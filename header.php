@@ -1,4 +1,5 @@
 <?php
   include 'top.php'
 ?>
-<header>Hello</header>
+<title>Portfolio Website</title>
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico"
