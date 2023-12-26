@@ -2,5 +2,5 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Porfolio Website</title>
+  <title>Portfolio Website</title>
 </head>

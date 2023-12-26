@@ -1,4 +1,4 @@
 <?php
-  include top.php;
-  <header></header>
+  include 'top.php'
 ?>
+<header>Hello</header>
