@@ -1,16 +1,53 @@
-<?php
-  include 'header.php'
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#bio">About Me</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-   <article>
-     <h1>Nicholas Kent's Portfolio</h1>
-     <body>
-	        This website is meant to be a portfolio website for Nicholas Kent.
-     </body>
-   </article>
-</main>
+    <main>
+        <section id="home">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Discover my world of coding and design</p>
+        </section>
 
-<?php
-  include 'footer.php'
-?>
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                <!-- Project items -->
+            </div>
+        </section>
+
+        <section id="bio">
+            <h2>About Me</h2>
+            <div class="bio-content">
+                <img src="bio-image.jpg" alt="Bio Image" class="bio-image">
+                <p class="bio-text">Here is my bio...</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <!-- Contact details -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 by Portfolio Owner. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
