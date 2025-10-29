@@ -34,42 +34,57 @@ nav ul li a {
 
 /* ====== Home Section ======= */
 #home {
-    padding: 120px 60px;
-    margin-top: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin-top: 60px;
+  padding: 120px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
 }
 
-.home-container {
+.home-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 100%;
   max-width: 1200px;
+  width: 100%;
 }
 
-.home-text {
+/* Left text box */
+.home-left {
   flex: 1 1 50%;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-right: 40px;
 }
 
-.intro-text {
-  font-size: 1.4rem;
+.home-left h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.home-left .intro-text {
+  font-size: 1.3rem;
   line-height: 1.6;
-  margin-top: 20px;
+}
+
+/* Right image box */
+.home-right {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-image {
-  flex: 1 1 40%;
-  max-width: 300px;
+  width: 300px;
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
-  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 /* ====== Project Section ======= */
