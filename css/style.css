@@ -1,3 +1,8 @@
+main{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -43,10 +48,21 @@ nav ul li a {
     padding: 20px;
 }
 
+
+/* Remove bullet points and align neatly */
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px auto 0;
+    max-width: 400px;
+    text-align: left;
+}
+
+
 #bio {
     background-color: #f0f0f0;
     padding: 50px 20px;
-    text-align: center;
+    text-align: left;
 }
 
 .bio-content {
