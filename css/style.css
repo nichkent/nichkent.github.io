@@ -54,7 +54,7 @@ nav ul li a {
 /* Left text box */
 .home-left {
   flex: 1 1 50%;
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -108,13 +108,13 @@ nav ul li a {
     align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
+    font-family: 'Poppins', sans-serif;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .bio-text {
     flex: 1 1 60%;
-    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     line-height: 1;
 }
