@@ -107,7 +107,6 @@ nav ul li a {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 40px;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
@@ -115,21 +114,13 @@ nav ul li a {
 
 .bio-text {
     flex: 1 1 60%;
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: 1;
 }
 
 .bio-text p {
     margin-bottom: 20px;
-}
-
-.bio-image {
-    flex: 1 1 30%;
-    max-width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto;
 }
 
 /* ====== Section Headers Section ======= */
