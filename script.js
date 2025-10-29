@@ -10,20 +10,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
  // Dark mode toggle
-    const toggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
+ const toggle = document.getElementById('dark-mode-toggle');
+ const body = document.body;
 
-    // Load saved theme from localStorage
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-    }
+// Load saved theme from localStorage
+if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+}
 
-    toggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
+toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('theme', 'dark');
         } else {
             localStorage.setItem('theme', 'light');
         }
-    });
 });
