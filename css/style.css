@@ -111,11 +111,21 @@ body.dark-mode footer {
     padding: 5px 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 1.2rem;
 }
 
-#dark-mode-toggle:hover {
+#dark-mode-toggle:hover::after {
+    content: "Toggle Theme";
+    position: absolute;
+    right: 110%;
+    top: 50%;
+    transform: translateY(-50%);
     background: #333;
     color: #fff;
+    padding: 3px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-size: 0.8rem;
 }
 
 body.dark-mode #dark-mode-toggle {
