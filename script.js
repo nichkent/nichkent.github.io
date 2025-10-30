@@ -97,3 +97,35 @@ document.querySelectorAll('[data-section]').forEach(link => {
   });
 });
 
+
+// === Scroll-linked timeline highlighting ===
+const projects = document.querySelectorAll('.project');
+const timelineItems = document.querySelectorAll('.timeline li');
+
+window.addEventListener('scroll', () => {
+  let currentYear = '';
+
+  projects.forEach(project => {
+    const rect = project.getBoundingClientRect();
+    if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
+      currentYear = project.getAttribute('data-year');
+    }
+  });
+
+  timelineItems.forEach(item => {
+    item.classList.toggle('active', item.getAttribute('data-year') === currentYear);
+  });
+});
+
+
+timelineItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const year = item.getAttribute('data-year');
+    const target = document.querySelector(`.project[data-year="${year}"]`);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+});
+
+
