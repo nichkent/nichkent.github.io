@@ -41,12 +41,45 @@
       <button id="dark-mode-toggle">🌙</button>
     </header>
 
-    <main id="projects-content">
-      <section id="default">
-        <h1>Welcome to My Projects</h1>
-        <p>Select a category above to explore my work.</p>
-      </section>
+    <main id="projects-page">
+      <div class="timeline-container">
+        <ul class="timeline">
+          <li data-year="2021">2021</li>
+          <li data-year="2022">2022</li>
+          <li data-year="2023">2023</li>
+          <li data-year="2024">2024</li>
+          <li data-year="2025">2025</li>
+        </ul>
+      </div>
+
+      <div class="projects-content">
+        <section class="project" data-year="2021">
+          <h2>Phishing Detection AI (2021)</h2>
+            <p>Developed a machine learning model that identifies phishing URLs with 95% accuracy using natural language and redirect analysis.</p>
+        </section>
+
+        <section class="project" data-year="2022">
+          <h2>Penetration Testing Lab (2022)</h2>
+            <p>Set up a virtual lab environment for ethical hacking practice and internal training at Mascoma Bank.</p>
+        </section>
+
+        <section class="project" data-year="2023">
+          <h2>FastAPI Web Tool (2023)</h2>
+            <p>Built an internal cybersecurity dashboard using FastAPI and PostgreSQL for log analysis.</p>
+        </section>
+
+        <section class="project" data-year="2024">
+          <h2>3D Game Engine (2024)</h2>
+            <p>Created a C++ Vulkan-based game engine with custom physics integration and 3D rendering pipeline.</p>
+        </section>
+
+        <section class="project" data-year="2025">
+          <h2>Drone Build Project (2025)</h2>
+            <p>Built a quadcopter from scratch using a Raspberry Pi and ESC-controlled brushless motors, complete with GUI throttle control.</p>
+        </section>
+      </div>
     </main>
+
 
     <script src="script.js"></script>
   </body>
