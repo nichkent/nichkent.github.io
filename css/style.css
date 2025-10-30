@@ -167,9 +167,8 @@ footer {
 /* Reach-Out section styles */
 #Reach\ Out {
   background: #f8f8f8;     /* light background */
-  padding: 40px 60px;
+  padding: 0px 60px;
   text-align: left;
-  border-top: 2px solid #ccc; /* optional divider */
 }
 
 /* Copyright area styles */
