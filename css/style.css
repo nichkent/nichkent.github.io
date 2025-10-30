@@ -162,7 +162,6 @@ h2 {
 /* ====== Footer Section ======= */
 footer {
     padding: 20px 0;
-    background: #f8f8f8;
 }
 
 /* Reach-Out section styles */
@@ -245,4 +244,14 @@ body.dark-mode footer {
 body.dark-mode #dark-mode-toggle {
     border-color: #f0f0f0;
     color: #f0f0f0;
+}
+  
+body.dark-mode #Reach\ Out {
+  background: rgba(20, 20, 20, 0.9);
+  border-top: 1px solid #555;
+}
+
+body.dark-mode #copyright {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ccc;
 }
