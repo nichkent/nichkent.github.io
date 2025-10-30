@@ -113,7 +113,7 @@ nav ul li a {
 /* ====== Bio Section ======= */
 #bio {
     background-color: #f0f0f0;
-    padding: 25px 40px;
+    padding: 25px 50px 25px;
     text-align: left;
     margin-bottom: 10px;
 }
@@ -152,15 +152,14 @@ h2 {
 }
     
 .contact-list li {
-    margin: 10px 0;
+    margin: 10px 0 10px;
     text-align: left;
-    padding: 20px;
 }
 
 /* Reach-Out section styles */
 #Reach\ Out {
   background: #dfdbdb;     /* light background */
-  padding: 10px 40px;
+  padding: 10px 40px 10px;
   text-align: left;
 }
 
@@ -175,7 +174,7 @@ footer {
   text-align: center;
   padding: 20px 0;
   font-size: 0.9rem;
-  color: #555;
+  color: #000000;
 }
 
 @media screen and (max-width: 768px) {
