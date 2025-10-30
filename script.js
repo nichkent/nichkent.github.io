@@ -45,7 +45,7 @@ document.querySelectorAll('[data-section]').forEach(link => {
     switch (section) {
       case 'phishing':
         html = `
-          <h2>Phishing Detection AI</h2>
+          <h2>Phishing URL Detection AI</h2>
           <p>This project uses machine learning to detect phishing URLs with 95% accuracy using natural language features and redirect code analysis.</p>
         `;
         break;
