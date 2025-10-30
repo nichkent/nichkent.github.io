@@ -136,7 +136,6 @@ nav ul li a {
 
 /* ====== Section Headers Section ======= */
 h2 {
-    margin-top: 30px;
     font-weight: 600;
 }
 
@@ -160,7 +159,7 @@ h2 {
 
 /* Reach-Out section styles */
 #Reach\ Out {
-  background: #f8f8f8;     /* light background */
+  background: #dfdbdb;     /* light background */
   padding: 10px 40px;
   text-align: left;
 }
@@ -245,7 +244,6 @@ body.dark-mode #dark-mode-toggle {
   
 body.dark-mode #Reach\ Out {
   background: rgba(20, 20, 20, 0.9);
-  border-top: 1px solid #555;
 }
 
 body.dark-mode #copyright {
