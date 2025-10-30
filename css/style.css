@@ -165,9 +165,21 @@ footer {
     background: #f8f8f8;
 }
 
-footer .copyright {
-   align: center;
-   text-align: center;
+/* Reach-Out section styles */
+#Reach\ Out {
+  background: #f8f8f8;     /* light background */
+  padding: 40px 60px;
+  text-align: left;
+  border-top: 2px solid #ccc; /* optional divider */
+}
+
+/* Copyright area styles */
+#copyright {
+  background: #e0e0e0;     /* slightly darker band */
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 @media screen and (max-width: 768px) {
