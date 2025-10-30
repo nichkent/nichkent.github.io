@@ -144,7 +144,7 @@ h2 {
 /* ====== Reach Out Section ======= */    
 .contact-list {
     list-style: none;
-    padding: 20px;
+    padding: 50px;
     margin: 20px 0 0;
     text-align: left;
 }
@@ -159,11 +159,6 @@ h2 {
     padding: 20px;
 }
 
-/* ====== Footer Section ======= */
-footer {
-    padding: 20px 0;
-}
-
 /* Reach-Out section styles */
 #Reach\ Out {
   background: #f8f8f8;     /* light background */
@@ -171,6 +166,11 @@ footer {
   text-align: left;
 }
 
+/* ====== Footer Section ======= */
+footer {
+    padding: 20px 0;
+}
+  
 /* Copyright area styles */
 #copyright {
   background: #e0e0e0;     /* slightly darker band */
