@@ -33,67 +33,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// === Project page content swapping ===
-const contentArea = document.getElementById("projects-content");
+// === Dynamic content loading for projects page ===
+const projectArea = document.querySelector('.projects-content');
+const projectLinks = document.querySelectorAll('[data-page]');
 
-document.querySelectorAll('[data-section]').forEach(link => {
+projectLinks.forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
-    const section = e.target.getAttribute('data-section');
+    const page = link.getAttribute('data-page');
 
-    let html = '';
-    switch (section) {
-      case 'phishing':
-        html = `
-          <h2>Phishing URL Detection AI</h2>
-          <p>This project uses machine learning to detect phishing URLs with 95% accuracy using natural language features and redirect code analysis.</p>
-        `;
-        break;
-
-      case 'pentesting':
-        html = `
-          <h2>Penetration Testing Projects</h2>
-          <p>A showcase of my red team simulations, network vulnerability assessments, and exploitation reports.</p>
-        `;
-        break;
-
-      case 'software':
-        html = `
-          <h2>Cool Software I've Made</h2>
-          <p>Small utilities and creative tools built in Python, FastAPI, and JavaScript.</p>
-        `;
-        break;
-
-      case '3d':
-        html = `
-          <h2>3D Game Engine</h2>
-          <p>A Vulkan-based 3D engine built in C++ with a custom math library and physics integration.</p>
-        `;
-        break;
-
-      case 'art':
-        html = `
-          <h2>Digital Art & Design</h2>
-          <p>Interactive media projects, Unreal Engine experiments, and digital visualizations.</p>
-        `;
-        break;
-
-      case 'robots':
-        html = `
-          <h2>Robots and Stuff</h2>
-          <p>Mechanical builds, drone experiments, and Raspberry Pi robotics projects.</p>
-        `;
-        break;
-
-      default:
-        html = `
-          <h1>Welcome to My Projects</h1>
-          <p>Select a category above to explore my work.</p>
-        `;
-    }
-
-    contentArea.innerHTML = html;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    fetch(`projects/${page}.html`)
+      .then(response => {
+        if (!response.ok) throw new Error(`Could not load ${page}`);
+        return response.text();
+      })
+      .then(html => {
+        projectArea.innerHTML = html;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(err => {
+        projectArea.innerHTML = `<p style="color:red;">Error loading ${page}: ${err.message}</p>`;
+      });
   });
 });
 
