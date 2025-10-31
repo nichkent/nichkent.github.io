@@ -262,6 +262,7 @@ footer {
 /* ==== Timeline Layout ==== */
 #projects-page {
   display: flex;
+  flex-direction: row-reverse;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 60px;
@@ -290,7 +291,7 @@ footer {
 
 .timeline li {
   position: relative;
-  padding-left: 20px;
+  padding-right: 20px;
   font-size: 1.1rem;
   color: #666;
   transition: all 0.3s ease;
@@ -300,7 +301,7 @@ footer {
 .timeline li::before {
   content: "";
   position: absolute;
-  left: -10px;
+  right: -10px;
   top: 50%;
   transform: translateY(-50%);
   width: 14px;
