@@ -338,10 +338,6 @@ footer {
 }
 
 /* ==== Dark Mode Timeline ==== */
-body.dark-mode .timeline {
-  border-left: 3px solid #444;
-}
-
 body.dark-mode .timeline li {
   color: #ccc;
 }
