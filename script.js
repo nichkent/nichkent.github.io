@@ -72,6 +72,19 @@ window.addEventListener('scroll', () => {
     }
   });
 
+  // Highlight timeline
+  timelineItems.forEach(item => {
+    item.classList.toggle('active', item.getAttribute('data-year') === currentYear);
+  });
+
+  // Focus project in view
+  projects.forEach(project => {
+    const inView = project.getAttribute('data-year') === currentYear;
+    project.classList.toggle('active', inView);
+  });
+});
+
+
   timelineItems.forEach(item => {
     item.classList.toggle('active', item.getAttribute('data-year') === currentYear);
   });
