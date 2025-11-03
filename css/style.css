@@ -198,12 +198,6 @@ body.dark-mode .navbar a:hover {
   filter: none;
 }
 
-/* Optional - subtle shadow on the active one */
-.project.active {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-}
-
 /* Works for dark mode as well */
 body.dark-mode .project.active {
   box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
