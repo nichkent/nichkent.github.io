@@ -82,7 +82,6 @@ window.addEventListener('scroll', () => {
     const inView = project.getAttribute('data-year') === currentYear;
     project.classList.toggle('active', inView);
   });
-});
 
 
   timelineItems.forEach(item => {
