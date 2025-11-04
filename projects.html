@@ -14,7 +14,7 @@
 
           <!-- Dropdown #1 -->
           <li class="dropdown">
-            <a href>Cybersecurity ▾</a>
+            <button class="dropdown-toggle">Cybersecurity ▾</button>
             <ul class="dropdown-menu">
               <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
               <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
@@ -28,7 +28,7 @@
 
           <!-- Dropdown #2 -->
           <li class="dropdown">
-            <a href>Creative Stuff I've Made ▾</a>
+            <button class="dropdown-toggle">Creative Pursuits ▾</button>
             <ul class="dropdown-menu">
               <li><a href="#music" data-page="creative/music">Music</a></li>
               <li><a href="#writing" data-page="creative/writing">Writing</a></li>
@@ -47,10 +47,13 @@
   
   <body>
     <main id="projects-loader">
-      <h2>Welcome to the Project Warehouse!</h2>
+      <div id="projects-page">
+        <div class="projects-content">
+          <h2>Welcome to the Project Warehouse!</h2>
 
-        <p>Where I store all projects I work on throughout my life. Pick a project topic that sounds interesting from the top to get started. Also, thanks for checking out my projects!</p>
-
+            <p>Where I store all projects I work on throughout my life. Pick a project topic that sounds interesting from the top to get started. Also, thanks for checking out my projects!</p>
+        </div>
+      </div>
     </main>
     
     <script src="script.js"></script>
