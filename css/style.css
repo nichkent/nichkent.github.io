@@ -82,16 +82,15 @@ nav ul li a {
 }
 
 /* Dropdown menu hidden by default */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background: #f8f8f8;
-  top: 100%;
-  left: 0;
-  min-width: 220px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  z-index: 1000;
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: #333;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
 }
 
 /* Each item in dropdown */
@@ -107,8 +106,8 @@ nav ul li a {
 }
 
 /* Show dropdown on hover */
-.dropdown:hover .dropdown-menu {
-  display: block;
+.dropdown-toggle:hover {
+  color: #4b0082;
 }
 
 /* Dark mode versions */
