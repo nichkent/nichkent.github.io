@@ -11,8 +11,7 @@ main,
 #bio,
 #projects-page,
 #Reach\ Out {
-  padding-left: 60px;     /* 👈 inward padding from the left edge */
-  padding-right: 60px;    /* 👈 inward padding from the right edge */
+  padding-left: 20px;     /* 👈 inward padding from the left edge */
   box-sizing: border-box; /* ensures padding doesn’t cause overflow */
 }
 
