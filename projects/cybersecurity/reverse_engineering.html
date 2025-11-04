@@ -1,78 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Warehouse</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-
-  <header>
-      <nav>
-        <ul class="navbar">
-          <li><a href="index.html">Home Page</a></li>
-
-          <!-- Dropdown #1 -->
-          <li class="dropdown">
-            <a href="#">Cybersecurity ▾</a>
-            <ul class="dropdown-menu">
-              <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
-              <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
-              <li><a href="#networking" data-page="cybersecurity/networking">Network Traffic Analysis</a></li>
-              <li><a href="#cryptography" data-page="cybersecurity/cryptography">Cryptography</a></li>
-            </ul>
-          </li>
-
-          <!-- Regular link -->
-          <li><a href="#software" data-page="software">Cool Software I've Made</a></li>
-
-          <!-- Dropdown #2 -->
-          <li class="dropdown">
-            <a href="#">Creative Stuff I've Made ▾</a>
-            <ul class="dropdown-menu">
-              <li><a href="#music" data-page="creative/music">Music</a></li>
-              <li><a href="#writing" data-page="creative/writing">Writing</a></li>
-              <li><a href="#drawing" data-page="creative/drawing">Drawing</a></li>
-              <li><a href="#3d_modeling" data-page="creative/3d_modeling">3D Modeling</a></li>
-            </ul>
-          </li>
-
-          <li><a href="#robots_misc" data-page="robots_misc">Robots and Stuff</a></li>
-        </ul>
-      </nav>
-
-      <button id="dark-mode-toggle">🌙</button>
-    </header>
-
-  
-  <body>
-    <main id="projects-loader">
-      <div id="projects-page">
-        <div class="timeline-container">
-          <ul class="timeline">
-            <li data-year="2022">2022</li>
-            <li data-year="2023">2023</li>
-            <li data-year="2024">2024</li>
-          </ul>
-        </div>
-
-       <div class="projects-content">
-       <section class="project" data-year="2022">
-         <h2>Reverse Engineering</h2>
-           <p>Reversed out a malware using FlareVM and Remux</p>
-       </section>
-     </div>
+<div id="projects-page">
+  <div class="timeline-container">
+    <ul class="timeline">
+      <li data-year="2022">2022</li>
+      <li data-year="2023">2023</li>
+      <li data-year="2024">2024</li>
+    </ul>
    </div>
 
-
-    </main>
-    
-    <script src="script.js"></script>
-  </body>
-
-  <footer>
-    <section id = "copyright">
-            <p>© 2025 by Portfolio Owner. All rights reserved.</p>
-    </section>
-  </footer>
-</html>
+   <div class="projects-content">
+     <section class="project" data-year="2022">
+       <h2>Reverse Engineering</h2>
+         <p>Reversed out a malware using FlareVM and Remux</p>
+     </section>
+   </div>
+</div>
