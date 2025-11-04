@@ -6,6 +6,16 @@ main {
   max-width: 1600px;
 }
 
+/* ===== Global Page Padding for Content Sections ===== */
+main,
+#bio,
+#projects-page,
+#Reach\ Out {
+  padding-left: 60px;     /* 👈 inward padding from the left edge */
+  padding-right: 60px;    /* 👈 inward padding from the right edge */
+  box-sizing: border-box; /* ensures padding doesn’t cause overflow */
+}
+
 /* Keep nice breathing room within each section */
 section {
   margin: 0;
@@ -256,6 +266,12 @@ h2 {
 /* ====== Footer Section ======= */
 footer {
     padding: 10px 0;
+}
+
+/* ===== Footer Cleanup ===== */
+footer {
+  padding-bottom: 0;     /* remove extra space at bottom */
+  margin-bottom: 0;      /* ensure it sits flush with viewport edge */
 }
   
 /* Copyright area styles */
