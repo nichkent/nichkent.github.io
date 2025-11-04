@@ -69,15 +69,21 @@ nav ul li a {
   margin: 0 15px;
 }
 
-.navbar a {
+.navbar a,
+.dropdown-toggle {
   text-decoration: none;
   color: #333;
   padding: 10px;
   display: inline-block;
   transition: color 0.3s;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.dropdown-toggle:hover {
   color: #4b0082;
 }
 
@@ -118,11 +124,13 @@ body.dark-mode .dropdown-menu {
   background: rgba(20, 20, 20, 0.95);
 }
 
-body.dark-mode .navbar a {
+body.dark-mode .navbar a,
+body.dark-mode .dropdown-toggle {
   color: #f0f0f0;
 }
 
-body.dark-mode .navbar a:hover {
+body.dark-mode .navbar a:hover 
+body.dark-mode .dropdown-toggle:hover {
   color: #bb86fc;
 }
 
