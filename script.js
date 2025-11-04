@@ -42,7 +42,7 @@ projectLinks.forEach(link => {
     e.preventDefault();
     const page = link.getAttribute('data-page');
 
-    fetch(`projects/${page}.html`)
+    fetch(`Projects/${page}.html`)
       .then(response => {
         if (!response.ok) throw new Error(`Could not load ${page}`);
         return response.text();
