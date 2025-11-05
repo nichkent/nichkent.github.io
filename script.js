@@ -21,85 +21,82 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // === Spotlight Carousel ===
-const spotlightItems = document.querySelectorAll('.spotlight-item');
-const prevBtn = document.querySelector('.spotlight-nav.prev');
-const nextBtn = document.querySelector('.spotlight-nav.next');
-const slider = document.querySelector('.spotlight-slider');
+  const spotlightItems = document.querySelectorAll('.spotlight-item');
+  const prevBtn = document.querySelector('.spotlight-nav.prev');
+  const nextBtn = document.querySelector('.spotlight-nav.next');
+  const slider = document.querySelector('.spotlight-slider');
 
-if (spotlightItems.length) {
-  let current = 0;
-  let autoRotateTimer = null;
+  if (spotlightItems.length) {
+    let current = 0;
+    let autoRotateTimer = null;
 
-  function updateSpotlight(index) {
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    spotlightItems.forEach((item, i) => {
-      item.classList.toggle('active', i === index);
-    });
-  }
+    function updateSpotlight(index) {
+      slider.style.transform = `translateX(-${index * 100}%)`;
+      spotlightItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+    }
 
-  function nextSpotlight() {
-    current = (current + 1) % spotlightItems.length;
-    updateSpotlight(current);
-    resetAutoRotate();
-  }
-
-  function prevSpotlight() {
-    current = (current - 1 + spotlightItems.length) % spotlightItems.length;
-    updateSpotlight(current);
-    resetAutoRotate();
-  }
-
-  // Reset timer so manual actions restart the 5s countdown
-  function resetAutoRotate() {
-    if (autoRotateTimer) clearInterval(autoRotateTimer);
-    autoRotateTimer = setInterval(() => {
+    function nextSpotlight() {
       current = (current + 1) % spotlightItems.length;
       updateSpotlight(current);
-    }, 5000);
-  }
+      resetAutoRotate();
+    }
 
-  // Button click events
-  nextBtn?.addEventListener('click', nextSpotlight);
-  prevBtn?.addEventListener('click', prevSpotlight);
+    function prevSpotlight() {
+      current = (current - 1 + spotlightItems.length) % spotlightItems.length;
+      updateSpotlight(current);
+      resetAutoRotate();
+    }
 
-  // Make spotlight clickable to load project page
-  spotlightItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const page = item.getAttribute('data-page');
-      if (page) {
-        // Try to dynamically load via your project loader if available
-        const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
-        if (projectArea) {
-          fetch(`projects/${page}.html`)
-            .then(response => {
-              if (!response.ok) throw new Error(`Could not load ${page}`);
-              return response.text();
-            })
-            .then(html => {
-              projectArea.innerHTML = html;
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-              initTimelineScroll();
-            })
-            .catch(err => {
-              console.error(err);
-              // If loader not found (e.g. homepage), just redirect
-              window.location.href = `projects.html#${page}`;
-            });
-        } else {
-          // If no loader exists (like on homepage), redirect to projects page
-          window.location.href = `projects.html#${page}`;
+    // Reset timer so manual actions restart the 5s countdown
+    function resetAutoRotate() {
+      if (autoRotateTimer) clearInterval(autoRotateTimer);
+      autoRotateTimer = setInterval(() => {
+        current = (current + 1) % spotlightItems.length;
+        updateSpotlight(current);
+      }, 5000);
+    }
+
+    // Button click events
+    nextBtn?.addEventListener('click', nextSpotlight);
+    prevBtn?.addEventListener('click', prevSpotlight);
+
+    // Make spotlight clickable to load project page
+    spotlightItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const page = item.getAttribute('data-page');
+        if (page) {
+          const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
+          if (projectArea) {
+            fetch(`projects/${page}.html`)
+              .then(response => {
+                if (!response.ok) throw new Error(`Could not load ${page}`);
+                return response.text();
+              })
+              .then(html => {
+                projectArea.innerHTML = html;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                initTimelineScroll();
+              })
+              .catch(err => {
+                console.error(err);
+                // If loader not found (e.g. homepage), just redirect
+                window.location.href = `projects.html#${page}`;
+              });
+          } else {
+            // If no loader exists (like on homepage), redirect to projects page
+            window.location.href = `projects.html#${page}`;
+          }
         }
-      }
+      });
     });
-  });
 
-  // Start auto rotation
-  resetAutoRotate();
-  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
-  slider.addEventListener('mouseleave', resetAutoRotate);
-
-}
-
+    // Start auto rotation
+    resetAutoRotate();
+    slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+    slider.addEventListener('mouseleave', resetAutoRotate);
+  }
 
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
@@ -124,65 +121,77 @@ if (spotlightItems.length) {
     });
   }
 
+  // === Route map for project folder structure ===
+  const projectRoutes = {
+    // Cybersecurity
+    cryptography: 'cybersecurity/cryptography',
+    pentesting: 'cybersecurity/pentesting',
+    networking: 'cybersecurity/networking',
+    reverse_engineering: 'cybersecurity/reverse_engineering',
+
+    // Creative
+    music: 'creative/music',
+    writing: 'creative/writing',
+    drawing: 'creative/drawing',
+    '3d_modeling': 'creative/3d_modeling',
+
+    // Other
+    software: 'software',
+    robots_misc: 'robots_misc',
+  };
+
   // === Dynamic content loading for projects page ===
   const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
   const projectLinks = document.querySelectorAll('[data-page]');
 
   // === Auto-load project if page is opened with a hash ===
-  const hash = window.location.hash.replace('#', '');
-  if (hash && projectArea) {
-    // Attempt to load a project HTML file matching the hash
-    fetch(`projects/${hash}.html`)
-      .then(response => {
-        if (!response.ok) throw new Error(`Could not load ${hash}`);
-        return response.text();
-      })
-      .then(html => {
-        projectArea.innerHTML = html;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        initTimelineScroll(); // initialize timeline again if needed
-      })
-      .catch(err => {
-        console.error(`Error loading project from hash: ${err}`);
-        projectArea.innerHTML = `<p style="color:red;">Project "${hash}" not found.</p>`;
-      });
-  }
-
-  window.addEventListener('hashchange', () => {
-  const newHash = window.location.hash.replace('#', '');
-  if (newHash && projectArea) {
-    fetch(`projects/${newHash}.html`)
-      .then(res => res.ok ? res.text() : Promise.reject(`404: ${newHash}`))
-      .then(html => {
-        projectArea.innerHTML = html;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        initTimelineScroll();
-      })
-      .catch(() => {
-        projectArea.innerHTML = `<p style="color:red;">Project "${newHash}" not found.</p>`;
-      });
-  }
-});
-
-
-  
-  projectLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const page = link.getAttribute('data-page');
-
-      fetch(`projects/${page}.html`)
+  function loadProjectFromHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && projectArea) {
+      const route = projectRoutes[hash] || hash; // Map short hash → full path
+      fetch(`projects/${route}.html`)
         .then(response => {
-          if (!response.ok) throw new Error(`Could not load ${page}`);
+          if (!response.ok) throw new Error(`Could not load ${route}`);
           return response.text();
         })
         .then(html => {
           projectArea.innerHTML = html;
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          initTimelineScroll(); // reinit timeline + focus after load
+          initTimelineScroll();
         })
         .catch(err => {
-          projectArea.innerHTML = `<p style="color:red;">Error loading ${page}: ${err.message}</p>`;
+          console.error(`Error loading project from hash: ${err}`);
+          projectArea.innerHTML = `<p style="color:red;">Project "${hash}" not found.</p>`;
+        });
+    }
+  }
+
+  // Run once on page load
+  loadProjectFromHash();
+
+  // Re-run when hash changes (supports both short and nested hashes)
+  window.addEventListener('hashchange', loadProjectFromHash);
+
+  // === Click-to-load for internal links (on-page nav) ===
+  projectLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const page = link.getAttribute('data-page');
+      const route = projectRoutes[page] || page;
+
+      fetch(`projects/${route}.html`)
+        .then(response => {
+          if (!response.ok) throw new Error(`Could not load ${route}`);
+          return response.text();
+        })
+        .then(html => {
+          projectArea.innerHTML = html;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          initTimelineScroll();
+          history.pushState(null, '', `#${page}`); // update URL
+        })
+        .catch(err => {
+          projectArea.innerHTML = `<p style="color:red;">Error loading ${route}: ${err.message}</p>`;
         });
     });
   });
