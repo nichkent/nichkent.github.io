@@ -12,9 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ===== Button for going to project warehouse from home page =========
-   document.getElementById("GoToProjectWarehouse").onclick = function() {
+  const goToButton = document.getElementById("GoToProjectWarehouse");
+  if (goToButton) {
+    goToButton.onclick = function() {
       window.location.href = "https://nichkent.github.io/projects.html";
-   };
+    };
+  }
+
     
 
   // === Dark mode toggle ===
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // === Dynamic content loading for projects page ===
-  const projectArea = document.querySelector('#projects-loader, .projects-content');
+  const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
   const projectLinks = document.querySelectorAll('[data-page]');
 
   projectLinks.forEach(link => {
