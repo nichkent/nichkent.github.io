@@ -95,6 +95,9 @@ if (spotlightItems.length) {
 
   // Start auto rotation
   resetAutoRotate();
+  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+  slider.addEventListener('mouseleave', resetAutoRotate);
+
 }
 
 
