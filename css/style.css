@@ -336,7 +336,8 @@ body.dark-mode #project-spotlight {
   background: rgba(0, 0, 0, 0.6);
 }
 body.dark-mode .spotlight-title {
-  ba
+  background: rgba(75, 0, 130, 0.6);
+}
 
 /* ====== Bio Section ======= */
 #bio {
