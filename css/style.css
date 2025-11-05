@@ -1,4 +1,4 @@
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> 
 
 main {
   margin: 0 auto;
@@ -11,47 +11,45 @@ main,
 #bio,
 #projects-page,
 #Reach\ Out {
-  padding-left: 20px;     /* 👈 inward padding from the left edge */
-  box-sizing: border-box; /* ensures padding doesn’t cause overflow */
+  padding-left: 20px;
+  box-sizing: border-box;
 }
 
-/* Keep nice breathing room within each section */
 section {
   margin: 0;
-  padding: 60px 0; /* vertical spacing only */
+  padding: 60px 0;
 }
 
-
 body {
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    margin: 0 0 0;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  margin: 0;
 }
 
 header {
-    background: #f8f8f8;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+  background: #f8f8f8;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 /* ====== Navigation Section ======= */
 nav ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
+  list-style: none;
+  padding: 0;
+  text-align: center;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+  display: inline;
+  margin: 0 15px;
 }
 
 nav ul li a {
-    text-decoration: none;
-    color: #333;
+  text-decoration: none;
+  color: #333;
 }
 
 /* ==== Navbar Dropdown Styles For projects.html Page ==== */
@@ -96,7 +94,7 @@ nav ul li a {
   font-weight: 600;
   font-family: 'Poppins', sans-serif;
   color: #ffffff;
-  background: linear-gradient(135deg, #6a11cb, #2575fc); /* vibrant purple-blue blend */
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -116,7 +114,7 @@ nav ul li a {
 
 /* ===== Dark Mode Version ===== */
 body.dark-mode .GTPWButton {
-  background: linear-gradient(135deg, #8a2be2, #4b0082); /* deep indigo glow */
+  background: linear-gradient(135deg, #8a2be2, #4b0082);
   color: #fff;
   box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
 }
@@ -126,36 +124,34 @@ body.dark-mode .GTPWButton:hover {
   box-shadow: 0 0 30px rgba(187, 134, 252, 0.9);
 }
 
-
-/* Dropdown menu hidden by default */ 
-.dropdown-menu { 
-  display: none; 
-  position: absolute; 
-  background: #f8f8f8; 
-  top: 100%; left: 0; 
-  min-width: 220px; 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-  border-radius: 4px; z-index: 1000; 
-} 
-
-/* Each item in dropdown */ 
-.dropdown-menu li { 
-  display: block; 
-  text-align: left; 
-  margin: 0; 
-} 
-
-.dropdown-menu li a { 
-  display: block; 
-  padding: 10px 15px; 
-} 
-
-/* Show dropdown on hover */ 
-.dropdown:hover .dropdown-menu { 
-  display: block; 
+/* Dropdown menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: #f8f8f8;
+  top: 100%; left: 0;
+  min-width: 220px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
 }
 
-/* Dark mode versions */
+.dropdown-menu li {
+  display: block;
+  text-align: left;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 15px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dark mode navbar */
 body.dark-mode .navbar {
   background: rgba(0, 0, 0, 0.85);
 }
@@ -169,17 +165,15 @@ body.dark-mode .dropdown-toggle {
   color: #f0f0f0;
 }
 
-body.dark-mode .navbar a:hover 
+body.dark-mode .navbar a:hover,
 body.dark-mode .dropdown-toggle:hover {
   color: #bb86fc;
 }
 
-
-
 /* ====== Home Section ======= */
 #home {
   margin-top: 60px;
-  padding: 120px 0px;
+  padding: 120px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,7 +189,6 @@ body.dark-mode .dropdown-toggle:hover {
   width: 100%;
 }
 
-/* Left text box */
 .home-left {
   flex: 1 1 50%;
   text-align: center;
@@ -215,7 +208,6 @@ body.dark-mode .dropdown-toggle:hover {
   line-height: 1.6;
 }
 
-/* Right image box */
 .home-right {
   flex: 1 1 40%;
   display: flex;
@@ -231,331 +223,65 @@ body.dark-mode .dropdown-toggle:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ====== Project Section ======= */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    margin-bottom: 10px;
-}
-
-/* ===== Project Focus Effect ===== */
-.project {
-  transition: all 0.4s ease;
-  opacity: 0.5;
-  transform: scale(0.97);
-  filter: grayscale(60%);
-}
-
-.project.active {
-  opacity: 1;
-  transform: scale(1);
-  filter: none;
-}
-
-
-/* ====== Bio Section ======= */
-#bio {
-    background-color: #f0f0f0;
-    padding: 25px 50px 25px;
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-.bio-content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-family: 'Poppins', sans-serif;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.bio-text {
-    flex: 1 1 60%;
-    font-size: 1rem;
-    line-height: 1;
-}
-
-/* ====== Section Headers Section ======= */
-h2 {
-    font-weight: 600;
-}
-
-/* ====== Reach Out Section ======= */    
-.contact-list {
-    list-style: none;
-    padding: 5px;
-    margin: 10px 0 0;
-    text-align: left;
-}
-
-.contact-list h2 {
-    text-align: left;
-}
-    
-.contact-list li {
-    margin: 10px 0 10px;
-    text-align: left;
-}
-
-/* Reach-Out section styles */
-#Reach\ Out {
-  background: #dfdbdb;     /* light background */
-  padding: 10px 40px 10px;
-  text-align: left;
-}
-
-/* ====== Footer Section ======= */
-footer {
-    padding: 10px 0;
-}
-
-/* ===== Footer Cleanup ===== */
-footer {
-  padding-bottom: 0;     /* remove extra space at bottom */
-  margin-bottom: 0;      /* ensure it sits flush with viewport edge */
-}
-  
-/* Copyright area styles */
-#copyright {
-  background: #e0e0e0;     /* slightly darker band */
-  text-align: center;
-  padding: 20px 0;
-  font-size: 0.9rem;
-  color: #000000;
-}
-
-@media screen and (max-width: 768px) {
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
-}
-
-/* ==== Timeline Layout ==== */
-#projects-page {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 60px;
-  padding: 100px 60px;
-  position: relative;
-}
-
-/* Timeline column */
-.timeline-container {
-  position: sticky;
-  top: 100px;
-  height: 80vh;
-}
-
-.timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-right: 3px solid #ccc;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.timeline li {
-  position: relative;
-  padding-right: 20px;
-  font-size: 1.1rem;
-  color: #666;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.timeline li::before {
-  content: "";
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 14px;
-  height: 14px;
-  background: #ccc;
-  border-radius: 50%;
-  transition: background 0.3s ease;
-}
-
-/* Active year on scroll */
-.timeline li.active {
-  color: #4b0082;
-  font-size: 1.6rem;
-  font-weight: bold;
-}
-
-.timeline li.active::before {
-  background: #4b0082;
-}
-
-/* Project content */
-.projects-content {
-  flex: 1;
-  max-width: 900px;
-  text-align: left;
-  margin-left: 0;
-  margin-right: auto;
-  padding-left: 40px;
-}
-
-.project {
-  margin-bottom: 150px;
-}
-
-.project h2 {
-  text-align: left;
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-}
-
-.project p {
-  text-align: left;
-  line-height: 1.6;
-}
-
-.project img {
-   align-items: right;
-}
-
-/* ==== Dark Mode Timeline ==== */
-body.dark-mode .timeline li {
-  color: #ccc;
-}
-
-body.dark-mode .timeline li::before {
-  background: #666;
-}
-
-body.dark-mode .timeline li.active {
-  color: #bb86fc;
-}
-
-body.dark-mode .timeline li.active::before {
-  background: #bb86fc;
-}
-
-
-
-/* ====== Dark Mode Styles ====== */
-
-body.dark-mode {
-    background: linear-gradient(to top, #4b0082 0%, #000000 100%);
-    color: #f0f0f0;
-    transition: background 0.6s ease, color 0.6s ease;
-}
-
-body.dark-mode header {
-    background: rgba(0, 0, 0, 0.85);
-}
-
-body.dark-mode nav ul li a {
-    color: #f0f0f0;
-}
-
-body.dark-mode #bio {
-    background: rgba(30, 30, 30, 0.8);
-}
-
-body.dark-mode footer {
-    color: #ccc;
-}
-
-#dark-mode-toggle {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    background: none;
-    border: 2px solid #333;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
-}
-
-#dark-mode-toggle:hover::after {
-    content: "Toggle Theme";
-    position: absolute;
-    right: 110%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #333;
-    color: #fff;
-    padding: 3px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-    font-size: 0.8rem;
-}
-
-body.dark-mode #dark-mode-toggle {
-    border-color: #f0f0f0;
-    color: #f0f0f0;
-}
-  
-body.dark-mode #Reach\ Out {
-  background: rgba(20, 20, 20, 0.9);
-}
-
-body.dark-mode #copyright {
-  background: rgba(0, 0, 0, 0.85);
-  color: #ccc;
-}
-
-
 /* ===== Spotlight Section ===== */
 #project-spotlight {
   position: relative;
   padding: 60px 0;
-  overflow: hidden;
   text-align: center;
   background: rgba(20, 20, 20, 0.4);
   border-top: 2px solid rgba(255, 255, 255, 0.1);
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
 
 #project-spotlight h2 {
   font-size: 2rem;
   margin-bottom: 40px;
   font-weight: 600;
+  color: #fff;
 }
 
-/* Spotlight container & slider setup */
+/* Spotlight structure */
 .spotlight-container {
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .spotlight-slider {
   display: flex;
-  transition: transform 0.6s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s ease;
 }
 
 .spotlight-item {
-  min-width: 100%;
+  flex: 0 0 70%;
+  margin: 0 2%;
   position: relative;
-  opacity: 0.6;
-  transform: scale(0.97);
-  transition: all 0.5s ease;
+  opacity: 0.3;
+  transform: scale(0.8);
+  filter: grayscale(80%) blur(3px);
+  transition: all 0.6s ease;
+  pointer-events: none;
 }
 
 .spotlight-item.active {
   opacity: 1;
   transform: scale(1);
+  filter: none;
+  z-index: 2;
+  pointer-events: auto;
 }
 
-/* Spotlight images */
+.spotlight-item.prev,
+.spotlight-item.next {
+  opacity: 0.6;
+  transform: scale(0.9);
+  filter: grayscale(50%) blur(1.5px);
+}
+
 .spotlight-item img {
   width: 100%;
   height: 550px;
@@ -606,62 +332,7 @@ body.dark-mode #copyright {
   right: 15px;
 }
 
-/* === Spotlight container tweak === */
-.spotlight-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/* === Spotlight slider (horizontal scroll) === */
-.spotlight-slider {
-  display: flex;
-  transition: transform 0.6s ease;
-}
-
-/* === Spotlight items === */
-.spotlight-item {
-  flex: 0 0 100%;
-  position: relative;
-  transition: all 0.6s ease;
-  opacity: 0.4;
-  transform: scale(0.8);
-  filter: grayscale(80%) blur(2px);
-  pointer-events: none; /* Only main item clickable */
-}
-
-.spotlight-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  display: block;
-}
-
-/* === Active item (center spotlight) === */
-.spotlight-item.active {
-  opacity: 1;
-  transform: scale(1);
-  filter: none;
-  pointer-events: auto;
-  z-index: 2;
-}
-
-/* === Neighboring items (visible but greyed) === */
-.spotlight-item.prev,
-.spotlight-item.next {
-  opacity: 0.6;
-  transform: scale(0.9);
-  filter: grayscale(50%) blur(1px);
-  pointer-events: none;
-}
-
-/* Ensure adjacent slides slightly peek in */
-.spotlight-slider {
-  transform: translateX(0);
-}
-
+/* Gradient fade edges */
 .spotlight-container::before,
 .spotlight-container::after {
   content: "";
@@ -671,50 +342,17 @@ body.dark-mode #copyright {
   height: 100%;
   z-index: 3;
   pointer-events: none;
-  background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+}
+
+.spotlight-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(20,20,20,0.9), transparent);
 }
 
 .spotlight-container::after {
   right: 0;
-  transform: scaleX(-1);
+  background: linear-gradient(to left, rgba(20,20,20,0.9), transparent);
 }
-
-/* === Navigation arrows === */
-.spotlight-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  border: none;
-  font-size: 2rem;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  z-index: 4;
-  transition: background 0.3s ease;
-}
-
-.spotlight-nav:hover {
-  background: rgba(75, 0, 130, 0.8);
-}
-
-.spotlight-nav.prev { left: 10px; }
-.spotlight-nav.next { right: 10px; }
-
-/* === Title overlay === */
-.spotlight-title {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
 
 /* Dark Mode adjustments */
 body.dark-mode #project-spotlight {
@@ -730,3 +368,126 @@ body.dark-mode .spotlight-nav:hover {
   background: rgba(75, 0, 130, 0.4);
 }
 
+/* ====== Bio Section ======= */
+#bio {
+  background-color: #f0f0f0;
+  padding: 25px 50px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.bio-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.bio-text {
+  flex: 1 1 60%;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ====== Section Headers ======= */
+h2 {
+  font-weight: 600;
+}
+
+/* ====== Reach Out Section ======= */
+#Reach\ Out {
+  background: #dfdbdb;
+  padding: 10px 40px;
+  text-align: left;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 5px;
+  margin: 10px 0 0;
+}
+
+.contact-list li {
+  margin: 10px 0;
+}
+
+/* ====== Footer ======= */
+footer {
+  padding: 10px 0;
+  margin-bottom: 0;
+}
+
+#copyright {
+  background: #e0e0e0;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  color: #000;
+}
+
+/* ====== Dark Mode General ====== */
+body.dark-mode {
+  background: linear-gradient(to top, #4b0082 0%, #000 100%);
+  color: #f0f0f0;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+body.dark-mode header {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+body.dark-mode nav ul li a {
+  color: #f0f0f0;
+}
+
+body.dark-mode #bio {
+  background: rgba(30, 30, 30, 0.8);
+}
+
+body.dark-mode footer {
+  color: #ccc;
+}
+
+body.dark-mode #Reach\ Out {
+  background: rgba(20, 20, 20, 0.9);
+}
+
+body.dark-mode #copyright {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ccc;
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  background: none;
+  border: 2px solid #333;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+#dark-mode-toggle:hover::after {
+  content: "Toggle Theme";
+  position: absolute;
+  right: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #333;
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+body.dark-mode #dark-mode-toggle {
+  border-color: #f0f0f0;
+  color: #f0f0f0;
+}
