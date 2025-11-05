@@ -606,6 +606,116 @@ body.dark-mode #copyright {
   right: 15px;
 }
 
+/* === Spotlight container tweak === */
+.spotlight-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* === Spotlight slider (horizontal scroll) === */
+.spotlight-slider {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+/* === Spotlight items === */
+.spotlight-item {
+  flex: 0 0 100%;
+  position: relative;
+  transition: all 0.6s ease;
+  opacity: 0.4;
+  transform: scale(0.8);
+  filter: grayscale(80%) blur(2px);
+  pointer-events: none; /* Only main item clickable */
+}
+
+.spotlight-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* === Active item (center spotlight) === */
+.spotlight-item.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* === Neighboring items (visible but greyed) === */
+.spotlight-item.prev,
+.spotlight-item.next {
+  opacity: 0.6;
+  transform: scale(0.9);
+  filter: grayscale(50%) blur(1px);
+  pointer-events: none;
+}
+
+/* Ensure adjacent slides slightly peek in */
+.spotlight-slider {
+  transform: translateX(0);
+}
+
+.spotlight-container::before,
+.spotlight-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 12%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(0,0,0,0.4), transparent);
+}
+
+.spotlight-container::after {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* === Navigation arrows === */
+.spotlight-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 4;
+  transition: background 0.3s ease;
+}
+
+.spotlight-nav:hover {
+  background: rgba(75, 0, 130, 0.8);
+}
+
+.spotlight-nav.prev { left: 10px; }
+.spotlight-nav.next { right: 10px; }
+
+/* === Title overlay === */
+.spotlight-title {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
 /* Dark Mode adjustments */
 body.dark-mode #project-spotlight {
   background: rgba(0, 0, 0, 0.6);
