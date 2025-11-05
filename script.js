@@ -31,7 +31,12 @@ if (spotlightItems.length) {
   let autoRotateTimer = null;
 
   function updateSpotlight(index) {
-    slider.style.transform = `translateX(-${index * 100}%)`;
+    // Calculate offset so active slide is centered
+    const slideWidth = spotlightItems[index].offsetWidth;
+    const containerWidth = slider.parentElement.offsetWidth;
+    const offset = spotlightItems[index].offsetLeft - (containerWidth / 2 - slideWidth / 2);
+    slider.style.transform = `translateX(-${offset}px)`;
+
 
     spotlightItems.forEach((item, i) => {
       item.classList.remove('active', 'prev', 'next');
