@@ -21,82 +21,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // === Spotlight Carousel ===
-  const spotlightItems = document.querySelectorAll('.spotlight-item');
-  const prevBtn = document.querySelector('.spotlight-nav.prev');
-  const nextBtn = document.querySelector('.spotlight-nav.next');
-  const slider = document.querySelector('.spotlight-slider');
+const spotlightItems = document.querySelectorAll('.spotlight-item');
+const prevBtn = document.querySelector('.spotlight-nav.prev');
+const nextBtn = document.querySelector('.spotlight-nav.next');
+const slider = document.querySelector('.spotlight-slider');
 
-  if (spotlightItems.length) {
-    let current = 0;
-    let autoRotateTimer = null;
+if (spotlightItems.length) {
+  let current = 0;
+  let autoRotateTimer = null;
 
-    function updateSpotlight(index) {
-      slider.style.transform = `translateX(-${index * 100}%)`;
-      spotlightItems.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
-      });
-    }
+  function updateSpotlight(index) {
+    slider.style.transform = `translateX(-${index * 100}%)`;
 
-    function nextSpotlight() {
-      current = (current + 1) % spotlightItems.length;
-      updateSpotlight(current);
-      resetAutoRotate();
-    }
-
-    function prevSpotlight() {
-      current = (current - 1 + spotlightItems.length) % spotlightItems.length;
-      updateSpotlight(current);
-      resetAutoRotate();
-    }
-
-    // Reset timer so manual actions restart the 5s countdown
-    function resetAutoRotate() {
-      if (autoRotateTimer) clearInterval(autoRotateTimer);
-      autoRotateTimer = setInterval(() => {
-        current = (current + 1) % spotlightItems.length;
-        updateSpotlight(current);
-      }, 5000);
-    }
-
-    // Button click events
-    nextBtn?.addEventListener('click', nextSpotlight);
-    prevBtn?.addEventListener('click', prevSpotlight);
-
-    // Make spotlight clickable to load project page
-    spotlightItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const page = item.getAttribute('data-page');
-        if (page) {
-          const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
-          if (projectArea) {
-            fetch(`projects/${page}.html`)
-              .then(response => {
-                if (!response.ok) throw new Error(`Could not load ${page}`);
-                return response.text();
-              })
-              .then(html => {
-                projectArea.innerHTML = html;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                initTimelineScroll();
-              })
-              .catch(err => {
-                console.error(err);
-                // If loader not found (e.g. homepage), just redirect
-                window.location.href = `projects.html#${page}`;
-              });
-          } else {
-            // If no loader exists (like on homepage), redirect to projects page
-            window.location.href = `projects.html#${page}`;
-          }
-        }
-      });
+    spotlightItems.forEach((item, i) => {
+      item.classList.remove('active', 'prev', 'next');
+      if (i === index) item.classList.add('active');
+      else if (i === (index - 1 + spotlightItems.length) % spotlightItems.length)
+        item.classList.add('prev');
+      else if (i === (index + 1) % spotlightItems.length)
+        item.classList.add('next');
     });
-
-    // Start auto rotation
-    resetAutoRotate();
-    slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
-    slider.addEventListener('mouseleave', resetAutoRotate);
   }
+
+  function nextSpotlight() {
+    current = (current + 1) % spotlightItems.length;
+    updateSpotlight(current);
+    resetAutoRotate();
+  }
+
+  function prevSpotlight() {
+    current = (current - 1 + spotlightItems.length) % spotlightItems.length;
+    updateSpotlight(current);
+    resetAutoRotate();
+  }
+
+  function resetAutoRotate() {
+    if (autoRotateTimer) clearInterval(autoRotateTimer);
+    autoRotateTimer = setInterval(nextSpotlight, 5000);
+  }
+
+  nextBtn?.addEventListener('click', nextSpotlight);
+  prevBtn?.addEventListener('click', prevSpotlight);
+
+  spotlightItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const page = item.getAttribute('data-page');
+      if (page) window.location.href = `projects.html#${page}`;
+    });
+  });
+
+  updateSpotlight(current);
+  resetAutoRotate();
+  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+  slider.addEventListener('mouseleave', resetAutoRotate);
+}
 
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
