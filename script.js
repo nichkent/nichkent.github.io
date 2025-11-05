@@ -19,6 +19,44 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+ 
+ // === Spotlight Carousel ===
+document.addEventListener('DOMContentLoaded', () => {
+  const spotlightItems = document.querySelectorAll('.spotlight-item');
+  const prevBtn = document.querySelector('.spotlight-nav.prev');
+  const nextBtn = document.querySelector('.spotlight-nav.next');
+  const slider = document.querySelector('.spotlight-slider');
+
+  if (!spotlightItems.length) return;
+
+  let current = 0;
+
+  function updateSpotlight(index) {
+    slider.style.transform = `translateX(-${index * 100}%)`;
+    spotlightItems.forEach((item, i) => {
+      item.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSpotlight() {
+    current = (current + 1) % spotlightItems.length;
+    updateSpotlight(current);
+  }
+
+  function prevSpotlight() {
+    current = (current - 1 + spotlightItems.length) % spotlightItems.length;
+    updateSpotlight(current);
+  }
+
+  // Button events
+  nextBtn?.addEventListener('click', nextSpotlight);
+  prevBtn?.addEventListener('click', prevSpotlight);
+
+  // Auto-rotate every 6 seconds
+  setInterval(nextSpotlight, 6000);
+});
+
+
     
 
   // === Dark mode toggle ===
