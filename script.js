@@ -1,7 +1,7 @@
 // === Smooth scrolling ===
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Smooth scroll for anchor links
+  // === Smooth scroll for anchor links ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
@@ -21,65 +21,75 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // === Spotlight Carousel ===
-const spotlightItems = document.querySelectorAll('.spotlight-item');
-const prevBtn = document.querySelector('.spotlight-nav.prev');
-const nextBtn = document.querySelector('.spotlight-nav.next');
-const slider = document.querySelector('.spotlight-slider');
+  const spotlightItems = document.querySelectorAll('.spotlight-item');
+  const prevBtn = document.querySelector('.spotlight-nav.prev');
+  const nextBtn = document.querySelector('.spotlight-nav.next');
+  const slider = document.querySelector('.spotlight-slider');
 
-if (spotlightItems.length) {
-  let current = 0;
-  let autoRotateTimer = null;
+  if (spotlightItems.length) {
+    let current = 0;
+    let autoRotateTimer = null;
 
-  function updateSpotlight(index) {
-    // Calculate offset so active slide is centered
-    const slideWidth = spotlightItems[index].offsetWidth;
-    const containerWidth = slider.parentElement.offsetWidth;
-    const offset = spotlightItems[index].offsetLeft - (containerWidth / 2 - slideWidth / 2);
-    slider.style.transform = `translateX(-${offset}px)`;
+    function updateSpotlight(index) {
+      // Clamp index within valid range
+      current = (index + spotlightItems.length) % spotlightItems.length;
 
+      // Assign classes for active, prev, next
+      spotlightItems.forEach((item, i) => {
+        item.classList.remove('active', 'prev', 'next');
+        if (i === current) item.classList.add('active');
+        else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+          item.classList.add('prev');
+        else if (i === (current + 1) % spotlightItems.length)
+          item.classList.add('next');
+      });
 
-    spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
-      if (i === index) item.classList.add('active');
-      else if (i === (index - 1 + spotlightItems.length) % spotlightItems.length)
-        item.classList.add('prev');
-      else if (i === (index + 1) % spotlightItems.length)
-        item.classList.add('next');
+      // Calculate offset for centering the active slide
+      const itemWidth = spotlightItems[0].offsetWidth;
+      const gap = 40; // must match CSS .spotlight-slider gap
+      const totalSlideWidth = itemWidth + gap;
+      const offset = totalSlideWidth * current - (slider.parentElement.offsetWidth - itemWidth) / 2;
+
+      slider.style.transform = `translateX(-${offset}px)`;
+    }
+
+    function nextSpotlight() {
+      updateSpotlight(current + 1);
+      resetAutoRotate();
+    }
+
+    function prevSpotlight() {
+      updateSpotlight(current - 1);
+      resetAutoRotate();
+    }
+
+    function resetAutoRotate() {
+      if (autoRotateTimer) clearInterval(autoRotateTimer);
+      autoRotateTimer = setInterval(() => updateSpotlight(current + 1), 5000);
+    }
+
+    // Button click events
+    nextBtn?.addEventListener('click', nextSpotlight);
+    prevBtn?.addEventListener('click', prevSpotlight);
+
+    // Click spotlight → go to project
+    spotlightItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const page = item.getAttribute('data-page');
+        if (page) {
+          window.location.href = `projects.html#${page}`;
+        }
+      });
     });
-  }
 
-  function nextSpotlight() {
-    current = (current + 1) % spotlightItems.length;
-    updateSpotlight(current);
+    // Initialize
+    updateSpotlight(0);
     resetAutoRotate();
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+    slider.addEventListener('mouseleave', resetAutoRotate);
   }
-
-  function prevSpotlight() {
-    current = (current - 1 + spotlightItems.length) % spotlightItems.length;
-    updateSpotlight(current);
-    resetAutoRotate();
-  }
-
-  function resetAutoRotate() {
-    if (autoRotateTimer) clearInterval(autoRotateTimer);
-    autoRotateTimer = setInterval(nextSpotlight, 5000);
-  }
-
-  nextBtn?.addEventListener('click', nextSpotlight);
-  prevBtn?.addEventListener('click', prevSpotlight);
-
-  spotlightItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const page = item.getAttribute('data-page');
-      if (page) window.location.href = `projects.html#${page}`;
-    });
-  });
-
-  updateSpotlight(current);
-  resetAutoRotate();
-  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
-  slider.addEventListener('mouseleave', resetAutoRotate);
-}
 
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
@@ -104,77 +114,63 @@ if (spotlightItems.length) {
     });
   }
 
-  // === Route map for project folder structure ===
-  const projectRoutes = {
-    // Cybersecurity
-    cryptography: 'cybersecurity/cryptography',
-    pentesting: 'cybersecurity/pentesting',
-    networking: 'cybersecurity/networking',
-    reverse_engineering: 'cybersecurity/reverse_engineering',
-
-    // Creative
-    music: 'creative/music',
-    writing: 'creative/writing',
-    drawing: 'creative/drawing',
-    '3d_modeling': 'creative/3d_modeling',
-
-    // Other
-    software: 'software',
-    robots_misc: 'robots_misc',
-  };
-
   // === Dynamic content loading for projects page ===
   const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
   const projectLinks = document.querySelectorAll('[data-page]');
 
-  // === Auto-load project if page is opened with a hash ===
-  function loadProjectFromHash() {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && projectArea) {
-      const route = projectRoutes[hash] || hash; // Map short hash → full path
-      fetch(`projects/${route}.html`)
-        .then(response => {
-          if (!response.ok) throw new Error(`Could not load ${route}`);
-          return response.text();
-        })
+  // === Auto-load project if page opened with a hash ===
+  const hash = window.location.hash.replace('#', '');
+  if (hash && projectArea) {
+    fetch(`projects/${hash}.html`)
+      .then(response => {
+        if (!response.ok) throw new Error(`Could not load ${hash}`);
+        return response.text();
+      })
+      .then(html => {
+        projectArea.innerHTML = html;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        initTimelineScroll();
+      })
+      .catch(err => {
+        console.error(`Error loading project from hash: ${err}`);
+        projectArea.innerHTML = `<p style="color:red;">Project "${hash}" not found.</p>`;
+      });
+  }
+
+  // === Handle hash change dynamically ===
+  window.addEventListener('hashchange', () => {
+    const newHash = window.location.hash.replace('#', '');
+    if (newHash && projectArea) {
+      fetch(`projects/${newHash}.html`)
+        .then(res => res.ok ? res.text() : Promise.reject(`404: ${newHash}`))
         .then(html => {
           projectArea.innerHTML = html;
           window.scrollTo({ top: 0, behavior: 'smooth' });
           initTimelineScroll();
         })
-        .catch(err => {
-          console.error(`Error loading project from hash: ${err}`);
-          projectArea.innerHTML = `<p style="color:red;">Project "${hash}" not found.</p>`;
+        .catch(() => {
+          projectArea.innerHTML = `<p style="color:red;">Project "${newHash}" not found.</p>`;
         });
     }
-  }
+  });
 
-  // Run once on page load
-  loadProjectFromHash();
-
-  // Re-run when hash changes (supports both short and nested hashes)
-  window.addEventListener('hashchange', loadProjectFromHash);
-
-  // === Click-to-load for internal links (on-page nav) ===
+  // === Attach link listeners for dynamic project loading ===
   projectLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const page = link.getAttribute('data-page');
-      const route = projectRoutes[page] || page;
-
-      fetch(`projects/${route}.html`)
+      fetch(`projects/${page}.html`)
         .then(response => {
-          if (!response.ok) throw new Error(`Could not load ${route}`);
+          if (!response.ok) throw new Error(`Could not load ${page}`);
           return response.text();
         })
         .then(html => {
           projectArea.innerHTML = html;
           window.scrollTo({ top: 0, behavior: 'smooth' });
           initTimelineScroll();
-          history.pushState(null, '', `#${page}`); // update URL
         })
         .catch(err => {
-          projectArea.innerHTML = `<p style="color:red;">Error loading ${route}: ${err.message}</p>`;
+          projectArea.innerHTML = `<p style="color:red;">Error loading ${page}: ${err.message}</p>`;
         });
     });
   });
