@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ===== Button for going to project warehouse from home page =========
+   document.getElementById("GoToProjectWarehouse").onclick = function() {
+      window.location.href = "https://nichkent.github.io/projects.html";
+   };
+    
+
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
   const body = document.body;
