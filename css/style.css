@@ -87,7 +87,7 @@ nav ul li a {
   color: #4b0082;
 }
 
-/* ===== Call-to-Action Button ===== */
+/* ===== Go to project warehouse Button ===== */
 .GTPWButton {
   display: inline-block;
   padding: 14px 28px;
@@ -510,3 +510,113 @@ body.dark-mode #copyright {
   background: rgba(0, 0, 0, 0.85);
   color: #ccc;
 }
+
+
+/* ===== Spotlight Section ===== */
+#project-spotlight {
+  position: relative;
+  padding: 60px 0;
+  overflow: hidden;
+  text-align: center;
+  background: rgba(20, 20, 20, 0.4);
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+#project-spotlight h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+/* Spotlight container & slider setup */
+.spotlight-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.spotlight-slider {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.spotlight-item {
+  min-width: 100%;
+  position: relative;
+  opacity: 0.6;
+  transform: scale(0.97);
+  transition: all 0.5s ease;
+}
+
+.spotlight-item.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Spotlight images */
+.spotlight-item img {
+  width: 100%;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Title overlay */
+.spotlight-title {
+  position: absolute;
+  bottom: 25px;
+  right: 35px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation buttons */
+.spotlight-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 10px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.spotlight-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #bb86fc;
+}
+
+.spotlight-nav.prev {
+  left: 15px;
+}
+
+.spotlight-nav.next {
+  right: 15px;
+}
+
+/* Dark Mode adjustments */
+body.dark-mode #project-spotlight {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .spotlight-title {
+  background: rgba(75, 0, 130, 0.6);
+}
+
+body.dark-mode .spotlight-nav:hover {
+  color: #bb86fc;
+  background: rgba(75, 0, 130, 0.4);
+}
+
