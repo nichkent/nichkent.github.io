@@ -25,7 +25,7 @@
               <h1>Welcome to My Portfolio</h1>
               <p class="intro-text">
                 I do A LOT of things! I post them all here as a bank of all my work.<br><br>
-                But, if you're just here for my Cybersecurity work, you can click here:
+                But, if you're just here for my Cybersecurity work, click below.
                <br><br> <button id="GoToProjectWarehouse" class="GTPWButton">Project Warehouse</button>
               </p>
             </div>
@@ -36,12 +36,33 @@
       </section>
 
 
-        <section id="projects">
-            <h2>Project Spotlight</h2>
-            <div class="project-grid">
-                <!-- Project items -->
-            </div>
+        <section id="project-spotlight">
+          <h2>Project Spotlight</h2>
+            <div class="spotlight-container">
+              <button class="spotlight-nav prev">‹</button>
+
+               <div class="spotlight-slider">
+                 <!-- Each .spotlight-item represents one featured project -->
+                 <div class="spotlight-item active">
+                   <img src="images/spotlight/project1.jpg" alt="Project 1">
+                   <div class="spotlight-title">AES File Encryptor</div>
+                 </div>
+
+                 <div class="spotlight-item">
+                   <img src="images/spotlight/project2.jpg" alt="Project 2">
+                   <div class="spotlight-title">Drone Control System</div>
+                 </div>
+
+                 <div class="spotlight-item">
+                   <img src="images/spotlight/project3.jpg" alt="Project 3">
+                   <div class="spotlight-title">Phishing URL Classifier</div>
+                 </div>
+               </div>
+
+             <button class="spotlight-nav next">›</button>
+          </div>
         </section>
+
         
 
         <section id="bio">
