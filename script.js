@@ -128,6 +128,44 @@ if (spotlightItems.length) {
   const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
   const projectLinks = document.querySelectorAll('[data-page]');
 
+  // === Auto-load project if page is opened with a hash ===
+  const hash = window.location.hash.replace('#', '');
+  if (hash && projectArea) {
+    // Attempt to load a project HTML file matching the hash
+    fetch(`projects/${hash}.html`)
+      .then(response => {
+        if (!response.ok) throw new Error(`Could not load ${hash}`);
+        return response.text();
+      })
+      .then(html => {
+        projectArea.innerHTML = html;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        initTimelineScroll(); // initialize timeline again if needed
+      })
+      .catch(err => {
+        console.error(`Error loading project from hash: ${err}`);
+        projectArea.innerHTML = `<p style="color:red;">Project "${hash}" not found.</p>`;
+      });
+  }
+
+  window.addEventListener('hashchange', () => {
+  const newHash = window.location.hash.replace('#', '');
+  if (newHash && projectArea) {
+    fetch(`projects/${newHash}.html`)
+      .then(res => res.ok ? res.text() : Promise.reject(`404: ${newHash}`))
+      .then(html => {
+        projectArea.innerHTML = html;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        initTimelineScroll();
+      })
+      .catch(() => {
+        projectArea.innerHTML = `<p style="color:red;">Project "${newHash}" not found.</p>`;
+      });
+  }
+});
+
+
+  
   projectLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
