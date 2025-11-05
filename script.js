@@ -1,6 +1,7 @@
- // === Smooth scrolling ===
+// === Smooth scrolling ===
 document.addEventListener('DOMContentLoaded', () => {
- 
+
+  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
@@ -19,45 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
- 
- // === Spotlight Carousel ===
-document.addEventListener('DOMContentLoaded', () => {
+  // === Spotlight Carousel ===
   const spotlightItems = document.querySelectorAll('.spotlight-item');
   const prevBtn = document.querySelector('.spotlight-nav.prev');
   const nextBtn = document.querySelector('.spotlight-nav.next');
   const slider = document.querySelector('.spotlight-slider');
 
-  if (!spotlightItems.length) return;
+  if (spotlightItems.length) {
+    let current = 0;
 
-  let current = 0;
+    function updateSpotlight(index) {
+      slider.style.transform = `translateX(-${index * 100}%)`;
+      spotlightItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+    }
 
-  function updateSpotlight(index) {
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    spotlightItems.forEach((item, i) => {
-      item.classList.toggle('active', i === index);
-    });
+    function nextSpotlight() {
+      current = (current + 1) % spotlightItems.length;
+      updateSpotlight(current);
+    }
+
+    function prevSpotlight() {
+      current = (current - 1 + spotlightItems.length) % spotlightItems.length;
+      updateSpotlight(current);
+    }
+
+    // Button events
+    nextBtn?.addEventListener('click', nextSpotlight);
+    prevBtn?.addEventListener('click', prevSpotlight);
+
+    // Auto-rotate every 5 seconds
+    setInterval(nextSpotlight, 5000);
   }
-
-  function nextSpotlight() {
-    current = (current + 1) % spotlightItems.length;
-    updateSpotlight(current);
-  }
-
-  function prevSpotlight() {
-    current = (current - 1 + spotlightItems.length) % spotlightItems.length;
-    updateSpotlight(current);
-  }
-
-  // Button events
-  nextBtn?.addEventListener('click', nextSpotlight);
-  prevBtn?.addEventListener('click', prevSpotlight);
-
-  // Auto-rotate every 6 seconds
-  setInterval(nextSpotlight, 6000);
-});
-
-
-    
 
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
@@ -67,18 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
     body.classList.add('dark-mode');
   }
 
-  toggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  if (toggle) {
+    toggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
 
-  toggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    if (body.classList.contains('dark-mode')) {
-      localStorage.setItem('theme', 'dark');
-      toggle.textContent = '☀️';
-    } else {
-      localStorage.setItem('theme', 'light');
-      toggle.textContent = '🌙';
-    }
-  });
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        toggle.textContent = '☀️';
+      } else {
+        localStorage.setItem('theme', 'light');
+        toggle.textContent = '🌙';
+      }
+    });
+  }
 
   // === Dynamic content loading for projects page ===
   const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
@@ -114,9 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function initTimelineScroll() {
   const projects = document.querySelectorAll('.project');
   const timelineItems = document.querySelectorAll('.timeline li');
-  if (!projects.length || !timelineItems.length) return; // nothing to do
+  if (!projects.length || !timelineItems.length) return;
 
-  // Highlight and focus as you scroll
   window.addEventListener('scroll', () => {
     let currentYear = '';
 
@@ -128,7 +124,8 @@ function initTimelineScroll() {
     });
 
     timelineItems.forEach(item => {
-      item.classList.toggle('active', item.getAttribute('data-year') === currentYear);
+      const isActive = item.getAttribute('data-year') === currentYear;
+      item.classList.toggle('active', isActive);
     });
 
     projects.forEach(project => {
@@ -137,7 +134,6 @@ function initTimelineScroll() {
     });
   });
 
-  // Scroll to project when clicking a timeline year
   timelineItems.forEach(item => {
     item.addEventListener('click', () => {
       const year = item.getAttribute('data-year');
