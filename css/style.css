@@ -87,6 +87,46 @@ nav ul li a {
   color: #4b0082;
 }
 
+/* ===== Call-to-Action Button ===== */
+.cta-button {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* vibrant purple-blue blend */
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(106, 17, 203, 0.5);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(106, 17, 203, 0.9);
+  background: linear-gradient(135deg, #7b2ff7, #5a0fce);
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+/* ===== Dark Mode Version ===== */
+body.dark-mode .cta-button {
+  background: linear-gradient(135deg, #8a2be2, #4b0082); /* deep indigo glow */
+  color: #fff;
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+}
+
+body.dark-mode .cta-button:hover {
+  background: linear-gradient(135deg, #bb86fc, #7b2ff7);
+  box-shadow: 0 0 30px rgba(187, 134, 252, 0.9);
+}
+
+
 /* Dropdown menu hidden by default */ 
 .dropdown-menu { 
   display: none; 
