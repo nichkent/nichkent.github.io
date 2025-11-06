@@ -293,16 +293,15 @@ body.dark-mode .dropdown-toggle:hover {
   max-width: 1400px;
   margin: 0 auto;
   overflow: hidden;
-  padding: 0 80px; /* more even left/right space for centering */
+  padding: 0 60px; /* balanced breathing room */
   box-sizing: border-box;
 }
-
 
 .spotlight-slider {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 60px; /* spacing between slides */
+  gap: 60px;
   transition: transform 0.6s ease;
   will-change: transform;
 }
