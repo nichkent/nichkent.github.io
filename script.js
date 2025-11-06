@@ -1,6 +1,5 @@
 // === Smooth scrolling ===
 document.addEventListener('DOMContentLoaded', () => {
-
   // === Smooth scroll for anchor links ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -18,7 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
+
+
+
+  
   // ===== Button for going to project warehouse from home page =========
   const goToButton = document.getElementById("GoToProjectWarehouse");
   if (goToButton) {
@@ -34,104 +36,92 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
-// === Spotlight Carousel ===
-const spotlightItems = document.querySelectorAll('.spotlight-item');
-const prevBtn = document.querySelector('.spotlight-nav.prev');
-const nextBtn = document.querySelector('.spotlight-nav.next');
-const slider = document.querySelector('.spotlight-slider');
 
-if (spotlightItems.length) {
-  let current = 0;
-  let autoRotateTimer = null;
 
-  function updateSpotlight(index) {
-    current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // assign classes
-    spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
-      if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-        item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length)
-        item.classList.add('next');
-    });
 
-    // ensure layout is ready before measuring
-    requestAnimationFrame(() => {
-      const containerWidth = slider.parentElement.offsetWidth;
-      const activeItem = spotlightItems[current];
-      const itemWidth = activeItem.offsetWidth;
-      const itemLeft = activeItem.offsetLeft;
 
-      // center active item
-      const offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
-      slider.style.transform = `translateX(-${offset}px)`;
-    });
-  }
 
-  function nextSpotlight() {
-    updateSpotlight(current + 1);
-    resetAutoRotate();
-  }
 
-  function prevSpotlight() {
-    updateSpotlight(current - 1);
-    resetAutoRotate();
-  }
 
-  function resetAutoRotate() {
-    if (autoRotateTimer) clearInterval(autoRotateTimer);
-    autoRotateTimer = setInterval(() => {
+  
+  // === Spotlight Carousel ===
+  const spotlightItems = document.querySelectorAll('.spotlight-item');
+  const prevBtn = document.querySelector('.spotlight-nav.prev');
+  const nextBtn = document.querySelector('.spotlight-nav.next');
+  const slider = document.querySelector('.spotlight-slider');
+
+  if (spotlightItems.length) {
+    let current = 0;
+    let autoRotateTimer = null;
+
+    function updateSpotlight(index) {
+      current = (index + spotlightItems.length) % spotlightItems.length;
+
+      // assign classes
+      spotlightItems.forEach((item, i) => {
+        item.classList.remove('active', 'prev', 'next');
+        if (i === current) item.classList.add('active');
+        else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+          item.classList.add('prev');
+        else if (i === (current + 1) % spotlightItems.length)
+          item.classList.add('next');
+      });
+
+      // ensure layout is ready before measuring
+      requestAnimationFrame(() => {
+        const containerWidth = slider.parentElement.offsetWidth;
+        const activeItem = spotlightItems[current];
+        const itemWidth = activeItem.offsetWidth;
+        const itemLeft = activeItem.offsetLeft;
+
+        // center active item
+        const offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+        slider.style.transform = `translateX(-${offset}px)`;
+      });
+    }
+
+    function nextSpotlight() {
       updateSpotlight(current + 1);
-    }, 5000);
+      resetAutoRotate();
+    }
+
+    function prevSpotlight() {
+      updateSpotlight(current - 1);
+      resetAutoRotate();
+    }
+
+    function resetAutoRotate() {
+      if (autoRotateTimer) clearInterval(autoRotateTimer);
+      autoRotateTimer = setInterval(() => {
+        updateSpotlight(current + 1);
+      }, 5000);
+    }
+
+    // initialize properly after layout is ready
+    window.addEventListener('load', () => {
+      updateSpotlight(0);
+      resetAutoRotate();
+    });
+
+    nextBtn?.addEventListener('click', nextSpotlight);
+    prevBtn?.addEventListener('click', prevSpotlight);
+
+    spotlightItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const page = item.getAttribute('data-page');
+        if (page) window.location.href = `projects.html#${page}`;
+      });
+    });
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+    slider.addEventListener('mouseleave', resetAutoRotate);
+
+    // Keep centered on resize
+    window.addEventListener('resize', () => updateSpotlight(current));
   }
 
-  // initialize properly after layout is ready
-  window.addEventListener('load', () => {
-    updateSpotlight(0);
-    resetAutoRotate();
-  });
-
-  nextBtn?.addEventListener('click', nextSpotlight);
-  prevBtn?.addEventListener('click', prevSpotlight);
-
-  spotlightItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const page = item.getAttribute('data-page');
-      if (page) window.location.href = `projects.html#${page}`;
-    });
-  });
-
-  window.addEventListener('resize', () => updateSpotlight(current));
-}
-
-
-
-  // Buttons
-  nextBtn?.addEventListener('click', nextSpotlight);
-  prevBtn?.addEventListener('click', prevSpotlight);
-
-  // Click spotlight → go to project
-  spotlightItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const page = item.getAttribute('data-page');
-      if (page) window.location.href = `projects.html#${page}`;
-    });
-  });
-
-  // Wait for DOM to fully load, then start
-  window.addEventListener('load', () => {
-    updateSpotlight(0);
-    resetAutoRotate();
-  });
-
-  window.addEventListener('resize', () => updateSpotlight(current));
-
-  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
-  slider.addEventListener('mouseleave', resetAutoRotate);
-}
 
 
 
@@ -142,7 +132,9 @@ if (spotlightItems.length) {
 
 
 
-    
+
+
+  
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
   const body = document.body;
@@ -169,7 +161,13 @@ if (spotlightItems.length) {
 
 
 
-    
+
+
+
+
+
+
+  
   // === Dynamic content loading for projects page ===
   const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
   const projectLinks = document.querySelectorAll('[data-page]');
@@ -179,7 +177,16 @@ if (spotlightItems.length) {
 
 
 
-    
+
+
+
+
+
+
+
+
+
+  
   // === Auto-load project if page opened with a hash ===
   const hash = window.location.hash.replace('#', '');
   if (hash && projectArea) {
@@ -198,6 +205,15 @@ if (spotlightItems.length) {
         projectArea.innerHTML = `<p style="color:red;">Project "${hash}" not found.</p>`;
       });
   }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -228,7 +244,14 @@ if (spotlightItems.length) {
 
 
 
-    
+
+
+
+
+
+
+
+  
   // === Attach link listeners for dynamic project loading ===
   projectLinks.forEach(link => {
     link.addEventListener('click', e => {
@@ -261,7 +284,13 @@ if (spotlightItems.length) {
 
 
 
-/* Timeline scroll function */
+
+
+
+
+
+
+// === Scroll-linked timeline highlighting & focus ===
 function initTimelineScroll() {
   const projects = document.querySelectorAll('.project');
   const timelineItems = document.querySelectorAll('.timeline li');
@@ -290,8 +319,7 @@ function initTimelineScroll() {
 
   // Run on scroll
   window.addEventListener('scroll', updateActiveProject);
-
-  // ✅ Run once immediately on load (to activate first visible project)
+  // Run immediately on load
   updateActiveProject();
 
   // Scroll to project when clicking a timeline year
@@ -304,15 +332,4 @@ function initTimelineScroll() {
       }
     });
   });
-
-
-
-  
-// === Keep spotlight centered on resize ===
-window.addEventListener('resize', () => {
-  if (typeof updateSpotlight === 'function' && spotlightItems.length) {
-    updateSpotlight(current);
-  }
-});
-
 }
