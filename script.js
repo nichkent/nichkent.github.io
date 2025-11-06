@@ -44,113 +44,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const spotlightItems = document.querySelectorAll('.spotlight-item');
   const prevBtn = document.querySelector('.spotlight-nav.prev');
   const nextBtn = document.querySelector('.spotlight-nav.next');
-  const slider = document.querySelector('.spotlight-slider');
-  const container = document.querySelector('.spotlight-container');
 
-  if (spotlightItems.length && slider && container) {
+  if (spotlightItems.length) {
     let current = 0;
-    let autoRotateTimer = null;
+  
+    function updateSpotlight(index) {
+      current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // Wait until images are loaded so widths are correct
-    function imagesReady() {
-      const imgs = slider.querySelectorAll('img');
-      const pending = [];
-      imgs.forEach(img => {
-        if (!img.complete) {
-          pending.push(new Promise(res => {
-            img.addEventListener('load', res, { once: true });
-            img.addEventListener('error', res, { once: true });
-          }));
-        }
+      spotlightItems.forEach((item, i) => {
+       item.classList.remove('active', 'prev', 'next');
+        if (i === current) item.classList.add('active');
+        else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+          item.classList.add('prev');
+        else if (i === (current + 1) % spotlightItems.length)
+          item.classList.add('next');
       });
-      return Promise.all(pending);
     }
 
-    function getGap() {
-      const cs = window.getComputedStyle(slider);
-      // columnGap and gap both work; fallback to 0 if not set
-      return parseFloat(cs.columnGap || cs.gap || '0') || 0;
-    }
-
-    function centerActive(index) {
-    current = (index + spotlightItems.length) % spotlightItems.length;
-
-    // Assign active/neighbor classes
-    spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
-      if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-        item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length)
-        item.classList.add('next');
-    });
-
-    requestAnimationFrame(() => {
-      const containerRect = container.getBoundingClientRect();
-      const active = spotlightItems[current];
-      const activeRect = active.getBoundingClientRect();
-      const sliderRect = slider.getBoundingClientRect();
-
-      // Compute center positions relative to the slider
-      const activeCenter = activeRect.left - sliderRect.left + activeRect.width / 2;
-      const containerCenter = containerRect.width / 2;
-
-      // Exact translation so active center aligns with container center
-      let desired = activeCenter - containerCenter;
-
-      // Clamp to avoid overscrolling past first/last edges
-      const maxOffset = slider.scrollWidth - containerRect.width;
-      desired = Math.max(0, Math.min(desired, maxOffset));
-
-      slider.style.transform = `translateX(-${desired}px)`;
-    });
-  }
-
-
-  function nextSpotlight() {
-    centerActive(current + 1);
-    resetAutoRotate();
-  }
-
-  function prevSpotlight() {
-    centerActive(current - 1);
-    resetAutoRotate();
-  }
-
-  function resetAutoRotate() {
-    if (autoRotateTimer) clearInterval(autoRotateTimer);
-    autoRotateTimer = setInterval(() => centerActive(current + 1), 5000);
-  }
-
-  // Init after images are ready (so widths are stable)
-  imagesReady().then(() => {
-    // Double RAF ensures layout is fully settled before measuring
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        centerActive(0);
-        resetAutoRotate();
-      });
-    });
-  });
-
-  // Buttons
-  nextBtn?.addEventListener('click', nextSpotlight);
-  prevBtn?.addEventListener('click', prevSpotlight);
-
-  // Click slide -> go to project
-  spotlightItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const page = item.getAttribute('data-page');
-      if (page) window.location.href = `projects.html#${page}`;
-    });
-  });
-
-  // Keep centered on resize
-  window.addEventListener('resize', () => centerActive(current));
-
-  // Pause auto-rotate on hover (optional, if you had this before)
-  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
-  slider.addEventListener('mouseleave', resetAutoRotate);
+    prevBtn?.addEventListener('click', () => updateSpotlight(current - 1));
+    nextBtn?.addEventListener('click', () => updateSpotlight(current + 1));
+  
+    window.addEventListener('load', () => updateSpotlight(0));
 }
 
 
