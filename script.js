@@ -39,85 +39,103 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 // === Spotlight Carousel ===
 const spotlightItems = document.querySelectorAll('.spotlight-item');
 const prevBtn = document.querySelector('.spotlight-nav.prev');
 const nextBtn = document.querySelector('.spotlight-nav.next');
 const slider = document.querySelector('.spotlight-slider');
+const container = document.querySelector('.spotlight-container');
 
-if (spotlightItems.length) {
+if (spotlightItems.length && slider && container) {
   let current = 0;
   let autoRotateTimer = null;
 
- function updateSpotlight(index) {
-  current = (index + spotlightItems.length) % spotlightItems.length;
+  // Wait until images are loaded so widths are correct
+  function imagesReady() {
+    const imgs = slider.querySelectorAll('img');
+    const pending = [];
+    imgs.forEach(img => {
+      if (!img.complete) {
+        pending.push(new Promise(res => {
+          img.addEventListener('load', res, { once: true });
+          img.addEventListener('error', res, { once: true });
+        }));
+      }
+    });
+    return Promise.all(pending);
+  }
 
-  // Assign classes
-  spotlightItems.forEach((item, i) => {
-    item.classList.remove('active', 'prev', 'next');
-    if (i === current) item.classList.add('active');
-    else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-      item.classList.add('prev');
-    else if (i === (current + 1) % spotlightItems.length)
-      item.classList.add('next');
-  });
+  function getGap() {
+    const cs = window.getComputedStyle(slider);
+    // columnGap and gap both work; fallback to 0 if not set
+    return parseFloat(cs.columnGap || cs.gap || '0') || 0;
+  }
 
-  // --- Absolute centering via DOM measurements ---
-  requestAnimationFrame(() => {
-    const container = slider.parentElement;
-    const containerRect = container.getBoundingClientRect();
-    const activeItem = spotlightItems[current];
-    const activeRect = activeItem.getBoundingClientRect();
+  function centerActive(index) {
+    // Clamp with wraparound
+    current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // Find the difference between the centers
-    const containerCenter = containerRect.left + containerRect.width / 2;
-    const activeCenter = activeRect.left + activeRect.width / 2;
-    const delta = activeCenter - containerCenter;
+    // Assign classes
+    spotlightItems.forEach((item, i) => {
+      item.classList.remove('active', 'prev', 'next');
+      if (i === current) item.classList.add('active');
+      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length) item.classList.add('prev');
+      else if (i === (current + 1) % spotlightItems.length) item.classList.add('next');
+    });
 
-    // Apply inverse translation to center active item
-    const currentTransform = parseFloat(slider.dataset.offset || 0);
-    const newTransform = currentTransform + delta;
-    slider.dataset.offset = newTransform;
-    slider.style.transform = `translateX(-${newTransform}px)`;
-  });
-}
+    // Robust centering: sum widths of slides before current + gaps
+    const gap = getGap();
+    let prefixWidth = 0;
+    for (let i = 0; i < current; i++) {
+      prefixWidth += spotlightItems[i].offsetWidth;
+    }
+    const active = spotlightItems[current];
+    const activeWidth = active.offsetWidth;
 
+    // Total distance from slider's very left edge to the center of the active slide
+    const activeCenterFromLeft = prefixWidth + gap * current + (activeWidth / 2);
 
+    // Center of the visible container
+    const containerCenter = container.clientWidth / 2;
+
+    // Desired translate so that activeCenter aligns with containerCenter
+    const desired = activeCenterFromLeft - containerCenter;
+
+    slider.style.transform = `translateX(-${desired}px)`;
+  }
 
   function nextSpotlight() {
-    updateSpotlight(current + 1);
+    centerActive(current + 1);
     resetAutoRotate();
   }
 
   function prevSpotlight() {
-    updateSpotlight(current - 1);
+    centerActive(current - 1);
     resetAutoRotate();
   }
 
   function resetAutoRotate() {
     if (autoRotateTimer) clearInterval(autoRotateTimer);
-    autoRotateTimer = setInterval(() => updateSpotlight(current + 1), 5000);
+    autoRotateTimer = setInterval(() => centerActive(current + 1), 5000);
   }
 
-  // === Initialize AFTER images are ready ===
-  window.addEventListener('load', () => {
-    // Force the slider to start flush-left before measuring
-    slider.style.justifyContent = 'flex-start';
-    slider.scrollLeft = 0;
-    slider.style.transform = 'translateX(0px)';
-    slider.dataset.offset = 0;
-
-    // Wait one frame for the layout to settle
+  // Init after images are ready (so widths are stable)
+  imagesReady().then(() => {
+    // Double RAF ensures layout is fully settled before measuring
     requestAnimationFrame(() => {
-    updateSpotlight(0); // Force first (leftmost) project active
-    resetAutoRotate();
-   });
+      requestAnimationFrame(() => {
+        centerActive(0);
+        resetAutoRotate();
+      });
+    });
   });
-    
 
+  // Buttons
   nextBtn?.addEventListener('click', nextSpotlight);
   prevBtn?.addEventListener('click', prevSpotlight);
 
+  // Click slide -> go to project
   spotlightItems.forEach(item => {
     item.addEventListener('click', () => {
       const page = item.getAttribute('data-page');
@@ -125,14 +143,13 @@ if (spotlightItems.length) {
     });
   });
 
-  // Pause auto-rotation on hover
+  // Keep centered on resize
+  window.addEventListener('resize', () => centerActive(current));
+
+  // Pause auto-rotate on hover (optional, if you had this before)
   slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
   slider.addEventListener('mouseleave', resetAutoRotate);
-
-  // Re-center on resize
-  window.addEventListener('resize', () => updateSpotlight(current));
 }
-
 
 
 
