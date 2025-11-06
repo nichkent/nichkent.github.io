@@ -99,12 +99,18 @@ if (spotlightItems.length) {
     autoRotateTimer = setInterval(() => updateSpotlight(current + 1), 5000);
   }
 
-  // Initialize AFTER images are done loading
+  // === Initialize AFTER images are ready ===
   window.addEventListener('load', () => {
-    setTimeout(() => {
-      updateSpotlight(0);
-      resetAutoRotate();
-    }, 300); // short delay ensures browser paints first
+    // Force the slider to start flush-left before measuring
+    slider.style.justifyContent = 'flex-start';
+    slider.scrollLeft = 0;
+    slider.style.transform = 'translateX(0px)';
+    slider.dataset.offset = 0;
+
+    // Wait one frame for the layout to settle
+    requestAnimationFrame(() => {
+    updateSpotlight(0); // Force first (leftmost) project active
+    resetAutoRotate();
   });
 
   nextBtn?.addEventListener('click', nextSpotlight);
