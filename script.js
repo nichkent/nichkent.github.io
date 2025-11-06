@@ -40,76 +40,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// === Spotlight Carousel ===
-const spotlightItems = document.querySelectorAll('.spotlight-item');
-const prevBtn = document.querySelector('.spotlight-nav.prev');
-const nextBtn = document.querySelector('.spotlight-nav.next');
-const slider = document.querySelector('.spotlight-slider');
-const container = document.querySelector('.spotlight-container');
+  // === Spotlight Carousel ===
+  const spotlightItems = document.querySelectorAll('.spotlight-item');
+  const prevBtn = document.querySelector('.spotlight-nav.prev');
+  const nextBtn = document.querySelector('.spotlight-nav.next');
+  const slider = document.querySelector('.spotlight-slider');
+  const container = document.querySelector('.spotlight-container');
 
-if (spotlightItems.length && slider && container) {
-  let current = 0;
-  let autoRotateTimer = null;
+  if (spotlightItems.length && slider && container) {
+    let current = 0;
+    let autoRotateTimer = null;
 
-  // Wait until images are loaded so widths are correct
-  function imagesReady() {
-    const imgs = slider.querySelectorAll('img');
-    const pending = [];
-    imgs.forEach(img => {
-      if (!img.complete) {
-        pending.push(new Promise(res => {
-          img.addEventListener('load', res, { once: true });
-          img.addEventListener('error', res, { once: true });
-        }));
-      }
-    });
-    return Promise.all(pending);
-  }
+    // Wait until images are loaded so widths are correct
+    function imagesReady() {
+      const imgs = slider.querySelectorAll('img');
+      const pending = [];
+      imgs.forEach(img => {
+        if (!img.complete) {
+          pending.push(new Promise(res => {
+            img.addEventListener('load', res, { once: true });
+            img.addEventListener('error', res, { once: true });
+          }));
+        }
+      });
+      return Promise.all(pending);
+    }
 
-  function getGap() {
-    const cs = window.getComputedStyle(slider);
-    // columnGap and gap both work; fallback to 0 if not set
-    return parseFloat(cs.columnGap || cs.gap || '0') || 0;
-  }
+    function getGap() {
+      const cs = window.getComputedStyle(slider);
+      // columnGap and gap both work; fallback to 0 if not set
+      return parseFloat(cs.columnGap || cs.gap || '0') || 0;
+    }
 
-  function centerActive(index) {
-    // Clamp with wraparound
+    function centerActive(index) {
     current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // Assign classes
+    // Assign active/neighbor classes
     spotlightItems.forEach((item, i) => {
       item.classList.remove('active', 'prev', 'next');
       if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length) item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length) item.classList.add('next');
+      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+        item.classList.add('prev');
+      else if (i === (current + 1) % spotlightItems.length)
+        item.classList.add('next');
     });
 
-    // Robust centering: sum widths of slides before current + gaps
-    const gap = getGap();
-    let prefixWidth = 0;
-    for (let i = 0; i < current; i++) {
-      prefixWidth += spotlightItems[i].offsetWidth;
-    }
-    const active = spotlightItems[current];
-    const activeWidth = active.offsetWidth;
+    requestAnimationFrame(() => {
+      const containerRect = container.getBoundingClientRect();
+      const active = spotlightItems[current];
+      const activeRect = active.getBoundingClientRect();
+      const sliderRect = slider.getBoundingClientRect();
 
-    // Total distance from slider's very left edge to the center of the active slide
-    const activeCenterFromLeft = prefixWidth + gap * current + (activeWidth / 2);
+      // Compute center positions relative to the slider
+      const activeCenter = activeRect.left - sliderRect.left + activeRect.width / 2;
+      const containerCenter = containerRect.width / 2;
 
-    // Center of the visible container
-    const containerCenter = container.clientWidth / 2;
+      // Exact translation so active center aligns with container center
+      let desired = activeCenter - containerCenter;
 
-    // Desired translate so that activeCenter aligns with containerCenter
-    let desired = activeCenterFromLeft - containerCenter;
+      // Clamp to avoid overscrolling past first/last edges
+      const maxOffset = slider.scrollWidth - containerRect.width;
+      desired = Math.max(0, Math.min(desired, maxOffset));
 
-    // --- Special centering correction for the very first slide ---
-    if (current === 0) {
-    desired -= getGap() / 1.5; // shift slightly right (~half the gap)
-    }
-
-  slider.style.transform = `translateX(-${desired}px)`;
-
+      slider.style.transform = `translateX(-${desired}px)`;
+    });
   }
+
 
   function nextSpotlight() {
     centerActive(current + 1);
