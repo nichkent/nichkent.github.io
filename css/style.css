@@ -137,15 +137,7 @@ nav ul li a {
   transform: scale(0.98);
 }
 
-
-
-
-
-
-
-
-
-/* ===== Dark Mode Version ===== */
+/* Dark Mode Version */
 body.dark-mode .GTPWButton {
   background: linear-gradient(135deg, #8a2be2, #4b0082);
   color: #fff;
@@ -157,7 +149,14 @@ body.dark-mode .GTPWButton:hover {
   box-shadow: 0 0 30px rgba(187, 134, 252, 0.9);
 }
 
-/* Dropdown menu */
+
+
+
+
+
+
+
+/* ========= Dropdown menu ======== */
 .dropdown-menu {
   display: none;
   position: absolute;
@@ -446,6 +445,21 @@ body.dark-mode .spotlight-title {
   font-size: 1.6rem;
   font-weight: bold;
 }
+
+/* ===== Project Focus Effect ===== */
+.project {
+  transition: all 0.4s ease;
+  opacity: 0.6;
+  transform: scale(0.97);
+  filter: grayscale(60%);
+}
+
+.project.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
+}
+
 
 .timeline li.active::before {
   background: #4b0082;
