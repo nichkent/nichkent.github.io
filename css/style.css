@@ -375,15 +375,30 @@ body.dark-mode .dropdown-toggle:hover {
 
 /* Prevent overlap flashes by controlling stacking */
 .spotlight-item {
+  z-index: 1;
+  transition:
+    transform 0.7s ease,
+    opacity 0.7s ease,
+    filter 0.7s ease;
+}
+
+.spotlight-item.active {
   z-index: 3;
+}
+
+/* Outgoing slides go underneath during transitions */
+.spotlight-item.under {
+  z-index: 1 !important;
+  opacity: 0.9;
+}
+
+/* Optional: incoming slides slightly fade in */
+.spotlight-item.incoming {
+  opacity: 1;
 }
 
 .spotlight-item.prev,
 .spotlight-item.next {
-  z-index: 1;
-}
-
-.spotlight-item.active {
   z-index: 2;
 }
 
