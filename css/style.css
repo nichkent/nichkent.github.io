@@ -386,17 +386,24 @@ body.dark-mode .dropdown-toggle:hover {
   z-index: 3;
 }
 
-/* Outgoing slides go underneath during transitions */
+.spotlight-item.prev,
+.spotlight-item.next {
+  z-index: 2;
+}
+
+/* Outgoing slides always go below active */
 .spotlight-item.under {
   z-index: 1 !important;
   opacity: 0.95;
   transform: scale(0.98);
 }
 
-/* Optional: incoming slides slightly fade in */
+/* Incoming slides gently fade in underneath */
 .spotlight-item.incoming {
+  z-index: 2 !important;
   opacity: 1;
 }
+
 
 .spotlight-item.prev,
 .spotlight-item.next {
