@@ -374,13 +374,11 @@ body.dark-mode .dropdown-toggle:hover {
 }
 
 /* Prevent overlap flashes by controlling stacking */
-.spotlight-item {
-  z-index: 1;
-  transition:
-    transform 0.7s ease,
-    opacity 0.7s ease,
-    filter 0.7s ease;
-}
+/* Z-index priority hierarchy */
+.spotlight-item { z-index: 0; }
+.spotlight-item.prev,
+.spotlight-item.next { z-index: 1; }
+.spotlight-item.active { z-index: 3; }
 
 .spotlight-item.active {
   z-index: 3;
@@ -388,18 +386,10 @@ body.dark-mode .dropdown-toggle:hover {
 
 /* Outgoing slides go underneath during transitions */
 .spotlight-item.under {
-  z-index: 1 !important;
-  opacity: 0.9;
+  z-index: 0 !important;
 }
-
-/* Optional: incoming slides slightly fade in */
 .spotlight-item.incoming {
-  opacity: 1;
-}
-
-.spotlight-item.prev,
-.spotlight-item.next {
-  z-index: 2;
+  z-index: 2 !important;
 }
 
 /* Ensure wrap-around slides transition smoothly below */
