@@ -49,36 +49,37 @@ if (spotlightItems.length) {
   let current = 0;
   let autoRotateTimer = null;
 
-  function updateSpotlight(index) {
-    current = (index + spotlightItems.length) % spotlightItems.length;
+ function updateSpotlight(index) {
+  current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // Assign classes
-    spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
-      if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-        item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length)
-        item.classList.add('next');
-    });
+  // Assign active / neighbor classes
+  spotlightItems.forEach((item, i) => {
+    item.classList.remove('active', 'prev', 'next');
+    if (i === current) item.classList.add('active');
+    else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+      item.classList.add('prev');
+    else if (i === (current + 1) % spotlightItems.length)
+      item.classList.add('next');
+  });
 
-    // Wait until layout and images have settled before measuring
-    requestAnimationFrame(() => {
-      const container = slider.parentElement;
-      const containerRect = container.getBoundingClientRect();
-      const activeItem = spotlightItems[current];
-      const activeRect = activeItem.getBoundingClientRect();
+  requestAnimationFrame(() => {
+    const container = slider.parentElement;
+    const containerWidth = container.offsetWidth;
+    const activeItem = spotlightItems[current];
+    const itemWidth = activeItem.offsetWidth;
 
-      // Calculate how much we need to shift the slider so that
-      // the active item's center aligns with the container's center
-      const containerCenter = containerRect.left + containerRect.width / 2;
-      const activeCenter = activeRect.left + activeRect.width / 2;
-      const offset = activeCenter - containerCenter;
+    const computedStyle = window.getComputedStyle(slider);
+    const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 60);
 
-      slider.style.transform = `translateX(calc(${slider.style.transform || '0px'} - ${offset}px))`;
-      slider.style.transform = `translateX(-${offset}px)`;
-    });
-  }
+    // --- Stable, index-based offset ---
+    // Each item sits at (itemWidth + gap) * i
+    const totalSlideWidth = itemWidth + gap;
+    const offset = totalSlideWidth * current - (containerWidth - itemWidth) / 2;
+
+    slider.style.transform = `translateX(-${offset}px)`;
+  });
+}
+
 
   function nextSpotlight() {
     updateSpotlight(current + 1);
