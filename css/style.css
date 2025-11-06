@@ -375,27 +375,13 @@ body.dark-mode .dropdown-toggle:hover {
 
 /* Prevent overlap flashes by controlling stacking */
 /* Z-index priority hierarchy */
+/* Z-index stack — from back to front */
 .spotlight-item { z-index: 0; }
+.spotlight-item.incoming { z-index: 0 !important; }  /* start below everything */
 .spotlight-item.prev,
 .spotlight-item.next { z-index: 1; }
-.spotlight-item.active { z-index: 3; }
-
-.spotlight-item.active {
-  z-index: 3;
-}
-
-/* Outgoing slides go underneath during transitions */
-.spotlight-item.under {
-  z-index: 0 !important;
-}
-.spotlight-item.incoming {
-  z-index: 2 !important;
-}
-
-/* Ensure wrap-around slides transition smoothly below */
-.spotlight-item.transitioning {
-  z-index: 1 !important;
-}
+.spotlight-item.active { z-index: 2; }
+.spotlight-item.under { z-index: 3 !important; }  /* outgoing sits above just long enough to fade */
 
 
 /* --- Subtle gradient fade at edges --- */
