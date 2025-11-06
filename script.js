@@ -35,7 +35,7 @@
 
 
     
-  // === Spotlight Carousel ===
+// === Spotlight Carousel ===
 const spotlightItems = document.querySelectorAll('.spotlight-item');
 const prevBtn = document.querySelector('.spotlight-nav.prev');
 const nextBtn = document.querySelector('.spotlight-nav.next');
@@ -46,10 +46,9 @@ if (spotlightItems.length) {
   let autoRotateTimer = null;
 
   function updateSpotlight(index) {
-    // Loop the index
     current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // Update active, prev, next classes
+    // Update classes
     spotlightItems.forEach((item, i) => {
       item.classList.remove('active', 'prev', 'next');
       if (i === current) item.classList.add('active');
@@ -59,22 +58,10 @@ if (spotlightItems.length) {
         item.classList.add('next');
     });
 
-    // Center the active slide dynamically
-    centerActiveSlide();
-  }
-
-  function centerActiveSlide() {
-    const containerWidth = slider.parentElement.offsetWidth;
-    const activeSlide = spotlightItems[current];
-    const slideRect = activeSlide.getBoundingClientRect();
-    const sliderRect = slider.getBoundingClientRect();
-
-    // Compute how much to shift to center active slide
-    const offset =
-      slideRect.left -
-      sliderRect.left -
-      (containerWidth / 2 - slideRect.width / 2);
-
+    // Translate based purely on item index and width
+    const itemWidth = spotlightItems[0].offsetWidth;
+    const gap = 40; // must match CSS gap
+    const offset = (itemWidth + gap) * current;
     slider.style.transform = `translateX(-${offset}px)`;
   }
 
@@ -105,16 +92,14 @@ if (spotlightItems.length) {
     });
   });
 
-  // ✅ Initialize after DOM layout is stable
+  // Wait for DOM to fully load, then start
   window.addEventListener('load', () => {
     updateSpotlight(0);
     resetAutoRotate();
   });
 
-  // ✅ Recenter on window resize
-  window.addEventListener('resize', centerActiveSlide);
+  window.addEventListener('resize', () => updateSpotlight(current));
 
-  // Pause on hover
   slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
   slider.addEventListener('mouseleave', resetAutoRotate);
 }
