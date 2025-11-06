@@ -111,7 +111,9 @@ if (spotlightItems.length) {
     requestAnimationFrame(() => {
     updateSpotlight(0); // Force first (leftmost) project active
     resetAutoRotate();
+   });
   });
+    
 
   nextBtn?.addEventListener('click', nextSpotlight);
   prevBtn?.addEventListener('click', prevSpotlight);
