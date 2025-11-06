@@ -35,6 +35,14 @@ header {
   z-index: 1000;
 }
 
+
+
+
+
+
+
+
+
 /* ====== Navigation Section ======= */
 nav ul {
   list-style: none;
@@ -51,6 +59,14 @@ nav ul li a {
   text-decoration: none;
   color: #333;
 }
+
+
+
+
+
+
+
+
 
 /* ==== Navbar Dropdown Styles For projects.html Page ==== */
 .navbar {
@@ -85,6 +101,15 @@ nav ul li a {
   color: #4b0082;
 }
 
+
+
+
+
+
+
+
+
+
 /* ===== Go to project warehouse Button ===== */
 .GTPWButton {
   display: inline-block;
@@ -111,6 +136,14 @@ nav ul li a {
 .GTPWButton:active {
   transform: scale(0.98);
 }
+
+
+
+
+
+
+
+
 
 /* ===== Dark Mode Version ===== */
 body.dark-mode .GTPWButton {
@@ -170,6 +203,12 @@ body.dark-mode .dropdown-toggle:hover {
   color: #bb86fc;
 }
 
+
+
+
+
+
+
 /* ====== Home Section ======= */
 #home {
   margin-top: 60px;
@@ -222,6 +261,13 @@ body.dark-mode .dropdown-toggle:hover {
   object-fit: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
+
+
+
+
+
+
+
 
 /* ===== Spotlight Section ===== */
 #project-spotlight {
@@ -330,6 +376,18 @@ body.dark-mode .dropdown-toggle:hover {
 .spotlight-nav.prev { left: 15px; }
 .spotlight-nav.next { right: 15px; }
 
+/* --- Dark mode tweaks --- */
+body.dark-mode #project-spotlight {
+  background: rgba(0, 0, 0, 0.6);
+}
+body.dark-mode .spotlight-title {
+  background: rgba(75, 0, 130, 0.6);
+}
+
+
+
+
+
 /* ==== Timeline Layout ==== */
 #projects-page {
   display: flex;
@@ -393,7 +451,32 @@ body.dark-mode .dropdown-toggle:hover {
   background: #4b0082;
 }
 
-/* Project content */
+/*  Dark Mode Timeline */
+body.dark-mode .timeline li {
+  color: #ccc;
+}
+
+body.dark-mode .timeline li::before {
+  background: #666;
+}
+
+body.dark-mode .timeline li.active {
+  color: #bb86fc;
+}
+
+body.dark-mode .timeline li.active::before {
+  background: #bb86fc;
+}
+
+
+
+
+
+
+
+
+
+/* ====== Project content ======= */
 .projects-content {
   flex: 1;
   max-width: 900px;
@@ -418,31 +501,11 @@ body.dark-mode .dropdown-toggle:hover {
   line-height: 1.6;
 }
 
-/* ==== Dark Mode Timeline ==== */
-body.dark-mode .timeline li {
-  color: #ccc;
-}
-
-body.dark-mode .timeline li::before {
-  background: #666;
-}
-
-body.dark-mode .timeline li.active {
-  color: #bb86fc;
-}
-
-body.dark-mode .timeline li.active::before {
-  background: #bb86fc;
-}
 
 
-/* --- Dark mode tweaks --- */
-body.dark-mode #project-spotlight {
-  background: rgba(0, 0, 0, 0.6);
-}
-body.dark-mode .spotlight-title {
-  background: rgba(75, 0, 130, 0.6);
-}
+
+
+
 
 /* ====== Bio Section ======= */
 #bio {
@@ -467,10 +530,25 @@ body.dark-mode .spotlight-title {
   line-height: 1;
 }
 
+
+
+
+
+
+
 /* ====== Section Headers ======= */
 h2 {
   font-weight: 600;
 }
+
+
+
+
+
+
+
+
+
 
 /* ====== Reach Out Section ======= */
 #Reach\ Out {
@@ -489,6 +567,13 @@ h2 {
   margin: 10px 0;
 }
 
+
+
+
+
+
+
+
 /* ====== Footer ======= */
 footer {
   padding: 10px 0;
@@ -502,6 +587,14 @@ footer {
   font-size: 0.9rem;
   color: #000;
 }
+
+
+
+
+
+
+
+
 
 /* ====== Dark Mode General ====== */
 body.dark-mode {
