@@ -58,34 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateSpotlight(index) {
       current = (index + spotlightItems.length) % spotlightItems.length;
 
-      // assign classes
+      // Assign classes
       spotlightItems.forEach((item, i) => {
-        item.classList.remove('active', 'prev', 'next');
-        if (i === current) item.classList.add('active');
-        else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-          item.classList.add('prev');
-        else if (i === (current + 1) % spotlightItems.length)
-          item.classList.add('next');
-      });
+      item.classList.remove('active', 'prev', 'next');
+      if (i === current) item.classList.add('active');
+      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+        item.classList.add('prev');
+      else if (i === (current + 1) % spotlightItems.length)
+        item.classList.add('next');
+    });
 
-      // ensure layout is ready before measuring
-      requestAnimationFrame(() => {
-        const containerWidth = slider.parentElement.offsetWidth;
-        const activeItem = spotlightItems[current];
-        const itemWidth = activeItem.offsetWidth;
-        const itemLeft = activeItem.offsetLeft;
+    // === Center the active item ===
+    requestAnimationFrame(() => {
+    const containerWidth = slider.parentElement.offsetWidth;
+    const activeItem = spotlightItems[current];
+    const itemWidth = activeItem.offsetWidth;
+    const gap = 60; // must match your CSS .spotlight-slider gap
+    const totalItemWidth = itemWidth + gap;
 
-        // center active item
-        let offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+    // Instead of relying on offsetLeft, calculate position by index
+    const offset = totalItemWidth * current - (containerWidth / 2 - itemWidth / 2);
 
-        // Clamp so we never scroll beyond first or last project
-        const maxOffset = slider.scrollWidth - containerWidth;
-        if (offset < 0) offset = 0;
-        if (offset > maxOffset) offset = maxOffset;
+    slider.style.transform = `translateX(-${offset}px)`;
+  });
+}
 
-        slider.style.transform = `translateX(-${offset}px)`;
-      });
-    }
 
     function nextSpotlight() {
       updateSpotlight(current + 1);
