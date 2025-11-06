@@ -82,8 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       slider.style.transform = `translateX(-${offset}px)`;
     });
 
-  });
-}
+ }
 
 
     function nextSpotlight() {
