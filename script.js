@@ -57,13 +57,13 @@ if (spotlightItems.length) {
     const outgoing = spotlightItems[current];
     const incoming = spotlightItems[newIndex];
 
-    // Reset all classes and z-index before transition
+    // Reset all z-indexes first
     spotlightItems.forEach(item => {
-      item.classList.remove('active', 'prev', 'next', 'under');
+      item.classList.remove('active', 'prev', 'next', 'under', 'over');
       item.style.zIndex = '1';
     });
 
-    // Assign new structural classes
+    // Assign neighbor classes
     spotlightItems.forEach((item, i) => {
       if (i === newIndex) item.classList.add('active');
       else if (i === (newIndex - 1 + spotlightItems.length) % spotlightItems.length)
@@ -72,29 +72,34 @@ if (spotlightItems.length) {
         item.classList.add('next');
     });
 
-    // --- z-index logic ---
-    // outgoing slide goes below during transition
-    outgoing.style.zIndex = '1';
-    incoming.style.zIndex = '2'; // below active at start
-    spotlightItems[newIndex].style.zIndex = '3'; // active always on top
+    // --- Direction-aware stacking ---
+    if (direction === 1) {
+      // Forward → old slide goes below
+      outgoing.style.zIndex = '1';
+      incoming.style.zIndex = '2';
+    } else {
+      // Backward → old slide also goes below (same behavior)
+      outgoing.style.zIndex = '1';
+      incoming.style.zIndex = '2';
+    }
 
-    // --- Visual transition classes ---
+    // Active slide always on top
+    incoming.style.zIndex = '3';
+
+    // Add transition marker
     outgoing.classList.add('under');
-    incoming.classList.add('incoming');
 
-    // Update current after animation completes
     setTimeout(() => {
-      outgoing.classList.remove('under', 'incoming');
+      outgoing.classList.remove('under');
       current = newIndex;
       isTransitioning = false;
     }, 700);
   }
 
-  // Button listeners
   prevBtn?.addEventListener('click', () => updateSpotlight(current - 1, -1));
   nextBtn?.addEventListener('click', () => updateSpotlight(current + 1, 1));
 
-  // ✅ Make spotlight items clickable — route to project page
+  // Click → route to project
   spotlightItems.forEach(item => {
     item.addEventListener('click', () => {
       const page = item.getAttribute('data-page');
@@ -102,7 +107,6 @@ if (spotlightItems.length) {
     });
   });
 
-  // ✅ Initialize on page load
   window.addEventListener('load', () => updateSpotlight(0));
 }
 
