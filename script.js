@@ -72,7 +72,8 @@ if (spotlightItems.length) {
         item.classList.add('next');
     });
 
-   
+   spotlightItems.forEach(item => item.classList.remove('incoming', 'under', 'transitioning'));
+
 
     // --- Visual transition classes ---
     outgoing.classList.add('under');
@@ -81,6 +82,7 @@ if (spotlightItems.length) {
     // Update current after animation completes
     setTimeout(() => {
       outgoing.classList.remove('under', 'incoming');
+      incoming.classList.remove('incoming'); // ✅ make sure incoming resets too
       current = newIndex;
       isTransitioning = false;
     }, 700);
