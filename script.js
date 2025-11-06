@@ -39,109 +39,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// === Spotlight Carousel ===
+const spotlightItems = document.querySelectorAll('.spotlight-item');
+const prevBtn = document.querySelector('.spotlight-nav.prev');
+const nextBtn = document.querySelector('.spotlight-nav.next');
+const slider = document.querySelector('.spotlight-slider');
+
+if (spotlightItems.length) {
+  let current = 0;
+  let autoRotateTimer = null;
+
+  function updateSpotlight(index) {
+    current = (index + spotlightItems.length) % spotlightItems.length;
+
+    // Assign classes
+    spotlightItems.forEach((item, i) => {
+      item.classList.remove('active', 'prev', 'next');
+      if (i === current) item.classList.add('active');
+      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+        item.classList.add('prev');
+      else if (i === (current + 1) % spotlightItems.length)
+        item.classList.add('next');
+    });
+
+    // Wait until layout and images have settled before measuring
+    requestAnimationFrame(() => {
+      const container = slider.parentElement;
+      const containerRect = container.getBoundingClientRect();
+      const activeItem = spotlightItems[current];
+      const activeRect = activeItem.getBoundingClientRect();
+
+      // Calculate how much we need to shift the slider so that
+      // the active item's center aligns with the container's center
+      const containerCenter = containerRect.left + containerRect.width / 2;
+      const activeCenter = activeRect.left + activeRect.width / 2;
+      const offset = activeCenter - containerCenter;
+
+      slider.style.transform = `translateX(calc(${slider.style.transform || '0px'} - ${offset}px))`;
+      slider.style.transform = `translateX(-${offset}px)`;
+    });
+  }
+
+  function nextSpotlight() {
+    updateSpotlight(current + 1);
+    resetAutoRotate();
+  }
+
+  function prevSpotlight() {
+    updateSpotlight(current - 1);
+    resetAutoRotate();
+  }
+
+  function resetAutoRotate() {
+    if (autoRotateTimer) clearInterval(autoRotateTimer);
+    autoRotateTimer = setInterval(() => updateSpotlight(current + 1), 5000);
+  }
+
+  // Initialize AFTER images are done loading
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      updateSpotlight(0);
+      resetAutoRotate();
+    }, 300); // short delay ensures browser paints first
+  });
+
+  nextBtn?.addEventListener('click', nextSpotlight);
+  prevBtn?.addEventListener('click', prevSpotlight);
+
+  spotlightItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const page = item.getAttribute('data-page');
+      if (page) window.location.href = `projects.html#${page}`;
+    });
+  });
+
+  // Pause auto-rotation on hover
+  slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
+  slider.addEventListener('mouseleave', resetAutoRotate);
+
+  // Re-center on resize
+  window.addEventListener('resize', () => updateSpotlight(current));
+}
 
 
 
 
 
   
-  // === Spotlight Carousel ===
-  const spotlightItems = document.querySelectorAll('.spotlight-item');
-  const prevBtn = document.querySelector('.spotlight-nav.prev');
-  const nextBtn = document.querySelector('.spotlight-nav.next');
-  const slider = document.querySelector('.spotlight-slider');
-
-  if (spotlightItems.length) {
-    let current = 0;
-    let autoRotateTimer = null;
-
-    function updateSpotlight(index) {
-  current = (index + spotlightItems.length) % spotlightItems.length;
-
-  // Assign classes
-  spotlightItems.forEach((item, i) => {
-    item.classList.remove('active', 'prev', 'next');
-    if (i === current) item.classList.add('active');
-    else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-      item.classList.add('prev');
-    else if (i === (current + 1) % spotlightItems.length)
-      item.classList.add('next');
-  });
-
-  // Wait for layout AND images to settle before measuring
-  requestAnimationFrame(() => {
-    // if the active image hasn't loaded yet, wait for it
-    const activeItem = spotlightItems[current];
-    const img = activeItem.querySelector("img");
-    if (img && !img.complete) {
-      img.onload = () => updateSpotlight(current);
-      return;
-    }
-
-    const containerWidth = slider.parentElement.offsetWidth;
-    const itemWidth = activeItem.offsetWidth;
-    const computedStyle = window.getComputedStyle(slider);
-    const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 60);
-
-    // measure based on real layout after everything is rendered
-    const itemLeft = activeItem.offsetLeft;
-
-    // --- Adjust centering ---
-    let offset;
-    if (current === 0) {
-      // first slide fix
-      offset = -(containerWidth / 2 - itemWidth / 2);
-    } else {
-      offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
-    }
-
-    slider.style.transform = `translateX(-${offset}px)`;
-  });
- }
-
-
-    function nextSpotlight() {
-      updateSpotlight(current + 1);
-      resetAutoRotate();
-    }
-
-    function prevSpotlight() {
-      updateSpotlight(current - 1);
-      resetAutoRotate();
-    }
-
-    function resetAutoRotate() {
-      if (autoRotateTimer) clearInterval(autoRotateTimer);
-      autoRotateTimer = setInterval(() => {
-        updateSpotlight(current + 1);
-      }, 5000);
-    }
-
-    // initialize properly after layout is ready
-    window.addEventListener('load', () => {
-      updateSpotlight(0);
-      resetAutoRotate();
-    });
-
-    nextBtn?.addEventListener('click', nextSpotlight);
-    prevBtn?.addEventListener('click', prevSpotlight);
-
-    spotlightItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const page = item.getAttribute('data-page');
-        if (page) window.location.href = `projects.html#${page}`;
-      });
-    });
-
-    // Pause on hover
-    slider.addEventListener('mouseenter', () => clearInterval(autoRotateTimer));
-    slider.addEventListener('mouseleave', resetAutoRotate);
-
-    // Keep centered on resize
-    window.addEventListener('resize', () => updateSpotlight(current));
-  }
-
-
+  
 
 
 
