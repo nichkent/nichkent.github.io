@@ -41,30 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // === Spotlight Carousel ===
-  const spotlightItems = document.querySelectorAll('.spotlight-item');
-  const prevBtn = document.querySelector('.spotlight-nav.prev');
-  const nextBtn = document.querySelector('.spotlight-nav.next');
-
-  if (spotlightItems.length) {
-    let current = 0;
-  
-    function updateSpotlight(index) {
-      current = (index + spotlightItems.length) % spotlightItems.length;
-
-      spotlightItems.forEach((item, i) => {
-       item.classList.remove('active', 'prev', 'next');
-        if (i === current) item.classList.add('active');
-        else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-          item.classList.add('prev');
-        else if (i === (current + 1) % spotlightItems.length)
-          item.classList.add('next');
-      });
-    }
-
-    prevBtn?.addEventListener('click', () => updateSpotlight(current - 1));
-    nextBtn?.addEventListener('click', () => updateSpotlight(current + 1));
-
-    const spotlightItems = document.querySelectorAll('.spotlight-item');
+const spotlightItems = document.querySelectorAll('.spotlight-item');
 const prevBtn = document.querySelector('.spotlight-nav.prev');
 const nextBtn = document.querySelector('.spotlight-nav.next');
 
@@ -84,26 +61,22 @@ if (spotlightItems.length) {
     });
   }
 
+  // Button listeners
   prevBtn?.addEventListener('click', () => updateSpotlight(current - 1));
   nextBtn?.addEventListener('click', () => updateSpotlight(current + 1));
 
-  // ✅ Add this block for clickable spotlight items
+  // ✅ Make spotlight items clickable — route to project page
   spotlightItems.forEach(item => {
     item.addEventListener('click', () => {
       const page = item.getAttribute('data-page');
       if (page) {
-        // open the corresponding project section
         window.location.href = `projects.html#${page}`;
       }
     });
   });
 
-  // Initialize spotlight
+  // ✅ Initialize on page load
   window.addEventListener('load', () => updateSpotlight(0));
-}
-
-    
-    window.addEventListener('load', () => updateSpotlight(0));
 }
 
 
