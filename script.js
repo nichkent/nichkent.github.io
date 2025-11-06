@@ -68,20 +68,31 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.add('next');
     });
 
-    // --- Center active item reliably ---
+    // --- Center active item ---
     requestAnimationFrame(() => {
       const containerWidth = slider.parentElement.offsetWidth;
       const activeItem = spotlightItems[current];
       const itemWidth = activeItem.offsetWidth;
-      const itemLeft = activeItem.offsetLeft;
 
-      // ✅ Fix: for the first slide, itemLeft is often 0 — nudge it slightly right
-      const safeLeft = current === 0 ? itemWidth * 0.1 : itemLeft;
+    // Measure the full width (including gap)
+    const computedStyle = window.getComputedStyle(slider);
+    const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 40);
 
-      const offset = safeLeft - (containerWidth / 2 - itemWidth / 2);
-      slider.style.transform = `translateX(-${offset}px)`;
-    });
+    // Calculate base offsetLeft
+    let itemLeft = activeItem.offsetLeft;
 
+    // ✅ If it's the first slide, manually compute the center offset
+    if (current === 0) {
+      itemLeft = 0; // ensure it's not undefined
+    }
+
+    const offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+
+    // ✅ Special case: if it's the first slide, shift slightly left to visually center it
+    const correctedOffset = current === 0 ? offset - gap / 2 : offset;
+
+    slider.style.transform = `translateX(-${correctedOffset}px)`;
+  });
  }
 
 
