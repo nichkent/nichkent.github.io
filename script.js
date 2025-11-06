@@ -1,5 +1,5 @@
-  // === Smooth scrolling ===
-  document.addEventListener('DOMContentLoaded', () => {
+// === Smooth scrolling ===
+document.addEventListener('DOMContentLoaded', () => {
 
   // === Smooth scroll for anchor links ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -48,24 +48,26 @@ if (spotlightItems.length) {
   function updateSpotlight(index) {
   current = (index + spotlightItems.length) % spotlightItems.length;
 
+  // Assign active / prev / next classes
   spotlightItems.forEach((item, i) => {
     item.classList.remove('active', 'prev', 'next');
     if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-        item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length)
-        item.classList.add('next');
-    });
+    else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+      item.classList.add('prev');
+    else if (i === (current + 1) % spotlightItems.length)
+      item.classList.add('next');
+  });
 
-    // Calculate center offset correctly
-    const containerWidth = slider.parentElement.offsetWidth;
-    const itemWidth = spotlightItems[0].offsetWidth;
-    const gap = 60; // must match CSS
-    const totalSlideWidth = itemWidth + gap;
+  // --- Correct centering calculation ---
+  const containerWidth = slider.parentElement.offsetWidth;
+  const itemWidth = spotlightItems[current].offsetWidth;
+  const itemLeft = spotlightItems[current].offsetLeft;
 
-    const offset = totalSlideWidth * current - (containerWidth - itemWidth) / 2;
-    slider.style.transform = `translateX(-${offset}px)`;
-  }
+  // Center the active slide in the viewport
+  const offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+  slider.style.transform = `translateX(-${offset}px)`;
+}
+
 
   function nextSpotlight() {
     updateSpotlight(current + 1);
@@ -78,9 +80,16 @@ if (spotlightItems.length) {
   }
 
   function resetAutoRotate() {
-    if (autoRotateTimer) clearInterval(autoRotateTimer);
-    autoRotateTimer = setInterval(() => updateSpotlight(current + 1), 5000);
-  }
+  if (autoRotateTimer) clearInterval(autoRotateTimer);
+  autoRotateTimer = setInterval(() => {
+    current = (current + 1) % spotlightItems.length;
+    updateSpotlight(current);
+  }, 5000);
+
+  // Ensure centering after any resize event mid-rotation
+  window.addEventListener('resize', () => updateSpotlight(current));
+}
+
 
   // Buttons
   nextBtn?.addEventListener('click', nextSpotlight);
@@ -172,6 +181,13 @@ if (spotlightItems.length) {
       });
   }
 
+
+
+
+
+
+
+  
   // === Handle hash change dynamically ===
   window.addEventListener('hashchange', () => {
     const newHash = window.location.hash.replace('#', '');
@@ -270,4 +286,15 @@ function initTimelineScroll() {
       }
     });
   });
+
+
+
+  
+// === Keep spotlight centered on resize ===
+window.addEventListener('resize', () => {
+  if (typeof updateSpotlight === 'function' && spotlightItems.length) {
+    updateSpotlight(current);
+  }
+});
+
 }
