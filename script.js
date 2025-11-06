@@ -56,36 +56,47 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoRotateTimer = null;
 
     function updateSpotlight(index) {
-      current = (index + spotlightItems.length) % spotlightItems.length;
+  current = (index + spotlightItems.length) % spotlightItems.length;
 
-      // Assign classes
-      spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
-      if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
-        item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length)
-        item.classList.add('next');
-    });
+  // Assign classes
+  spotlightItems.forEach((item, i) => {
+    item.classList.remove('active', 'prev', 'next');
+    if (i === current) item.classList.add('active');
+    else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+      item.classList.add('prev');
+    else if (i === (current + 1) % spotlightItems.length)
+      item.classList.add('next');
+  });
 
-    // --- Center active item ---
-    requestAnimationFrame(() => {
-      const containerWidth = slider.parentElement.offsetWidth;
-      const activeItem = spotlightItems[current];
-      const itemWidth = activeItem.offsetWidth;
+  // Wait for layout AND images to settle before measuring
+  requestAnimationFrame(() => {
+    // if the active image hasn't loaded yet, wait for it
+    const activeItem = spotlightItems[current];
+    const img = activeItem.querySelector("img");
+    if (img && !img.complete) {
+      img.onload = () => updateSpotlight(current);
+      return;
+    }
 
-      const computedStyle = window.getComputedStyle(slider);
-      const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 60);
+    const containerWidth = slider.parentElement.offsetWidth;
+    const itemWidth = activeItem.offsetWidth;
+    const computedStyle = window.getComputedStyle(slider);
+    const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 60);
 
-      // The first item’s offsetLeft is 0, so handle that manually
-      const offset =
-        current === 0
-          ? -(containerWidth / 2 - itemWidth / 2)
-          : activeItem.offsetLeft - (containerWidth / 2 - itemWidth / 2);
+    // measure based on real layout after everything is rendered
+    const itemLeft = activeItem.offsetLeft;
 
-         slider.style.transform = `translateX(-${offset}px)`;
-       });
+    // --- Adjust centering ---
+    let offset;
+    if (current === 0) {
+      // first slide fix
+      offset = -(containerWidth / 2 - itemWidth / 2);
+    } else {
+      offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+    }
 
+    slider.style.transform = `translateX(-${offset}px)`;
+  });
  }
 
 
