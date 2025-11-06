@@ -57,54 +57,49 @@ if (spotlightItems.length) {
     const outgoing = spotlightItems[current];
     const incoming = spotlightItems[newIndex];
 
-    // Reset classes
+    // Reset all z-indexes first
     spotlightItems.forEach(item => {
-      item.classList.remove('active', 'prev', 'next', 'under', 'incoming');
+      item.classList.remove('active', 'prev', 'next', 'under', 'over');
       item.style.zIndex = '1';
     });
 
-    // Determine prev and next indexes
-    const prevIndex = (newIndex - 1 + spotlightItems.length) % spotlightItems.length;
-    const nextIndex = (newIndex + 1) % spotlightItems.length;
+    // Assign neighbor classes
+    spotlightItems.forEach((item, i) => {
+      if (i === newIndex) item.classList.add('active');
+      else if (i === (newIndex - 1 + spotlightItems.length) % spotlightItems.length)
+        item.classList.add('prev');
+      else if (i === (newIndex + 1) % spotlightItems.length)
+        item.classList.add('next');
+    });
 
-    // Assign base roles
-    spotlightItems[newIndex].classList.add('active');
-    spotlightItems[prevIndex].classList.add('prev');
-    spotlightItems[nextIndex].classList.add('next');
-
-    // --- Direction-aware z-index logic ---
-    // active always on top
-    spotlightItems[newIndex].style.zIndex = '3';
-    // everything else below
-    spotlightItems[prevIndex].style.zIndex = '2';
-    spotlightItems[nextIndex].style.zIndex = '2';
-    spotlightItems[current].style.zIndex = '1';
-
-    // --- Direction-specific under/incoming animations ---
-    if (direction > 0) {
-      // going forward
-      outgoing.classList.add('under');
-      incoming.classList.add('incoming');
+    // --- Direction-aware stacking ---
+    if (direction === 1) {
+      // Forward → old slide goes below
+      outgoing.style.zIndex = '1';
+      incoming.style.zIndex = '2';
     } else {
-      // going backward
-      outgoing.classList.add('under');
-      incoming.classList.add('incoming');
+      // Backward → old slide also goes below (same behavior)
+      outgoing.style.zIndex = '1';
+      incoming.style.zIndex = '2';
     }
 
-    current = newIndex;
+    // Active slide always on top
+    incoming.style.zIndex = '3';
 
-    // End transition
+    // Add transition marker
+    outgoing.classList.add('under');
+
     setTimeout(() => {
-      outgoing.classList.remove('under', 'incoming');
+      outgoing.classList.remove('under');
+      current = newIndex;
       isTransitioning = false;
     }, 700);
   }
 
-  // Buttons
   prevBtn?.addEventListener('click', () => updateSpotlight(current - 1, -1));
   nextBtn?.addEventListener('click', () => updateSpotlight(current + 1, 1));
 
-  // Click to open project
+  // Click → route to project
   spotlightItems.forEach(item => {
     item.addEventListener('click', () => {
       const page = item.getAttribute('data-page');
@@ -112,10 +107,8 @@ if (spotlightItems.length) {
     });
   });
 
-  // Initialize
   window.addEventListener('load', () => updateSpotlight(0));
 }
-
 
 
 
