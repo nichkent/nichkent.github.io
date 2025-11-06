@@ -46,22 +46,24 @@ if (spotlightItems.length) {
   let autoRotateTimer = null;
 
   function updateSpotlight(index) {
-    current = (index + spotlightItems.length) % spotlightItems.length;
+  current = (index + spotlightItems.length) % spotlightItems.length;
 
-    // Update classes
-    spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
-      if (i === current) item.classList.add('active');
+  spotlightItems.forEach((item, i) => {
+    item.classList.remove('active', 'prev', 'next');
+    if (i === current) item.classList.add('active');
       else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
         item.classList.add('prev');
       else if (i === (current + 1) % spotlightItems.length)
         item.classList.add('next');
     });
 
-    // Translate based purely on item index and width
+    // Calculate center offset correctly
+    const containerWidth = slider.parentElement.offsetWidth;
     const itemWidth = spotlightItems[0].offsetWidth;
-    const gap = 40; // must match CSS gap
-    const offset = (itemWidth + gap) * current;
+    const gap = 60; // must match CSS
+    const totalSlideWidth = itemWidth + gap;
+
+    const offset = totalSlideWidth * current - (containerWidth - itemWidth) / 2;
     slider.style.transform = `translateX(-${offset}px)`;
   }
 
