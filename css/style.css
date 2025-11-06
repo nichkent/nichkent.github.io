@@ -297,10 +297,11 @@ body.dark-mode .dropdown-toggle:hover {
 
 .spotlight-slider {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 60px; /* spacing between slides */
   transition: transform 0.6s ease;
+  will-change: transform;
 }
 
 /* --- Individual Slides --- */
