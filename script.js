@@ -1,5 +1,5 @@
-// === Smooth scrolling ===
-document.addEventListener('DOMContentLoaded', () => {
+  // === Smooth scrolling ===
+  document.addEventListener('DOMContentLoaded', () => {
 
   // === Smooth scroll for anchor links ===
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+
+
+
+
+
+    
   // ===== Button for going to project warehouse from home page =========
   const goToButton = document.getElementById("GoToProjectWarehouse");
   if (goToButton) {
@@ -20,6 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+
+
+
+
+
+
+
+    
   // === Spotlight Carousel ===
   const spotlightItems = document.querySelectorAll('.spotlight-item');
   const prevBtn = document.querySelector('.spotlight-nav.prev');
@@ -91,6 +106,15 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.addEventListener('mouseleave', resetAutoRotate);
   }
 
+
+
+
+
+
+
+
+
+    
   // === Dark mode toggle ===
   const toggle = document.getElementById('dark-mode-toggle');
   const body = document.body;
@@ -114,10 +138,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+
+
+
+    
   // === Dynamic content loading for projects page ===
   const projectArea = document.querySelector('#projects-loader') || document.querySelector('.projects-content');
   const projectLinks = document.querySelectorAll('[data-page]');
 
+
+
+
+
+
+    
   // === Auto-load project if page opened with a hash ===
   const hash = window.location.hash.replace('#', '');
   if (hash && projectArea) {
@@ -154,6 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+
+
+
+
+
+    
   // === Attach link listeners for dynamic project loading ===
   projectLinks.forEach(link => {
     link.addEventListener('click', e => {
@@ -175,18 +215,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // === Initialize timeline logic on first load ===
+  // Initialize timeline logic on first load 
   initTimelineScroll();
 });
 
 
-// === Scroll-linked timeline highlighting & focus ===
+
+
+
+
+
+
+/* Timeline scroll function */
 function initTimelineScroll() {
   const projects = document.querySelectorAll('.project');
   const timelineItems = document.querySelectorAll('.timeline li');
   if (!projects.length || !timelineItems.length) return;
 
-  window.addEventListener('scroll', () => {
+  function updateActiveProject() {
     let currentYear = '';
 
     projects.forEach(project => {
@@ -205,8 +251,15 @@ function initTimelineScroll() {
       const inView = project.getAttribute('data-year') === currentYear;
       project.classList.toggle('active', inView);
     });
-  });
+  }
 
+  // Run on scroll
+  window.addEventListener('scroll', updateActiveProject);
+
+  // ✅ Run once immediately on load (to activate first visible project)
+  updateActiveProject();
+
+  // Scroll to project when clicking a timeline year
   timelineItems.forEach(item => {
     item.addEventListener('click', () => {
       const year = item.getAttribute('data-year');
