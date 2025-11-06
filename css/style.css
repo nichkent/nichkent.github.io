@@ -387,6 +387,11 @@ body.dark-mode .dropdown-toggle:hover {
   z-index: 2;
 }
 
+/* Ensure wrap-around slides transition smoothly below */
+.spotlight-item.transitioning {
+  z-index: 1 !important;
+}
+
 
 /* --- Subtle gradient fade at edges --- */
 .spotlight-container::before,
