@@ -49,19 +49,22 @@ if (spotlightItems.length) {
   let current = 0;
   let isTransitioning = false;
 
-  function updateSpotlight(index) {
-    if (isTransitioning) return; // prevent double clicks during motion
+  function updateSpotlight(index, direction = 1) {
+    if (isTransitioning) return;
     isTransitioning = true;
 
     const newIndex = (index + spotlightItems.length) % spotlightItems.length;
+    const outgoing = spotlightItems[current];
+    const incoming = spotlightItems[newIndex];
 
-    // Tag outgoing slides as "transitioning"
-    spotlightItems.forEach(item => item.classList.remove('transitioning'));
-    spotlightItems[current].classList.add('transitioning');
+    // Reset all classes and z-index before transition
+    spotlightItems.forEach(item => {
+      item.classList.remove('active', 'prev', 'next', 'under');
+      item.style.zIndex = '1';
+    });
 
-    // Apply classes
+    // Assign new structural classes
     spotlightItems.forEach((item, i) => {
-      item.classList.remove('active', 'prev', 'next');
       if (i === newIndex) item.classList.add('active');
       else if (i === (newIndex - 1 + spotlightItems.length) % spotlightItems.length)
         item.classList.add('prev');
@@ -69,14 +72,27 @@ if (spotlightItems.length) {
         item.classList.add('next');
     });
 
-    current = newIndex;
+    // --- z-index logic ---
+    // outgoing slide goes below during transition
+    outgoing.style.zIndex = '1';
+    incoming.style.zIndex = '2'; // below active at start
+    spotlightItems[newIndex].style.zIndex = '3'; // active always on top
 
-    // Allow next click after transition finishes
-    setTimeout(() => (isTransitioning = false), 700);
+    // --- Visual transition classes ---
+    outgoing.classList.add('under');
+    incoming.classList.add('incoming');
+
+    // Update current after animation completes
+    setTimeout(() => {
+      outgoing.classList.remove('under', 'incoming');
+      current = newIndex;
+      isTransitioning = false;
+    }, 700);
   }
 
-  prevBtn?.addEventListener('click', () => updateSpotlight(current - 1));
-  nextBtn?.addEventListener('click', () => updateSpotlight(current + 1));
+  // Button listeners
+  prevBtn?.addEventListener('click', () => updateSpotlight(current - 1, -1));
+  nextBtn?.addEventListener('click', () => updateSpotlight(current + 1, 1));
 
   // ✅ Make spotlight items clickable — route to project page
   spotlightItems.forEach(item => {
@@ -89,6 +105,7 @@ if (spotlightItems.length) {
   // ✅ Initialize on page load
   window.addEventListener('load', () => updateSpotlight(0));
 }
+
 
 
 
