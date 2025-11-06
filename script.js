@@ -72,11 +72,7 @@ if (spotlightItems.length) {
         item.classList.add('next');
     });
 
-    // --- z-index logic ---
-    // outgoing slide goes below during transition
-    outgoing.style.zIndex = '1';
-    incoming.style.zIndex = '2'; // below active at start
-    spotlightItems[newIndex].style.zIndex = '3'; // active always on top
+   
 
     // --- Visual transition classes ---
     outgoing.classList.add('under');
