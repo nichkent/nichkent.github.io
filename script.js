@@ -76,7 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemLeft = activeItem.offsetLeft;
 
         // center active item
-        const offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+        let offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
+
+        // Clamp so we never scroll beyond first or last project
+        const maxOffset = slider.scrollWidth - containerWidth;
+        if (offset < 0) offset = 0;
+        if (offset > maxOffset) offset = maxOffset;
+
         slider.style.transform = `translateX(-${offset}px)`;
       });
     }
