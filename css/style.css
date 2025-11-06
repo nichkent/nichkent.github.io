@@ -293,7 +293,10 @@ body.dark-mode .dropdown-toggle:hover {
   max-width: 1400px;
   margin: 0 auto;
   overflow: hidden;
+  padding: 0 80px; /* more even left/right space for centering */
+  box-sizing: border-box;
 }
+
 
 .spotlight-slider {
   display: flex;
