@@ -100,9 +100,15 @@ if (spotlightItems.length && slider && container) {
     const containerCenter = container.clientWidth / 2;
 
     // Desired translate so that activeCenter aligns with containerCenter
-    const desired = activeCenterFromLeft - containerCenter;
+    let desired = activeCenterFromLeft - containerCenter;
 
-    slider.style.transform = `translateX(-${desired}px)`;
+    // --- Special centering correction for the very first slide ---
+    if (current === 0) {
+    desired -= getGap() / 1.5; // shift slightly right (~half the gap)
+    }
+
+  slider.style.transform = `translateX(-${desired}px)`;
+
   }
 
   function nextSpotlight() {
