@@ -74,25 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const activeItem = spotlightItems[current];
       const itemWidth = activeItem.offsetWidth;
 
-    // Measure the full width (including gap)
-    const computedStyle = window.getComputedStyle(slider);
-    const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 40);
+      const computedStyle = window.getComputedStyle(slider);
+      const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 60);
 
-    // Calculate base offsetLeft
-    let itemLeft = activeItem.offsetLeft;
+      // The first item’s offsetLeft is 0, so handle that manually
+      const offset =
+        current === 0
+          ? -(containerWidth / 2 - itemWidth / 2)
+          : activeItem.offsetLeft - (containerWidth / 2 - itemWidth / 2);
 
-    // ✅ If it's the first slide, manually compute the center offset
-    if (current === 0) {
-      itemLeft = 0; // ensure it's not undefined
-    }
+         slider.style.transform = `translateX(-${offset}px)`;
+       });
 
-    const offset = itemLeft - (containerWidth / 2 - itemWidth / 2);
-
-    // ✅ Special case: if it's the first slide, shift slightly left to visually center it
-    const correctedOffset = current === 0 ? offset - gap / 2 : offset;
-
-    slider.style.transform = `translateX(-${correctedOffset}px)`;
-  });
  }
 
 
