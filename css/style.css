@@ -374,13 +374,14 @@ body.dark-mode .dropdown-toggle:hover {
 }
 
 /* Prevent overlap flashes by controlling stacking */
-/* === Final z-index stack (lowest → highest) === */
-.spotlight-item { z-index: 0; }               /* hidden background items */
-.spotlight-item.incoming { z-index: 1 !important; }  /* new slide (underneath) */
+/* Z-index stack — from back to front */
+.spotlight-item { z-index: 0; }
+.spotlight-item.incoming { z-index: 3 !important; }  /* start below everything */
 .spotlight-item.prev,
-.spotlight-item.next { z-index: 2; }          /* side slides */
-.spotlight-item.under { z-index: 3 !important; }      /* outgoing slide */
-.spotlight-item.active { z-index: 4; }        /* currently centered slide */
+.spotlight-item.next { z-index: 1; }
+.spotlight-item.active { z-index: 2; }
+.spotlight-item.under { z-index: 3 !important; }  /* outgoing sits above just long enough to fade */
+
 
 
 
