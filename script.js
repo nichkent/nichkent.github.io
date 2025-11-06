@@ -68,18 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
         item.classList.add('next');
     });
 
-    // === Center the active item ===
+    // --- Center active item reliably ---
     requestAnimationFrame(() => {
-    const containerWidth = slider.parentElement.offsetWidth;
-    const activeItem = spotlightItems[current];
-    const itemWidth = activeItem.offsetWidth;
-    const gap = 60; // must match your CSS .spotlight-slider gap
-    const totalItemWidth = itemWidth + gap;
+      const containerWidth = slider.parentElement.offsetWidth;
+      const activeItem = spotlightItems[current];
+      const itemWidth = activeItem.offsetWidth;
+      const itemLeft = activeItem.offsetLeft;
 
-    // Instead of relying on offsetLeft, calculate position by index
-    const offset = totalItemWidth * current - (containerWidth / 2 - itemWidth / 2);
+      // ✅ Fix: for the first slide, itemLeft is often 0 — nudge it slightly right
+      const safeLeft = current === 0 ? itemWidth * 0.1 : itemLeft;
 
-    slider.style.transform = `translateX(-${offset}px)`;
+      const offset = safeLeft - (containerWidth / 2 - itemWidth / 2);
+      slider.style.transform = `translateX(-${offset}px)`;
+    });
+
   });
 }
 
