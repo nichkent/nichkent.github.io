@@ -40,28 +40,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  // === Spotlight Carousel ===
+// === Spotlight Carousel ===
 const spotlightItems = document.querySelectorAll('.spotlight-item');
 const prevBtn = document.querySelector('.spotlight-nav.prev');
 const nextBtn = document.querySelector('.spotlight-nav.next');
 
 if (spotlightItems.length) {
   let current = 0;
+  let isTransitioning = false;
 
   function updateSpotlight(index) {
-    current = (index + spotlightItems.length) % spotlightItems.length;
+    if (isTransitioning) return; // prevent double clicks during motion
+    isTransitioning = true;
 
+    const newIndex = (index + spotlightItems.length) % spotlightItems.length;
+
+    // Tag outgoing slides as "transitioning"
+    spotlightItems.forEach(item => item.classList.remove('transitioning'));
+    spotlightItems[current].classList.add('transitioning');
+
+    // Apply classes
     spotlightItems.forEach((item, i) => {
       item.classList.remove('active', 'prev', 'next');
-      if (i === current) item.classList.add('active');
-      else if (i === (current - 1 + spotlightItems.length) % spotlightItems.length)
+      if (i === newIndex) item.classList.add('active');
+      else if (i === (newIndex - 1 + spotlightItems.length) % spotlightItems.length)
         item.classList.add('prev');
-      else if (i === (current + 1) % spotlightItems.length)
+      else if (i === (newIndex + 1) % spotlightItems.length)
         item.classList.add('next');
     });
+
+    current = newIndex;
+
+    // Allow next click after transition finishes
+    setTimeout(() => (isTransitioning = false), 700);
   }
 
-  // Button listeners
   prevBtn?.addEventListener('click', () => updateSpotlight(current - 1));
   nextBtn?.addEventListener('click', () => updateSpotlight(current + 1));
 
@@ -69,9 +82,7 @@ if (spotlightItems.length) {
   spotlightItems.forEach(item => {
     item.addEventListener('click', () => {
       const page = item.getAttribute('data-page');
-      if (page) {
-        window.location.href = `projects.html#${page}`;
-      }
+      if (page) window.location.href = `projects.html#${page}`;
     });
   });
 
