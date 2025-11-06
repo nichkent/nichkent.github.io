@@ -52,7 +52,7 @@ if (spotlightItems.length) {
  function updateSpotlight(index) {
   current = (index + spotlightItems.length) % spotlightItems.length;
 
-  // Assign active / neighbor classes
+  // Assign classes
   spotlightItems.forEach((item, i) => {
     item.classList.remove('active', 'prev', 'next');
     if (i === current) item.classList.add('active');
@@ -62,23 +62,26 @@ if (spotlightItems.length) {
       item.classList.add('next');
   });
 
+  // --- Absolute centering via DOM measurements ---
   requestAnimationFrame(() => {
     const container = slider.parentElement;
-    const containerWidth = container.offsetWidth;
+    const containerRect = container.getBoundingClientRect();
     const activeItem = spotlightItems[current];
-    const itemWidth = activeItem.offsetWidth;
+    const activeRect = activeItem.getBoundingClientRect();
 
-    const computedStyle = window.getComputedStyle(slider);
-    const gap = parseInt(computedStyle.columnGap || computedStyle.gap || 60);
+    // Find the difference between the centers
+    const containerCenter = containerRect.left + containerRect.width / 2;
+    const activeCenter = activeRect.left + activeRect.width / 2;
+    const delta = activeCenter - containerCenter;
 
-    // --- Stable, index-based offset ---
-    // Each item sits at (itemWidth + gap) * i
-    const totalSlideWidth = itemWidth + gap;
-    const offset = totalSlideWidth * current - (containerWidth - itemWidth) / 2;
-
-    slider.style.transform = `translateX(-${offset}px)`;
+    // Apply inverse translation to center active item
+    const currentTransform = parseFloat(slider.dataset.offset || 0);
+    const newTransform = currentTransform + delta;
+    slider.dataset.offset = newTransform;
+    slider.style.transform = `translateX(-${newTransform}px)`;
   });
 }
+
 
 
   function nextSpotlight() {
