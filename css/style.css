@@ -559,7 +559,9 @@ body.dark-mode .spotlight-title {
   left: calc(47.5vw - 100px);                     /* match arrow position */
   transform: translateX(-50%);
   margin-top: 80px;
-  max-width: 700px;
+  width: calc(100vw - 520px); 
+  max-width: 1000px;
+  min-width: 600px;
   text-align: center;
   opacity: 0;
   display: none;
@@ -574,6 +576,21 @@ body.dark-mode .spotlight-title {
   opacity: 1;
   transform: translate(-50%, 0);
 }
+
+@media (max-width: 1100px) {
+  .project .extra-content {
+    width: calc(100vw - 300px);
+  }
+}
+
+@media (max-width: 800px) {
+  .project .extra-content {
+    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 
 /* Keep title & paragraph left aligned */
 .project h2,
