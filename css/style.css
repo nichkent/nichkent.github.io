@@ -560,7 +560,7 @@ body.dark-mode .spotlight-title {
   transform: translateX(-50%);
   margin-top: 80px;
   width: calc(125vw - 520px); 
-  max-width: 1000px;
+  max-width: 1250px;
   min-width: 600px;
   text-align: center;
   opacity: 0;
