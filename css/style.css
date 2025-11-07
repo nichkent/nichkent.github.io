@@ -693,6 +693,54 @@ footer {
 
 
 
+/* === Expandable project content === */
+.expand-toggle {
+  display: block;
+  margin: 15px auto 0;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #4b0082;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.expand-toggle:hover {
+  transform: scale(1.2);
+  color: #6a11cb;
+}
+
+.expand-toggle.open {
+  transform: rotate(180deg);
+}
+
+/* Hidden content */
+.extra-content {
+  display: none;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-top: 15px;
+}
+
+.extra-content.show {
+  display: block;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ====== Dark Mode General ====== */
 body.dark-mode {
