@@ -699,22 +699,22 @@ footer {
 
 
 /* === Expandable project content === */
-position: relative;
+.expand-toggle {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25px auto 0;
+  margin: 25px auto 0;           /* centers horizontally */
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   border: none;
   font-size: 2rem;
-  padding: 10px 16px;
+  padding: 10px;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 10;
   transition: all 0.3s ease;
   width: 55px;
   height: 55px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .expand-toggle:hover {
@@ -723,15 +723,32 @@ position: relative;
   transform: scale(1.1);
 }
 
-.expand-toggle.open {
+.expand-toggle.open svg {
   transform: rotate(180deg);
 }
 
-/* Center extra content */
-.extra-content {
-  max-width: 700px;
-  margin: 25px auto 0;
+.expand-toggle svg {
+  transition: transform 0.3s ease;
+}
+
+/* Center expanded content relative to full viewport column */
+.project {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers all inner content */
   text-align: center;
+}
+
+.project h2,
+.project p {
+  text-align: center;  /* ensures heading & intro text are centered */
+}
+
+/* Hidden extra content */
+.extra-content {
+  max-width: 800px;
+  width: 100%;
+  margin: 25px auto 0;
   display: none;
   opacity: 0;
   transform: translateY(-10px);
@@ -744,14 +761,14 @@ position: relative;
   transform: translateY(0);
 }
 
-/* Optional background for contrast */
+/* Subtle container background */
 .project .extra-content {
   background: rgba(75, 0, 130, 0.05);
   border-radius: 10px;
   padding: 20px;
 }
 
-/* Dark mode consistency */
+/* Dark mode variants */
 body.dark-mode .expand-toggle {
   background: rgba(255, 255, 255, 0.15);
 }
@@ -764,6 +781,7 @@ body.dark-mode .expand-toggle:hover {
 body.dark-mode .project .extra-content {
   background: rgba(255, 255, 255, 0.05);
 }
+
 
 
 
