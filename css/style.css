@@ -781,6 +781,22 @@ body.dark-mode .project .extra-content {
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Center arrow + extra content relative to full screen */
+.expand-toggle,
+.extra-content {
+  position: relative;
+  left: calc(50vw - 50% + 60px); /* compensates for the left padding in your layout */
+  transform: translateX(-50%);
+}
+
+/* Fine tune for different screen widths */
+@media (max-width: 1000px) {
+  .expand-toggle,
+  .extra-content {
+    left: 50%;
+  }
+}
+
 
 
 
