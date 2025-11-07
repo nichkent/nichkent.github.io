@@ -548,7 +548,7 @@ body.dark-mode .spotlight-title {
 /* Center arrow perfectly in viewport */
 .project .expand-toggle {
   position: absolute;
-  left: calc(40vw - 100px);                     /* center of the viewport */
+  left: calc(45vw - 100px);                     /* center of the viewport */
   transform: translateX(-50%);
   z-index: 5;
 }
@@ -556,7 +556,7 @@ body.dark-mode .spotlight-title {
 /* Center the expanded content under the arrow */
 .project .extra-content {
   position: relative;
-  left: calc(40vw - 100px);                     /* match arrow position */
+  left: calc(45vw - 100px);                     /* match arrow position */
   transform: translateX(-50%);
   margin-top: 80px;
   max-width: 700px;
