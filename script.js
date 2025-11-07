@@ -186,6 +186,7 @@ if (spotlightItems.length) {
         projectArea.innerHTML = html;
         window.scrollTo({ top: 0, behavior: 'smooth' });
         initTimelineScroll();
+        initExpandToggles();
       })
       .catch(err => {
         console.error(`Error loading project from hash: ${err}`);
@@ -219,6 +220,7 @@ if (spotlightItems.length) {
           projectArea.innerHTML = html;
           window.scrollTo({ top: 0, behavior: 'smooth' });
           initTimelineScroll();
+          initExpandToggles();
         })
         .catch(() => {
           projectArea.innerHTML = `<p style="color:red;">Project "${newHash}" not found.</p>`;
@@ -253,6 +255,7 @@ if (spotlightItems.length) {
           projectArea.innerHTML = html;
           window.scrollTo({ top: 0, behavior: 'smooth' });
           initTimelineScroll();
+          initExpandToggles();
         })
         .catch(err => {
           projectArea.innerHTML = `<p style="color:red;">Error loading ${page}: ${err.message}</p>`;
@@ -262,6 +265,7 @@ if (spotlightItems.length) {
 
   // Initialize timeline logic on first load 
   initTimelineScroll();
+  initExpandToggles();
 });
 
 
@@ -291,16 +295,6 @@ function initTimelineScroll() {
       if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
         currentYear = project.getAttribute('data-year');
       }
-
-      // inside initTimelineScroll()
-      document.querySelectorAll('.expand-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const extraContent = button.nextElementSibling;
-        const isOpen = button.classList.toggle('open');
-        extraContent.classList.toggle('show', isOpen);
-      });
-    });
-
     });
 
     timelineItems.forEach(item => {
@@ -327,16 +321,38 @@ function initTimelineScroll() {
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    });
-
-    // === Expandable project sections ===
-    document.querySelectorAll('.expand-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-      const extraContent = button.nextElementSibling;
-      const isOpen = button.classList.toggle('open');
-      extraContent.classList.toggle('show', isOpen);
       });
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // === Expandable project sections ===
+function initExpandToggles() {
+  document.querySelectorAll('.expand-toggle').forEach(button => {
+    // Prevent duplicate listeners
+    button.removeEventListener('click', handleExpand);
+    button.addEventListener('click', handleExpand);
   });
+}
+
+function handleExpand(event) {
+  const button = event.currentTarget;
+  const extraContent = button.nextElementSibling;
+  const isOpen = button.classList.toggle('open');
+  extraContent.classList.toggle('show', isOpen);
+}
+
 }
