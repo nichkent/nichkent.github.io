@@ -536,12 +536,54 @@ body.dark-mode .spotlight-title {
   opacity: 0.6;
   transform: scale(0.97);
   filter: grayscale(60%);
+  position: relative;
 }
 
 .project.active {
   opacity: 1;
   transform: scale(1);
   filter: none;
+}
+
+/* Center arrow perfectly in viewport */
+.project .expand-toggle {
+  position: absolute;
+  left: 50vw;                     /* center of the viewport */
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* Center the expanded content under the arrow */
+.project .extra-content {
+  position: relative;
+  left: 50vw;                     /* match arrow position */
+  transform: translateX(-50%);
+  margin-top: 80px;
+  max-width: 700px;
+  text-align: center;
+  opacity: 0;
+  display: none;
+  background: rgba(75, 0, 130, 0.08);
+  border-radius: 10px;
+  padding: 20px 25px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project .extra-content.show {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Keep title & paragraph left aligned */
+.project h2,
+.project p {
+  text-align: left;
+}
+
+/* Dark mode versions */
+body.dark-mode .project .extra-content {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 
@@ -565,6 +607,8 @@ body.dark-mode .timeline li.active {
 body.dark-mode .timeline li.active::before {
   background: #bb86fc;
 }
+
+  
 
 
 
@@ -699,103 +743,36 @@ footer {
 
 
 /* === Expandable project content === */
-/* Arrow styled like spotlight nav */
 .expand-toggle {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 25px 0; /* space above/below */
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border: none;
-  font-size: 2rem;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 55px;
-  height: 55px;
-
-  /* NEW — center horizontally across the whole viewport */
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,0.5);
+  color:#fff;
+  border:none;
+  font-size:2rem;
+  border-radius:50%;
+  cursor:pointer;
+  transition:all .3s ease;
+  width:55px;
+  height:55px;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
 }
 
 .expand-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #bb86fc;
-  transform: translateX(-50%) scale(1.1);
+  background:rgba(255,255,255,0.25);
+  color:#bb86fc;
+  transform:translate(-50%,0) scale(1.1);
 }
 
-.expand-toggle.open svg {
-  transform: rotate(180deg);
+@keyframes pulse {
+  0%,100%{box-shadow:0 0 10px rgba(187,134,252,0.4);}
+  50%{box-shadow:0 0 20px rgba(187,134,252,0.8);}
+}
+.expand-toggle.open {
+  animation:pulse 1.6s infinite;
 }
 
-.expand-toggle svg {
-  transition: transform 0.3s ease;
-}
-
-/* The project content itself should stay left-aligned */
-.project {
-  text-align: left;
-}
-
-/* Hidden expandable section centered under the arrow */
-.extra-content {
-  max-width: 900px;
-  margin: 25px auto 0; /* centers under arrow */
-  text-align: center;
-  display: none;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.extra-content.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Subtle background for contrast */
-.project .extra-content {
-  background: rgba(75, 0, 130, 0.05);
-  border-radius: 10px;
-  padding: 20px;
-}
-
-/* Dark mode variants */
-body.dark-mode .expand-toggle {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-body.dark-mode .expand-toggle:hover {
-  background: rgba(187, 134, 252, 0.25);
-  color: #bb86fc;
-}
-
-body.dark-mode .project .extra-content {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Center arrow + extra content relative to full screen */
-.expand-toggle,
-.extra-content {
-  position: relative;
-  left: calc(50vw - 50% + 60px); /* compensates for the left padding in your layout */
-  transform: translateX(-50%);
-}
-
-/* Fine tune for different screen widths */
-@media (max-width: 1000px) {
-  .expand-toggle,
-  .extra-content {
-    left: 50%;
-  }
-}
 
 
 
