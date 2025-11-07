@@ -559,7 +559,7 @@ body.dark-mode .spotlight-title {
   left: calc(47.5vw - 100px);                     /* match arrow position */
   transform: translateX(-50%);
   margin-top: 80px;
-  width: calc(100vw - 520px); 
+  width: calc(125vw - 520px); 
   max-width: 1000px;
   min-width: 600px;
   text-align: center;
