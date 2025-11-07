@@ -699,11 +699,13 @@ footer {
 
 
 /* === Expandable project content === */
+/* Arrow styled like spotlight nav */
 .expand-toggle {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25px auto 0;           /* centers horizontally */
+  margin: 25px 0; /* space above/below */
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   border: none;
@@ -714,13 +716,18 @@ footer {
   transition: all 0.3s ease;
   width: 55px;
   height: 55px;
+
+  /* NEW — center horizontally across the whole viewport */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .expand-toggle:hover {
   background: rgba(255, 255, 255, 0.2);
   color: #bb86fc;
-  transform: scale(1.1);
+  transform: translateX(-50%) scale(1.1);
 }
 
 .expand-toggle.open svg {
@@ -731,24 +738,16 @@ footer {
   transition: transform 0.3s ease;
 }
 
-/* Center expanded content relative to full viewport column */
+/* The project content itself should stay left-aligned */
 .project {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centers all inner content */
-  text-align: center;
+  text-align: left;
 }
 
-.project h2,
-.project p {
-  text-align: center;  /* ensures heading & intro text are centered */
-}
-
-/* Hidden extra content */
+/* Hidden expandable section centered under the arrow */
 .extra-content {
-  max-width: 800px;
-  width: 100%;
-  margin: 25px auto 0;
+  max-width: 900px;
+  margin: 25px auto 0; /* centers under arrow */
+  text-align: center;
   display: none;
   opacity: 0;
   transform: translateY(-10px);
@@ -761,7 +760,7 @@ footer {
   transform: translateY(0);
 }
 
-/* Subtle container background */
+/* Subtle background for contrast */
 .project .extra-content {
   background: rgba(75, 0, 130, 0.05);
   border-radius: 10px;
