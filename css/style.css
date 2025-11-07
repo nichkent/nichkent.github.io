@@ -692,34 +692,77 @@ footer {
 
 
 
-/* ====== Expand Project CSS ========*/
-.expand-toggle {
-  display: block;
-  margin: 15px auto 0;
-  background: none;
+
+
+
+
+
+
+/* === Expandable project content === */
+position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px auto 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
   border: none;
   font-size: 2rem;
+  padding: 10px 16px;
+  border-radius: 50%;
   cursor: pointer;
-  color: #4b0082;
-  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 10;
+  transition: all 0.3s ease;
+  width: 55px;
+  height: 55px;
+}
+
+.expand-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #bb86fc;
+  transform: scale(1.1);
 }
 
 .expand-toggle.open {
   transform: rotate(180deg);
 }
 
+/* Center extra content */
 .extra-content {
+  max-width: 700px;
+  margin: 25px auto 0;
+  text-align: center;
   display: none;
   opacity: 0;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .extra-content.show {
   display: block;
   opacity: 1;
-  transform: scaleY(1);
+  transform: translateY(0);
+}
+
+/* Optional background for contrast */
+.project .extra-content {
+  background: rgba(75, 0, 130, 0.05);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Dark mode consistency */
+body.dark-mode .expand-toggle {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .expand-toggle:hover {
+  background: rgba(187, 134, 252, 0.25);
+  color: #bb86fc;
+}
+
+body.dark-mode .project .extra-content {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 
