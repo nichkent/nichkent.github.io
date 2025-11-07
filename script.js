@@ -323,6 +323,7 @@ function initTimelineScroll() {
       }
       });
     });
+}
 
 
 
@@ -331,15 +332,7 @@ function initTimelineScroll() {
 
 
 
-
-
-
-
-
-
-
-
-  // === Expandable project sections ===
+// === Expandable project sections ===
 function initExpandToggles() {
   document.querySelectorAll('.expand-toggle').forEach(button => {
     // Prevent duplicate listeners
@@ -353,6 +346,4 @@ function handleExpand(event) {
   const extraContent = button.nextElementSibling;
   const isOpen = button.classList.toggle('open');
   extraContent.classList.toggle('show', isOpen);
-}
-
 }
