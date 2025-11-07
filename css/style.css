@@ -692,8 +692,7 @@ footer {
 
 
 
-
-/* === Expandable project content === */
+/* ====== Expand Project CSS ========*/
 .expand-toggle {
   display: block;
   margin: 15px auto 0;
@@ -705,23 +704,16 @@ footer {
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.expand-toggle:hover {
-  transform: scale(1.2);
-  color: #6a11cb;
-}
-
 .expand-toggle.open {
   transform: rotate(180deg);
 }
 
-/* Hidden content */
 .extra-content {
   display: none;
   opacity: 0;
   transform: scaleY(0);
   transform-origin: top;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  margin-top: 15px;
 }
 
 .extra-content.show {
@@ -729,6 +721,7 @@ footer {
   opacity: 1;
   transform: scaleY(1);
 }
+
 
 
 
