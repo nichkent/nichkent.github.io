@@ -291,6 +291,16 @@ function initTimelineScroll() {
       if (rect.top <= window.innerHeight / 2 && rect.bottom >= 0) {
         currentYear = project.getAttribute('data-year');
       }
+
+      // inside initTimelineScroll()
+      document.querySelectorAll('.expand-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const extraContent = button.nextElementSibling;
+        const isOpen = button.classList.toggle('open');
+        extraContent.classList.toggle('show', isOpen);
+      });
+    });
+
     });
 
     timelineItems.forEach(item => {
@@ -318,5 +328,15 @@ function initTimelineScroll() {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
+
+    // === Expandable project sections ===
+    document.querySelectorAll('.expand-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+      const extraContent = button.nextElementSibling;
+      const isOpen = button.classList.toggle('open');
+      extraContent.classList.toggle('show', isOpen);
+      });
+    });
+
   });
 }
