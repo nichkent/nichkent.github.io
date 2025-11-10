@@ -165,11 +165,11 @@ body.projects-page.sidebar-collapsed .with-sidebar {
 
 /* Center expand-toggle regardless of sidebar state */
 body.projects-page .project .expand-toggle {
-  position: absolute;
-  left: 50vw;
+  position: fixed;
+  left: 50%;
   transform: translateX(-50%);
-  z-index: 5;
-  transition: left 0.3s ease;
+  z-index: 1100;
+  transition: transform 0.3s ease;
 }
 
 /* Dark mode for projects page sidebar */
@@ -247,7 +247,10 @@ body.projects-page .project .expand-toggle {
   z-index: 5;
 }
 
-
+/* When the sidebar is collapsed, do not shift */
+body.projects-page.sidebar-collapsed .project .expand-toggle {
+  left: 50%;
+}
 
 
 
