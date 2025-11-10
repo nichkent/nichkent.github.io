@@ -68,37 +68,119 @@ nav ul li a {
 
 
 
-/* ==== Navbar Dropdown Styles For projects.html Page ==== */
-.navbar {
+/* ===== Sidebar Navigation ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: #f8f8f8;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.sidebar nav {
+  width: 100%;
+}
+
+.sidebar .navbar {
   list-style: none;
   padding: 0;
   margin: 0;
-  text-align: center;
-  background: #f8f8f8;
+  width: 100%;
 }
 
-.navbar li {
-  display: inline-block;
-  position: relative;
-  margin: 0 15px;
+.sidebar .navbar li {
+  width: 100%;
 }
 
-.navbar a,
-.dropdown-toggle {
+.sidebar .navbar a,
+.sidebar .dropdown-toggle {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  text-align: left;
   text-decoration: none;
   color: #333;
-  padding: 10px;
-  display: inline-block;
-  transition: color 0.3s;
   background: none;
   border: none;
-  font: inherit;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
-.navbar a:hover,
-.dropdown-toggle:hover {
+.sidebar .navbar a:hover,
+.sidebar .dropdown-toggle:hover {
+  background: #e6e6e6;
   color: #4b0082;
+}
+
+/* ===== Dropdown behavior in sidebar ===== */
+.sidebar .dropdown-menu {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background: #f0f0f0;
+  border-left: 3px solid #4b0082;
+  margin: 0;
+}
+
+.sidebar .dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+.sidebar .dropdown-menu li a {
+  padding: 10px 30px;
+  font-size: 0.95rem;
+}
+
+/* ===== Dark Mode Sidebar ===== */
+body.dark-mode .sidebar {
+  background: rgba(0, 0, 0, 0.85);
+  color: #f0f0f0;
+}
+
+body.dark-mode .sidebar a,
+body.dark-mode .sidebar .dropdown-toggle {
+  color: #f0f0f0;
+}
+
+body.dark-mode .sidebar a:hover,
+body.dark-mode .sidebar .dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #bb86fc;
+}
+
+/* ===== Move main content to the right ===== */
+.with-sidebar {
+  margin-left: 250px;
+  padding: 40px;
+  transition: margin-left 0.3s ease;
+}
+
+/* ===== Dark Mode Button Placement ===== */
+#dark-mode-toggle {
+  margin-top: auto;
+  margin-bottom: 20px;
+  align-self: center;
+  background: none;
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+body.dark-mode #dark-mode-toggle {
+  border-color: #f0f0f0;
+  color: #f0f0f0;
 }
 
 
