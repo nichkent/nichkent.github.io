@@ -7,46 +7,43 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <header>
-      <nav>
-        <ul class="navbar">
-          <li><a href="index.html">Home Page</a></li>
+  <header class="sidebar">
+  <nav>
+    <ul class="navbar">
+      <li><a href="index.html">Home Page</a></li>
 
-          <!-- Dropdown #1 -->
-          <li class="dropdown">
-            <button class="dropdown-toggle">Cybersecurity ▾</button>
-            <ul class="dropdown-menu">
-              <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
-              <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
-              <li><a href="#networking" data-page="cybersecurity/networking">Network Traffic Analysis</a></li>
-              <li><a href="#cryptography" data-page="cybersecurity/cryptography">Cryptography</a></li>
-            </ul>
-          </li>
-
-          <!-- Regular link -->
-          <li><a href="#software" data-page="software">Cool Software I've Made</a></li>
-
-          <!-- Dropdown #2 -->
-          <li class="dropdown">
-            <button class="dropdown-toggle">Creative Pursuits ▾</button>
-            <ul class="dropdown-menu">
-              <li><a href="#music" data-page="creative/music">Music</a></li>
-              <li><a href="#writing" data-page="creative/writing">Writing</a></li>
-              <li><a href="#drawing" data-page="creative/drawing">Drawing</a></li>
-              <li><a href="#3d_modeling" data-page="creative/3d_modeling">3D Modeling</a></li>
-            </ul>
-          </li>
-
-          <li><a href="#robots_misc" data-page="robots_misc">Robots and Stuff</a></li>
+      <li class="dropdown">
+        <button class="dropdown-toggle">Cybersecurity ▾</button>
+        <ul class="dropdown-menu">
+          <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
+          <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
+          <li><a href="#networking" data-page="cybersecurity/networking">Network Traffic Analysis</a></li>
+          <li><a href="#cryptography" data-page="cybersecurity/cryptography">Cryptography</a></li>
         </ul>
-      </nav>
+      </li>
 
-      <button id="dark-mode-toggle">🌙</button>
-    </header>
+      <li><a href="#software" data-page="software">Cool Software I've Made</a></li>
+
+      <li class="dropdown">
+        <button class="dropdown-toggle">Creative Pursuits ▾</button>
+        <ul class="dropdown-menu">
+          <li><a href="#music" data-page="creative/music">Music</a></li>
+          <li><a href="#writing" data-page="creative/writing">Writing</a></li>
+          <li><a href="#drawing" data-page="creative/drawing">Drawing</a></li>
+          <li><a href="#3d_modeling" data-page="creative/3d_modeling">3D Modeling</a></li>
+        </ul>
+      </li>
+
+      <li><a href="#robots_misc" data-page="robots_misc">Robots and Stuff</a></li>
+    </ul>
+  </nav>
+
+  <button id="dark-mode-toggle">🌙</button>
+</header>
 
   
   <body>
-    <main id="projects-loader">
+    <main id="projects-loader" class="with-sidebar">
       <div id="projects-page">
         <div class="projects-content">
           <h2>Welcome to the Project Warehouse!</h2>
