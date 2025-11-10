@@ -17,13 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 
-  // Sidebar dropdown click toggling
+// Dropdown toggle functionality
 document.querySelectorAll('.dropdown-toggle').forEach(button => {
   button.addEventListener('click', () => {
     const parent = button.closest('.dropdown');
     parent.classList.toggle('open');
   });
 });
+
+// Sidebar collapse functionality
+const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('sidebar-toggle');
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+  document.body.classList.toggle('sidebar-collapsed');
+});
+
 
   
 
