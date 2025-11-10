@@ -15,6 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+  
+
+  // Sidebar dropdown click toggling
+document.querySelectorAll('.dropdown-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    const parent = button.closest('.dropdown');
+    parent.classList.toggle('open');
+  });
+});
+
+  
+
+
+
 
 
 
