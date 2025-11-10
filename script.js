@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 
-// Sidebar only on projects page
-const bodyClass = document.body.classList;
+// ================= Sidebar only on projects page=======================
 if (bodyClass.contains('projects-page')) {
   const sidebar = document.getElementById('sidebar');
   const toggleBtn = document.getElementById('sidebar-toggle');
