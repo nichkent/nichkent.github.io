@@ -17,21 +17,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 
-// Dropdown toggle functionality
-document.querySelectorAll('.dropdown-toggle').forEach(button => {
-  button.addEventListener('click', () => {
-    const parent = button.closest('.dropdown');
-    parent.classList.toggle('open');
-  });
-});
+// Sidebar only on projects page
+const bodyClass = document.body.classList;
+if (bodyClass.contains('projects-page')) {
+  const sidebar = document.getElementById('sidebar');
+  const toggleBtn = document.getElementById('sidebar-toggle');
 
-// Sidebar collapse functionality
-const sidebar = document.getElementById('sidebar');
-const toggleBtn = document.getElementById('sidebar-toggle');
-toggleBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('collapsed');
-  document.body.classList.toggle('sidebar-collapsed');
-});
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      document.body.classList.toggle('sidebar-collapsed');
+    });
+  }
+
+  // Dropdowns for sidebar
+  document.querySelectorAll('.dropdown-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const parent = button.closest('.dropdown');
+      parent.classList.toggle('open');
+    });
+  });
+}
 
 
   
