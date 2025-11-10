@@ -76,18 +76,42 @@ nav ul li a {
   width: 250px;
   height: 100vh;
   background: #f8f8f8;
-  padding-top: 30px;
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  transition: transform 0.3s ease;
 }
 
-.sidebar nav {
-  width: 100%;
+/* Sidebar collapse state */
+.sidebar.collapsed {
+  transform: translateX(-250px);
 }
 
+/* Sidebar toggle (hamburger) */
+#sidebar-toggle {
+  position: absolute;
+  top: 15px;
+  right: -45px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #4b0082;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+}
+
+#sidebar-toggle:hover {
+  background: #5c0fa3;
+}
+
+/* Navbar items */
 .sidebar .navbar {
   list-style: none;
   padding: 0;
@@ -99,7 +123,6 @@ nav ul li a {
   width: 100%;
 }
 
-/* All buttons and links have uniform highlight area */
 .sidebar .navbar a,
 .sidebar .dropdown-toggle {
   display: block;
@@ -123,14 +146,13 @@ nav ul li a {
   color: #4b0082;
 }
 
-/* Dropdown menu — hidden until clicked */
+/* Dropdown functionality */
 .sidebar .dropdown-menu {
   display: none;
   flex-direction: column;
   width: 100%;
   background: #f0f0f0;
   border-left: 3px solid #4b0082;
-  margin: 0;
 }
 
 .sidebar .dropdown.open .dropdown-menu {
@@ -159,11 +181,15 @@ body.dark-mode .sidebar .dropdown-toggle:hover {
   color: #bb86fc;
 }
 
-/* ===== Move main content to the right ===== */
+/* ===== Main content shift ===== */
 .with-sidebar {
   margin-left: 250px;
   padding: 40px;
   transition: margin-left 0.3s ease;
+}
+
+body.sidebar-collapsed .with-sidebar {
+  margin-left: 0;
 }
 
 /* ===== Dark Mode Button (top right corner) ===== */
@@ -185,6 +211,22 @@ body.dark-mode #dark-mode-toggle {
   border-color: #f0f0f0;
   color: #f0f0f0;
 }
+
+/* ===== Expand Toggle Centering Fix ===== */
+/* This ensures your expand-toggle stays centered no matter sidebar width */
+.project .expand-toggle {
+  position: absolute;
+  left: 50vw;              /* always center in viewport */
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* optional smoothness when sidebar toggles */
+body.sidebar-collapsed .project .ex
+
+
+
+
 
 
 
