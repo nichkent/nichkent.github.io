@@ -7,60 +7,58 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <header id="sidebar" class="sidebar">
-  <button id="sidebar-toggle">☰</button>
-  <nav>
-    <ul class="navbar">
-      <li><a href="index.html">Home Page</a></li>
-
-      <li class="dropdown">
-        <button class="dropdown-toggle">Cybersecurity ▾</button>
-        <ul class="dropdown-menu">
-          <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
-          <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
-          <li><a href="#networking" data-page="cybersecurity/networking">Network Traffic Analysis</a></li>
-          <li><a href="#cryptography" data-page="cybersecurity/cryptography">Cryptography</a></li>
-        </ul>
-      </li>
-
-      <li><a href="#software" data-page="software">Cool Software I've Made</a></li>
-
-      <li class="dropdown">
-        <button class="dropdown-toggle">Creative Pursuits ▾</button>
-        <ul class="dropdown-menu">
-          <li><a href="#music" data-page="creative/music">Music</a></li>
-          <li><a href="#writing" data-page="creative/writing">Writing</a></li>
-          <li><a href="#drawing" data-page="creative/drawing">Drawing</a></li>
-          <li><a href="#3d_modeling" data-page="creative/3d_modeling">3D Modeling</a></li>
-        </ul>
-      </li>
-
-      <li><a href="#robots_misc" data-page="robots_misc">Robots and Stuff</a></li>
-    </ul>
-  </nav>
-</header>
-
-<!-- keep dark mode button fixed -->
-<button id="dark-mode-toggle">🌙</button>
-
-  
   <body class="projects-page">
-    <main id="projects-loader" class="with-sidebar">
-      <div id="projects-page">
-        <div class="projects-content">
-          <h2>Welcome to the Project Warehouse!</h2>
+  <header id="sidebar" class="sidebar">
+    <button id="sidebar-toggle">☰</button>
+    <nav>
+      <ul class="navbar">
+        <li><a href="index.html">Home Page</a></li>
 
-            <p>Where I store all projects I work on throughout my life. Pick a project topic that sounds interesting from the top to get started. Also, thanks for checking out my projects!</p>
-        </div>
+        <li class="dropdown">
+          <button class="dropdown-toggle">Cybersecurity ▾</button>
+          <ul class="dropdown-menu">
+            <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
+            <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
+            <li><a href="#networking" data-page="cybersecurity/networking">Network Traffic Analysis</a></li>
+            <li><a href="#cryptography" data-page="cybersecurity/cryptography">Cryptography</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#software" data-page="software">Cool Software I've Made</a></li>
+
+        <li class="dropdown">
+          <button class="dropdown-toggle">Creative Pursuits ▾</button>
+          <ul class="dropdown-menu">
+            <li><a href="#music" data-page="creative/music">Music</a></li>
+            <li><a href="#writing" data-page="creative/writing">Writing</a></li>
+            <li><a href="#drawing" data-page="creative/drawing">Drawing</a></li>
+            <li><a href="#3d_modeling" data-page="creative/3d_modeling">3D Modeling</a></li>
+          </ul>
+        </li>
+
+        <li><a href="#robots_misc" data-page="robots_misc">Robots and Stuff</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Dark mode toggle fixed in corner -->
+  <button id="dark-mode-toggle">🌙</button>
+
+  <main id="projects-loader" class="with-sidebar">
+    <div id="projects-page">
+      <div class="projects-content">
+        <h2>Welcome to the Project Warehouse!</h2>
+        <p>Where I store all projects I work on throughout my life. Pick a project topic that sounds interesting from the top to get started. Also, thanks for checking out my projects!</p>
       </div>
-    </main>
-    
-    <script src="script.js"></script>
-  </body>
+    </div>
+  </main>
 
   <footer>
-    <section id = "copyright">
-            <p>© 2025 by Portfolio Owner. All rights reserved.</p>
+    <section id="copyright">
+      <p>© 2025 by Portfolio Owner. All rights reserved.</p>
     </section>
   </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
