@@ -26,40 +26,6 @@ body {
   margin: 0;
 }
 
-header {
-  background: #f8f8f8;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-
-
-
-
-
-
-
-
-/* ====== Navigation Section ======= */
-nav ul {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 15px;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #333;
-}
-
 
 
 
@@ -210,15 +176,6 @@ body.sidebar-collapsed .with-sidebar {
 body.dark-mode #dark-mode-toggle {
   border-color: #f0f0f0;
   color: #f0f0f0;
-}
-
-/* ===== Expand Toggle Centering Fix ===== */
-/* This ensures your expand-toggle stays centered no matter sidebar width */
-.project .expand-toggle {
-  position: absolute;
-  left: 50vw;              /* always center in viewport */
-  transform: translateX(-50%);
-  z-index: 5;
 }
 
 /* optional smoothness when sidebar toggles */
@@ -1044,20 +1001,6 @@ body.dark-mode #Reach\ Out {
 body.dark-mode #copyright {
   background: rgba(0, 0, 0, 0.85);
   color: #ccc;
-}
-
-/* Dark mode toggle button */
-#dark-mode-toggle {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  background: none;
-  border: 2px solid #333;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
 }
 
 #dark-mode-toggle:hover::after {
