@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <header class="sidebar">
+  <header id="sidebar" class="sidebar">
+  <button id="sidebar-toggle">☰</button>
   <nav>
     <ul class="navbar">
       <li><a href="index.html">Home Page</a></li>
 
       <li class="dropdown">
-        <button class="dropdown-toggle" data-toggle="dropdown">Cybersecurity ▾</button>
+        <button class="dropdown-toggle">Cybersecurity ▾</button>
         <ul class="dropdown-menu">
           <li><a href="#pentesting" data-page="cybersecurity/pentesting">Pentesting</a></li>
           <li><a href="#reverse_engineering" data-page="cybersecurity/reverse_engineering">Reverse Engineering</a></li>
@@ -25,7 +26,7 @@
       <li><a href="#software" data-page="software">Cool Software I've Made</a></li>
 
       <li class="dropdown">
-        <button class="dropdown-toggle" data-toggle="dropdown">Creative Pursuits ▾</button>
+        <button class="dropdown-toggle">Creative Pursuits ▾</button>
         <ul class="dropdown-menu">
           <li><a href="#music" data-page="creative/music">Music</a></li>
           <li><a href="#writing" data-page="creative/writing">Writing</a></li>
@@ -39,10 +40,11 @@
   </nav>
 </header>
 
-<!-- Keep dark mode button in top right corner -->
+<!-- keep dark mode button fixed -->
 <button id="dark-mode-toggle">🌙</button>
+
   
-  <body>
+  <body class="projects-page">
     <main id="projects-loader" class="with-sidebar">
       <div id="projects-page">
         <div class="projects-content">
