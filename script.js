@@ -1,6 +1,6 @@
 // === Smooth scrolling ===
 document.addEventListener('DOMContentLoaded', () => {
-  // === Smooth scroll for anchor links ===
+  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
@@ -15,28 +15,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
   
 
-// ================= Sidebar only on projects page=======================
-if (bodyClass.contains('projects-page')) {
-  const sidebar = document.getElementById('sidebar');
-  const toggleBtn = document.getElementById('sidebar-toggle');
+  // ================= Sidebar only on projects page =======================
+  const bodyClass = document.body.classList; // ✅ define it first
+  if (bodyClass.contains('projects-page')) {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebar-toggle');
 
-  if (toggleBtn && sidebar) {
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
-      document.body.classList.toggle('sidebar-collapsed');
+    // Sidebar collapse toggle
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        document.body.classList.toggle('sidebar-collapsed');
+      });
+    }
+
+    // Dropdown slide open / close
+    document.querySelectorAll('.dropdown-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const parent = button.closest('.dropdown');
+        parent.classList.toggle('open');
+      });
     });
   }
-
-  // Dropdowns for sidebar
-  document.querySelectorAll('.dropdown-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-      const parent = button.closest('.dropdown');
-      parent.classList.toggle('open');
-    });
-  });
-}
 
 
   
