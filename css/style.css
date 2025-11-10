@@ -99,6 +99,7 @@ nav ul li a {
   width: 100%;
 }
 
+/* All buttons and links have uniform highlight area */
 .sidebar .navbar a,
 .sidebar .dropdown-toggle {
   display: block;
@@ -113,6 +114,7 @@ nav ul li a {
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
+  box-sizing: border-box;
 }
 
 .sidebar .navbar a:hover,
@@ -121,7 +123,7 @@ nav ul li a {
   color: #4b0082;
 }
 
-/* ===== Dropdown behavior in sidebar ===== */
+/* Dropdown menu — hidden until clicked */
 .sidebar .dropdown-menu {
   display: none;
   flex-direction: column;
@@ -131,7 +133,7 @@ nav ul li a {
   margin: 0;
 }
 
-.sidebar .dropdown:hover .dropdown-menu {
+.sidebar .dropdown.open .dropdown-menu {
   display: flex;
 }
 
@@ -164,18 +166,19 @@ body.dark-mode .sidebar .dropdown-toggle:hover {
   transition: margin-left 0.3s ease;
 }
 
-/* ===== Dark Mode Button Placement ===== */
+/* ===== Dark Mode Button (top right corner) ===== */
 #dark-mode-toggle {
-  margin-top: auto;
-  margin-bottom: 20px;
-  align-self: center;
+  position: fixed;
+  right: 20px;
+  top: 15px;
   background: none;
   border: 2px solid #333;
-  border-radius: 6px;
-  padding: 6px 12px;
+  border-radius: 5px;
+  padding: 5px 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1.2rem;
+  z-index: 2000;
 }
 
 body.dark-mode #dark-mode-toggle {
