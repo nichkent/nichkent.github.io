@@ -188,6 +188,66 @@ body.projects-page.dark-mode .sidebar .dropdown-toggle:hover {
   color: #bb86fc;
 }
 
+/* === Sidebar smooth dropdown transitions === */
+body.projects-page .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+body.projects-page .dropdown.open .dropdown-menu {
+  max-height: 400px; /* enough space for items */
+}
+
+/* === Sidebar collapsible animation === */
+body.projects-page .sidebar {
+  transition: transform 0.4s ease;
+}
+
+body.projects-page .sidebar.collapsed {
+  transform: translateX(-250px);
+}
+
+/* === Keep main content shifting smoothly === */
+body.projects-page .with-sidebar {
+  margin-left: 250px;
+  transition: margin-left 0.4s ease;
+}
+
+body.projects-page.sidebar-collapsed .with-sidebar {
+  margin-left: 0;
+}
+
+/* === Dark mode toggle fixed globally === */
+#dark-mode-toggle {
+  position: fixed;
+  right: 20px;
+  top: 15px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  background: none;
+  z-index: 2000;
+}
+
+body.dark-mode #dark-mode-toggle {
+  border-color: #f0f0f0;
+  color: #f0f0f0;
+}
+
+/* === Center expand-toggle properly === */
+body.projects-page .project .expand-toggle {
+  position: absolute;
+  left: 50vw;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+
 
 
 
