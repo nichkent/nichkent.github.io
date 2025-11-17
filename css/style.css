@@ -680,15 +680,15 @@ body.dark-mode .spotlight-title {
 
 /* ===== Project Focus Effect ===== */
 .project {
-  transition: all 0.4s ease;
   opacity: 0.6;
   filter: grayscale(60%);
-  position: relative;
+  transition: all 0.3s ease;
 }
 
 .project.active {
   opacity: 1;
   filter: none;
+  box-shadow: 0 0 25px rgba(75, 0, 130, 0.3);
 }
 
 
