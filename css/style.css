@@ -163,15 +163,6 @@ body.projects-page.sidebar-collapsed .with-sidebar {
   margin-left: 0;
 }
 
-/* Center expand-toggle regardless of sidebar state */
-body.projects-page .project .expand-toggle {
-  position: fixed;
-  left: calc(47.5vw - 100px);
-  transform: translateX(-50%);
-  z-index: 1100;
-  transition: transform 0.3s ease;
-}
-
 /* Dark mode for projects page sidebar */
 body.projects-page.dark-mode .sidebar {
   background: rgba(0, 0, 0, 0.85);
@@ -242,8 +233,8 @@ body.dark-mode #dark-mode-toggle {
 /* === Keep expand-toggle centered relative to content === */
 body.projects-page .project .expand-toggle {
   position: fixed;
-  top: 50%; /* adjust if you want vertically centered differently */
-  left: calc(47.5vw - 100px); /* 125px = half sidebar, 100px = fine-tune */
+  top: 60%; /* adjust if you want vertically centered differently */
+  left: calc(47.5vw - 80px); /* 125px = half sidebar, 100px = fine-tune */
   transform: translateX(-50%);
   z-index: 1100;
   transition: left 0.3s ease;
