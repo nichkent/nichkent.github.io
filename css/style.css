@@ -234,7 +234,7 @@ body.dark-mode #dark-mode-toggle {
 body.projects-page .project-content .expand-toggle {
   position: absolute;
   top: 20px;
-  left: 50%; /* 125px = half sidebar, 100px = fine-tune */
+  left: 90%; /* 125px = half sidebar, 100px = fine-tune */
   transform: translateX(-50%);
   z-index: 1100;
   transition: left 0.3s ease;
