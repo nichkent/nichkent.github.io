@@ -234,7 +234,7 @@ body.dark-mode #dark-mode-toggle {
 body.projects-page .project .expand-toggle {
   position: fixed;
   top: 75%; /* adjust if you want vertically centered differently */
-  left: calc(20vw - 125px); /* 125px = half sidebar, 100px = fine-tune */
+  left: calc(50vw - 170px); /* 125px = half sidebar, 100px = fine-tune */
   transform: none;
   z-index: 1100;
   transition: left 0.3s ease;
@@ -1011,7 +1011,7 @@ footer {
 }
 .expand-toggle.open {
   animation:pulse 1.6s infinite;
-  transform: none;
+  transform: translateX(-50%);
 }
 
 
