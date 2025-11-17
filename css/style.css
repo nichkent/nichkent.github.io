@@ -165,7 +165,7 @@ body.projects-page.sidebar-collapsed .with-sidebar {
 
 /* Dark mode for projects page sidebar */
 body.projects-page.dark-mode .sidebar {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(24, 24, 24, 1);
 }
 
 body.projects-page.dark-mode .sidebar a,
@@ -337,7 +337,7 @@ body.dark-mode .GTPWButton:hover {
 
 /* Dark mode navbar */
 body.dark-mode .navbar {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(24, 24, 24, 1);
 }
 
 body.dark-mode .dropdown-menu {
@@ -691,6 +691,7 @@ body.dark-mode .spotlight-title {
 
 .project.active {
   opacity: 1;
+  align-content: center;
   filter: none;
 }
 
