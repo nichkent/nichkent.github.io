@@ -682,14 +682,12 @@ body.dark-mode .spotlight-title {
 .project {
   opacity: 0.6;
   filter: grayscale(60%);
-  transform: scale(0.97);
   transition: all 0.3s ease;
 }
 
 .project.active {
   opacity: 1;
   filter: none;
-  transform: scale(1);
 }
 
 
