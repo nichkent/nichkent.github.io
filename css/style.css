@@ -682,20 +682,21 @@ body.dark-mode .spotlight-title {
 .project {
   opacity: 0.6;
   filter: grayscale(60%);
+  transform: scale(0.97);
   transition: all 0.3s ease;
 }
 
 .project.active {
   opacity: 1;
   filter: none;
-  box-shadow: 0 0 25px rgba(75, 0, 130, 0.3);
+  transform: scale(1);
 }
 
 
 /* Center the expanded content under the arrow */
 .project .extra-content {
   position: relative;
-  left: calc(47.5vw - 100px);                     /* match arrow position */
+  left: calc(50vw - 170px);                     /* match arrow position */
   transform: translateX(-50%);
   margin-top: 80px;
   width: calc(125vw - 520px); 
@@ -1009,7 +1010,6 @@ footer {
 }
 .expand-toggle.open {
   animation:pulse 1.6s infinite;
-  transform: translateX(-50%);
 }
 
 
