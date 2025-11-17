@@ -231,7 +231,7 @@ body.dark-mode #dark-mode-toggle {
 }
 
 /* === Keep expand-toggle centered relative to content === */
-body.projects-page .project .expand-toggle {
+body.projects-page .project-content .expand-toggle {
   position: absolute;
   top: 20px;
   left: 50%; /* 125px = half sidebar, 100px = fine-tune */
@@ -699,13 +699,11 @@ body.dark-mode .spotlight-title {
 /* Center the expanded content under the arrow */
 .project .extra-content {
   position: relative;
-  left: calc(50vw - 170px);                     /* match arrow position */
+  left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px; /* match your content width */
   margin-top: 80px;
-  width: calc(125vw - 520px); 
-  max-width: 1250px;
-  min-width: 600px;
-  text-align: center;
   opacity: 0;
   display: none;
   background: rgba(75, 0, 130, 0.08);
@@ -713,6 +711,7 @@ body.dark-mode .spotlight-title {
   padding: 20px 25px;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
 
 .project .extra-content.show {
   display: block;
