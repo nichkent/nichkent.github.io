@@ -691,7 +691,6 @@ body.dark-mode .spotlight-title {
 
 .project.active {
   opacity: 1;
-  align-content: center;
   filter: none;
 }
 
