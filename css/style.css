@@ -233,8 +233,8 @@ body.dark-mode #dark-mode-toggle {
 /* === Keep expand-toggle centered relative to content === */
 body.projects-page .project .expand-toggle {
   position: fixed;
-  top: 60%; /* adjust if you want vertically centered differently */
-  left: calc(47.5vw - 80px); /* 125px = half sidebar, 100px = fine-tune */
+  top: 65%; /* adjust if you want vertically centered differently */
+  left: calc(45vw - 125px); /* 125px = half sidebar, 100px = fine-tune */
   transform: translateX(-50%);
   z-index: 1100;
   transition: left 0.3s ease;
@@ -1001,7 +1001,7 @@ footer {
 .expand-toggle:hover {
   background:rgba(255,255,255,0.25);
   color:#bb86fc;
-  transform:translate(-50%,0) scale(1.1);
+  transform: scale(1.1);
 }
 
 @keyframes pulse {
@@ -1010,6 +1010,7 @@ footer {
 }
 .expand-toggle.open {
   animation:pulse 1.6s infinite;
+  transform: none;
 }
 
 
