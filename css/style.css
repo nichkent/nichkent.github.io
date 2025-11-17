@@ -232,8 +232,8 @@ body.dark-mode #dark-mode-toggle {
 
 /* === Keep expand-toggle centered relative to content === */
 body.projects-page .project .expand-toggle {
-  position: fixed;
-  top: -30px; /* adjust if you want vertically centered differently */
+  position: absolute;
+  top: 20px;
   left: 50%; /* 125px = half sidebar, 100px = fine-tune */
   transform: translateX(-50%);
   z-index: 1100;
@@ -242,6 +242,7 @@ body.projects-page .project .expand-toggle {
 
 body.projects-page .project {
   position: relative;
+  padding-top: 70px;
 }
 
 /* When sidebar is collapsed, recenter it to true screen center */
@@ -861,6 +862,7 @@ body.dark-mode .timeline li.active::before {
 
 /* ====== Project content ======= */
 .projects-content {
+  position: relative;
   flex: 1;
   max-width: 900px;
   text-align: left;
