@@ -235,16 +235,17 @@ body.projects-page .project .expand-toggle {
   position: fixed;
   top: 75%; /* adjust if you want vertically centered differently */
   left: calc(20vw - 125px); /* 125px = half sidebar, 100px = fine-tune */
-  transform: translateX(-50%);
+  transform: none;
   z-index: 1100;
   transition: left 0.3s ease;
 }
 
 /* When sidebar is collapsed, recenter it to true screen center */
+/*
 body.projects-page.sidebar-collapsed .project .expand-toggle {
   left: 50vw;
 }
-
+*/
 
 
 
