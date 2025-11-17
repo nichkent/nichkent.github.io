@@ -233,11 +233,15 @@ body.dark-mode #dark-mode-toggle {
 /* === Keep expand-toggle centered relative to content === */
 body.projects-page .project .expand-toggle {
   position: fixed;
-  top: 33.25%; /* adjust if you want vertically centered differently */
-  left: calc(50vw - 170px); /* 125px = half sidebar, 100px = fine-tune */
-  transform: none;
+  top: -30px; /* adjust if you want vertically centered differently */
+  left: 50%; /* 125px = half sidebar, 100px = fine-tune */
+  transform: translateX(-50%);
   z-index: 1100;
   transition: left 0.3s ease;
+}
+
+body.projects-page .project {
+  position: relative;
 }
 
 /* When sidebar is collapsed, recenter it to true screen center */
