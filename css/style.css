@@ -861,11 +861,7 @@ body.dark-mode .timeline li.active::before {
 .projects-content {
   position: relative;
   flex: 1;
-  max-width: 900px;
-  text-align: left;
-  margin-left: 0 auto;
-  margin-right: auto;
-  padding-left: 40px;
+  text-align: center;
 }
 
 .project {
@@ -988,7 +984,6 @@ footer {
 
 /* === Expandable project content === */
 .expand-toggle {
-  display:flex;
   justify-content:center;
   align-items:center;
   background:rgba(0,0,0,0.5);
@@ -1001,6 +996,7 @@ footer {
   width:55px;
   height:55px;
   box-shadow:0 0 15px rgba(0,0,0,0.3);
+  margin-left: 180px;
 }
 
 .expand-toggle:hover {
