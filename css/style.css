@@ -11,7 +11,6 @@ main,
 #bio,
 #projects-page,
 #Reach\ Out {
-  padding-left: 10px;
   box-sizing: border-box;
 }
 
@@ -406,9 +405,10 @@ body.dark-mode .dropdown-toggle:hover {
 }
 
 .home-image {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  width: 450px;
+  height: 600px;
+  margin-left: 110px;
+  border-radius: 5%;
   object-fit: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
@@ -424,7 +424,7 @@ body.dark-mode .dropdown-toggle:hover {
 /* ===== Spotlight Section ===== */
 #project-spotlight {
   position: relative;
-  padding: 60px 0;
+  padding: 110px 0;
   text-align: center;
   background: rgba(20, 20, 20, 0.4);
   border-top: 2px solid rgba(255, 255, 255, 0.1);
@@ -434,7 +434,8 @@ body.dark-mode .dropdown-toggle:hover {
 
 #project-spotlight h2 {
   font-size: 2rem;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  margin-top: -30px;
   font-weight: 600;
   color: #fff;
 }
@@ -443,9 +444,7 @@ body.dark-mode .dropdown-toggle:hover {
 .spotlight-container {
   position: relative;
   width: 100%;
-  max-width: 1400px;
   margin: 0 auto;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -897,6 +896,8 @@ body.dark-mode .timeline li.active::before {
   text-align: left;
   margin-bottom: 10px;
   margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .bio-content {
@@ -939,6 +940,8 @@ h2 {
   background: #dfdbdb;
   padding: 10px 40px;
   text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .contact-list {
