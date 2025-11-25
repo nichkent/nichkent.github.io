@@ -11,7 +11,7 @@ main,
 #bio,
 #projects-page,
 #Reach\ Out {
-  padding-left: 20px;
+  padding-left: 10px;
   box-sizing: border-box;
 }
 
@@ -896,6 +896,7 @@ body.dark-mode .timeline li.active::before {
   padding: 25px 50px;
   text-align: left;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .bio-content {
@@ -959,8 +960,7 @@ h2 {
 
 /* ====== Footer ======= */
 footer {
-  padding: 10px 0;
-  margin-bottom: 0;
+  margin-top: 10px;
 }
 
 #copyright {
