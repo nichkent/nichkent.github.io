@@ -136,7 +136,6 @@ body.projects-page .sidebar .dropdown-toggle:hover {
 }
 
 body.projects-page .sidebar .dropdown-menu {
-  display: none;
   flex-direction: column;
   width: 100%;
   background: #f0f0f0;
