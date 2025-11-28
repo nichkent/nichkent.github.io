@@ -308,7 +308,7 @@ body.dark-mode .GTPWButton:hover {
 
 /* ========= Dropdown menu ======== */
 .dropdown-menu {
-  display: none;
+  display: flex;
   position: absolute;
   background: #f8f8f8;
   top: 100%; left: 0;
