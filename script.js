@@ -347,7 +347,7 @@ if (spotlightItems.length) {
             });
 
             if (targetSection) {
-              targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
               // Briefly highlight the section
               targetSection.classList.add('active');
               setTimeout(() => targetSection.classList.remove('active'), 1500);
