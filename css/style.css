@@ -280,7 +280,7 @@ body.projects-page .project-search-bar {
 
 #project-search-input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 10px 20px;
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   font-size: 0.95rem;
@@ -339,8 +339,8 @@ body.projects-page .project-search-bar {
 
 /* dark-mode sytles */
 body.dark-mode #project-search-input {
-  background: rgba(20, 20, 20, 0.7);   /* ✅ translucent dark glass */
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgb(28 28 28 / 70%)   /* ✅ translucent dark glass */
+  border-color: rgb(83 81 81 / 25%);
   color: #f0f0f0;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
