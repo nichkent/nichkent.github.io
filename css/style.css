@@ -260,12 +260,95 @@ body.projects-page .project {
   padding-top: 70px;
 }
 
-/* When sidebar is collapsed, recenter it to true screen center */
-/*
-body.projects-page.sidebar-collapsed .project .expand-toggle {
-  left: 50vw;
+/* === Project search bar (projects page) === */
+body.projects-page #project-search-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 10px;
 }
-*/
+
+body.projects-page .project-search-bar {
+  position: sticky;
+  top: 15px;              /* sticks near top as you scroll */
+  z-index: 850;           /* under sidebar (1000) and backdrop (900) */
+  max-width: 500px;
+  width: 100%;
+}
+
+#project-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  outline: none;
+}
+
+#project-search-input:focus {
+  border-color: #4b0082;
+  box-shadow: 0 0 0 2px rgba(75, 0, 130, 0.15);
+}
+
+/* Suggestions dropdown */
+.search-suggestions {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  max-height: 260px;
+  overflow-y: auto;
+  display: none;           /* shown when results exist */
+}
+
+.search-suggestions li {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.search-suggestions li span.title {
+  display: block;
+  font-weight: 500;
+}
+
+.search-suggestions li span.page {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.search-suggestions li:hover,
+.search-suggestions li.active {
+  background: #f0f0ff;
+  color: #4b0082;
+}
+
+/* Dark mode versions */
+body.dark-mode #project-search-input {
+  background: rgba(20, 20, 20, 0.95);
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+body.dark-mode #project-search-input::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .search-suggestions {
+  background: rgba(20, 20, 20, 0.97);
+}
+
+body.dark-mode .search-suggestions li:hover,
+body.dark-mode .search-suggestions li.active {
+  background: rgba(75, 0, 130, 0.35);
+  color: #f0f0f0;
+}
+
 
 
 
