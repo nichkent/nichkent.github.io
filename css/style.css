@@ -699,7 +699,7 @@ body.dark-mode .spotlight-title {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 900px; /* match your content width */
+  max-width: -webkit-fill-available; /* match your content width */
   margin-top: 80px;
   opacity: 0;
   display: none;
