@@ -140,7 +140,6 @@ body.projects-page .sidebar .dropdown-menu {
   flex-direction: column;
   width: 100%;
   background: #f0f0f0;
-  border-left: 3px solid #4b0082;
   box-shadow: none;
 }
 
@@ -165,6 +164,10 @@ body.projects-page.sidebar-collapsed .with-sidebar {
 
 /* Dark mode for projects page sidebar */
 body.projects-page.dark-mode .sidebar {
+  background: rgba(0, 0, 0, 1);
+}
+
+body.projects-page.dark-mode .sidebar .dropdown.open .dropdown-menu {
   background: rgba(0, 0, 0, 1);
 }
 
