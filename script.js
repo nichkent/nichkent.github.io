@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   // ================= Sidebar only on projects page =======================
+const bodyClass = document.body.classList; 
  if (bodyClass.contains('projects-page')) {
   const sidebar  = document.getElementById('sidebar');
   const toggleBtn = document.getElementById('sidebar-toggle');
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       parent.classList.toggle('open');
     });
   });
-
+ }
 
 
   
