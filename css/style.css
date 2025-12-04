@@ -220,7 +220,6 @@ body.projects-page .sidebar.collapsed {
 
 /* === Keep main content shifting smoothly === */
 body.projects-page .with-sidebar {
-  margin-left: 250px;
   transition: margin-left 0.4s ease;
 }
 
