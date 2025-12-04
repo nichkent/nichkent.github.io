@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       parent.classList.toggle('open');
     });
   });
-}
 
 
 
