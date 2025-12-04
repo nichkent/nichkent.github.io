@@ -19,27 +19,51 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   // ================= Sidebar only on projects page =======================
-  const bodyClass = document.body.classList; // ✅ define it first
-  if (bodyClass.contains('projects-page')) {
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.getElementById('sidebar-toggle');
+ if (bodyClass.contains('projects-page')) {
+  const sidebar  = document.getElementById('sidebar');
+  const toggleBtn = document.getElementById('sidebar-toggle');
+  const backdrop = document.getElementById('sidebar-backdrop');
 
-    // Sidebar collapse toggle
-    if (toggleBtn && sidebar) {
-      toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-        document.body.classList.toggle('sidebar-collapsed');
-      });
-    }
+  function openSidebar() {
+    if (!sidebar) return;
+    sidebar.classList.remove('collapsed');
+    document.body.classList.add('sidebar-open');
+  }
 
-    // Dropdown slide open / close
-    document.querySelectorAll('.dropdown-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const parent = button.closest('.dropdown');
-        parent.classList.toggle('open');
-      });
+  function closeSidebar() {
+    if (!sidebar) return;
+    sidebar.classList.add('collapsed');
+    document.body.classList.remove('sidebar-open');
+  }
+
+  // Sidebar button (hamburger) toggle
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      const isCollapsed = sidebar.classList.contains('collapsed');
+      if (isCollapsed) {
+        openSidebar();
+      } else {
+        closeSidebar();
+      }
     });
   }
+
+  // Clicking backdrop closes sidebar
+  if (backdrop) {
+    backdrop.addEventListener('click', () => {
+      closeSidebar();
+    });
+  }
+
+  // Dropdown slide open / close
+  document.querySelectorAll('.dropdown-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const parent = button.closest('.dropdown');
+      parent.classList.toggle('open');
+    });
+  });
+}
+
 
 
   
