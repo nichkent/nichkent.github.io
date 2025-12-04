@@ -228,23 +228,6 @@ body.projects-page.sidebar-collapsed .with-sidebar {
   margin-left: 0;
 }
 
-/* === Projects intro auto-hide behavior === */
-#projects-intro {
-  transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease;
-  opacity: 1;
-  transform: translateY(0);
-  max-height: 300px;
-  overflow: hidden;
-}
-
-#projects-intro.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-  max-height: 0;
-  pointer-events: none;
-  margin: 0;
-  padding: 0;
-}
 
 
 /* === Dark mode toggle fixed globally === */
