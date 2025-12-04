@@ -47,33 +47,35 @@
   <button id="dark-mode-toggle">🌙</button>
 
   <main class="with-sidebar">
-    <!-- Search bar (global for all project pages) -->
-    <div id="project-search-wrapper">
-      <div class="project-search-bar">
-        <input
-          type="text"
-          id="project-search-input"
-          placeholder="Search projects..."
-          autocomplete="off"
-          aria-label="Search projects"
-        />
-        <ul id="project-search-suggestions" class="search-suggestions"></ul>
-      </div>
+  <!-- Intro text that shows only on the base projects page -->
+  <section id="projects-intro">
+    <h2>Welcome to the Project Warehouse!</h2>
+    <p>
+      Where I store all projects I work on throughout my life. Pick a project topic that sounds
+      interesting from the top to get started. Also, thanks for checking out my projects!
+    </p>
+  </section>
+
+  <!-- Search bar (global for all project pages) -->
+  <div id="project-search-wrapper">
+    <div class="project-search-bar">
+      <input
+        type="text"
+        id="project-search-input"
+        placeholder="Search projects..."
+        autocomplete="off"
+        aria-label="Search projects"
+      />
+      <ul id="project-search-suggestions" class="search-suggestions"></ul>
     </div>
-  
-    <!-- Dynamic content area (this gets replaced by loaded project pages) -->
-    <div id="projects-loader">
-      <div id="projects-page">
-        <div class="projects-content">
-          <h2>Welcome to the Project Warehouse!</h2>
-          <p>
-            Where I store all projects I work on throughout my life. Pick a project topic that sounds
-            interesting from the top to get started. Also, thanks for checking out my projects!
-          </p>
-        </div>
-      </div>
-    </div>
-  </main>
+  </div>
+
+  <!-- Dynamic content area (replaced by loaded project pages) -->
+  <div id="projects-loader">
+    <!-- Initially empty; when the user picks a category or uses search,
+         this will be filled with software.html, cybersecurity/..., etc. -->
+  </div>
+</main>
 
 
   <footer>
