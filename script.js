@@ -215,6 +215,14 @@ if (spotlightItems.length) {
   const projectLinks = document.querySelectorAll('[data-page]');
 
 
+    // === Intro handling (only visible on initial projects.html) ===
+  function hideProjectsIntro() {
+    const intro = document.getElementById('projects-intro');
+    if (intro) {
+      intro.style.display = 'none';
+    }
+  }
+
 
 
 
@@ -318,6 +326,8 @@ if (spotlightItems.length) {
 
     function loadProjectPageAndScroll(page, projectTitle) {
       if (!page) return;
+
+      hideProjectsIntro();   // 👈 hide intro on first search-based load
 
       fetch(`projects/${page}.html`)
         .then(response => {
@@ -425,6 +435,7 @@ if (spotlightItems.length) {
   // === Auto-load project if page opened with a hash ===
   const hash = window.location.hash.replace('#', '');
   if (hash && projectArea) {
+    hideProjectsIntro();  // 👈 hide intro as soon as we know we're loading a project
     fetch(`projects/${hash}.html`)
       .then(response => {
         if (!response.ok) throw new Error(`Could not load ${hash}`);
@@ -462,6 +473,7 @@ if (spotlightItems.length) {
   window.addEventListener('hashchange', () => {
     const newHash = window.location.hash.replace('#', '');
     if (newHash && projectArea) {
+      hideProjectsIntro();  // 👈 hide intro when switching via hash
       fetch(`projects/${newHash}.html`)
         .then(res => res.ok ? res.text() : Promise.reject(`404: ${newHash}`))
         .then(html => {
@@ -494,6 +506,7 @@ if (spotlightItems.length) {
     link.addEventListener('click', e => {
       e.preventDefault();
       const page = link.getAttribute('data-page');
+      hideProjectsIntro();   // 👈 hide intro once user picks a section
       fetch(`projects/${page}.html`)
         .then(response => {
           if (!response.ok) throw new Error(`Could not load ${page}`);
