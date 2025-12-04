@@ -229,6 +229,199 @@ if (spotlightItems.length) {
 
 
   
+  // === Project search index ===
+  // Each entry maps a search title to the page file under /projects/
+  const PROJECT_INDEX = [
+    // ---- Software page projects (software.html) ----
+    { title: 'Secure Website', page: 'software' },
+    { title: 'Graphing Binary Trees', page: 'software' },
+    { title: 'Connect 4', page: 'software' },
+    { title: 'Differentially Private Machine Learning Model', page: 'software' },
+    { title: 'BCI Final (BCIs)', page: 'software' },
+    { title: 'Remote Control', page: 'software' },
+    { title: 'Stack Overflow Sentiment Analysis', page: 'software' },
+    { title: 'Phishing Detection AI', page: 'software' },
+    { title: 'Portfolio Website', page: 'software' },
+
+    // ---- Cybersecurity pages (add more fine-grained projects later if you like) ----
+    { title: 'Pentesting', page: 'cybersecurity/pentesting' },
+    { title: 'Reverse Engineering', page: 'cybersecurity/reverse_engineering' },
+    { title: 'Network Traffic Analysis', page: 'cybersecurity/networking' },
+    { title: 'Cryptography', page: 'cybersecurity/cryptography' },
+
+    // ---- Creative pursuits ----
+    { title: 'Music', page: 'creative/music' },
+    { title: 'Writing', page: 'creative/writing' },
+    { title: 'Drawing', page: 'creative/drawing' },
+    { title: '3D Modeling', page: 'creative/3d_modeling' },
+
+    // ---- Robots & misc ----
+    { title: 'Robots and Stuff', page: 'robots_misc' }
+  ];
+
+  const searchInput = document.getElementById('project-search-input');
+  const suggestionList = document.getElementById('project-search-suggestions');
+  const searchWrapper = document.getElementById('project-search-wrapper');
+
+  if (searchInput && suggestionList && projectArea) {
+    let filteredResults = [];
+    let activeIndex = -1;
+
+    function clearSuggestions() {
+      suggestionList.innerHTML = '';
+      suggestionList.style.display = 'none';
+      filteredResults = [];
+      activeIndex = -1;
+    }
+
+    function renderSuggestions(results) {
+      suggestionList.innerHTML = '';
+      if (!results.length) {
+        clearSuggestions();
+        return;
+      }
+
+      results.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.dataset.index = index;
+        li.innerHTML = `
+          <span class="title">${item.title}</span>
+          <span class="page">${item.page}</span>
+        `;
+        li.addEventListener('click', () => {
+          handleSelection(index);
+        });
+        suggestionList.appendChild(li);
+      });
+
+      suggestionList.style.display = 'block';
+    }
+
+    function highlightActive() {
+      const items = suggestionList.querySelectorAll('li');
+      items.forEach((li, idx) => {
+        li.classList.toggle('active', idx === activeIndex);
+      });
+    }
+
+    function handleSelection(index) {
+      const item = filteredResults[index];
+      if (!item) return;
+      const { title, page } = item;
+
+      clearSuggestions();
+      searchInput.blur();
+
+      // Core behavior: load that project page, then scroll to the matching project (if found)
+      loadProjectPageAndScroll(page, title);
+    }
+
+    function loadProjectPageAndScroll(page, projectTitle) {
+      if (!page) return;
+
+      fetch(`projects/${page}.html`)
+        .then(response => {
+          if (!response.ok) throw new Error(`Could not load ${page}`);
+          return response.text();
+        })
+        .then(html => {
+          projectArea.innerHTML = html;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+
+          // Re-init behaviors on newly injected content
+          initTimelineScroll();
+          initExpandToggles();
+
+          // Small timeout so DOM has laid out, then scroll to the specific project section
+          setTimeout(() => {
+            if (!projectTitle) return;
+
+            const projects = document.querySelectorAll('.project');
+            let targetSection = null;
+
+            projects.forEach(section => {
+              const h2 = section.querySelector('h2');
+              if (h2 && h2.textContent.trim().toLowerCase() === projectTitle.toLowerCase()) {
+                targetSection = section;
+              }
+            });
+
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              // Briefly highlight the section
+              targetSection.classList.add('active');
+              setTimeout(() => targetSection.classList.remove('active'), 1500);
+            }
+          }, 100);
+        })
+        .catch(err => {
+          projectArea.innerHTML = `<p style="color:red;">Error loading ${page}: ${err.message}</p>`;
+        });
+    }
+
+    // --- Input handler: filter suggestions as user types ---
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        clearSuggestions();
+        return;
+      }
+
+      filteredResults = PROJECT_INDEX.filter(item =>
+        item.title.toLowerCase().includes(query)
+      );
+
+      renderSuggestions(filteredResults);
+    });
+
+    // --- Keyboard navigation: arrows + enter/esc ---
+    searchInput.addEventListener('keydown', (e) => {
+      const items = suggestionList.querySelectorAll('li');
+      if (!items.length) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = (activeIndex + 1) % items.length;
+        highlightActive();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = (activeIndex - 1 + items.length) % items.length;
+        highlightActive();
+      } else if (e.key === 'Enter') {
+        if (activeIndex >= 0 && activeIndex < filteredResults.length) {
+          e.preventDefault();
+          handleSelection(activeIndex);
+        } else if (filteredResults.length === 1) {
+          e.preventDefault();
+          handleSelection(0);
+        }
+      } else if (e.key === 'Escape') {
+        clearSuggestions();
+      }
+    });
+
+    // Clicking outside the search closes suggestions
+    document.addEventListener('click', (e) => {
+      if (!searchWrapper.contains(e.target)) {
+        clearSuggestions();
+      }
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   // === Auto-load project if page opened with a hash ===
   const hash = window.location.hash.replace('#', '');
   if (hash && projectArea) {
