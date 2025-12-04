@@ -135,10 +135,13 @@ body.projects-page .sidebar .dropdown-toggle:hover {
 }
 
 body.projects-page .sidebar .dropdown-menu {
+  position: static;
+  display: flex;
   flex-direction: column;
   width: 100%;
   background: #f0f0f0;
   border-left: 3px solid #4b0082;
+  box-shadow: none;
 }
 
 body.projects-page .sidebar .dropdown.open .dropdown-menu {
@@ -306,7 +309,7 @@ body.dark-mode .GTPWButton:hover {
 
 
 /* ========= Dropdown menu ======== */
-.dropdown-menu {
+body:not(.projects-page) .dropdown-menu {
   display: flex;
   position: absolute;
   background: #f8f8f8;
@@ -317,18 +320,18 @@ body.dark-mode .GTPWButton:hover {
   z-index: 1000;
 }
 
-.dropdown-menu li {
+body:not(.projects-page) .dropdown-menu li {
   display: block;
   text-align: left;
   margin: 0;
 }
 
-.dropdown-menu li a {
+body:not(.projects-page) .dropdown-menu li a {
   display: block;
   padding: 10px 15px;
 }
 
-.dropdown:hover .dropdown-menu {
+body:not(.projects-page) .dropdown:hover .dropdown-menu {
   display: block;
 }
 
