@@ -152,15 +152,29 @@ body.projects-page .sidebar .dropdown-menu li a {
   font-size: 0.95rem;
 }
 
+/* Projects page content should NOT be pushed by the sidebar */
 body.projects-page .with-sidebar {
-  margin-left: 250px;
+  margin-left: 0;
   padding: 40px;
-  transition: margin-left 0.3s ease;
 }
 
-body.projects-page.sidebar-collapsed .with-sidebar {
-  margin-left: 0;
+/* === Sidebar backdrop overlay === */
+body.projects-page #sidebar-backdrop {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  background: rgba(0, 0, 0, 0.35); /* slight darken */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900; /* under sidebar (1000), over page content */
 }
+
+/* When sidebar is open, enable & fade in the backdrop */
+body.projects-page.sidebar-open #sidebar-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 /* Dark mode for projects page sidebar */
 body.projects-page.dark-mode .sidebar {
